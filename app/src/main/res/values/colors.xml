@@ -2,4 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--<Colors>Periwinkle (bars): #8390E3
+Lavender (buttons): #A487F5
+Light and Dark Gray (font): #707070 & 3D3B3B
+White (background): #FFFFFF
+Other colors: #CBC9FA (calendar), #BAA3FA (goals), #C5B2F8 (goals), #D7C9FE (goals)
+</color>-->
+    <color name="purple">#A487F5</color>
+    <color name="gray">#707070</color>
+    <color name="darkGray">#3D3B3B</color>
+    <color name="lightGray">#CBC9FA</color>
+    <color name="blue">#8390E3</color>
+    <color name="pink">#D7C9FE</color>
+    <color name="green">#C5B2F8</color>
+    <color name="yellow">#BAA3FA</color>
+
+
+
 </resources>
