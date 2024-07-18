@@ -1,0 +1,7 @@
+goalName,goalType,goalDescrip,goalStart,goalEnd,goalCompleted
+Homework,Education,App Programming Homework - Lab5,7/31/2024,7/31/2024,TRUE
+Meditate,Personal,30 minutes daily,7/1/2024,7/31/2024,TRUE
+Reading,Hobbies,30 minutes reading,7/14/2024,7/31/2024,FALSE
+Drink Water,Health,64 oz in a day,7/1/2024,12/31/2024,TRUE
+Exercise,Fitness,45 minutes,7/1/2024,9/30/2024,FALSE
+Save Money,Financial,$50 a week,7/1/2024,12/31/2024,TRUE
