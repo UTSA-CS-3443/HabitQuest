@@ -9,4 +9,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="progress_report">Progress Report</string>
+    <string name="today_s_goals">Today\'s Goals</string>
+    <string name="set_a_goal_habit">Set A Goal/ Habit</string>
 </resources>
