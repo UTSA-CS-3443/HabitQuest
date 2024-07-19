@@ -37,16 +37,16 @@ package edu.usta.cs3443.habitquest.model;
 public class Goal {
     private String goalName;
     private String goalType;
-    private String goalDescrip;
+    private String goalDescription;
     private String goalStart;
     private String goalEnd;
     private Boolean goalCompleted;
     
 
-public Goal(String goalName, String goalType, String goalDescrip, String goalStart, String goalEnd) {
+public Goal(String goalName, String goalType, String goalDescription, String goalStart, String goalEnd) {
         this.goalName = goalName;
         this.goalType = goalType;
-        this.goalDescrip = goalDescrip;
+        this.goalDescrip = goalDescription;
         this.goalStart = goalStart;
         this.goalEnd = goalEnd;
         this.goalCompleted = false;
@@ -59,7 +59,7 @@ public Goal(String goalName, String goalType, String goalDescrip, String goalSta
         return goalType;
     }
     public String getGoalDescription() { 
-        return goalDescrip;
+        return goalDescription;
     }
     public String getStart() { 
         return goalStart;
@@ -78,7 +78,7 @@ public Goal(String goalName, String goalType, String goalDescrip, String goalSta
         this.goalType = goalType;
     }
     public void setGoalDescription(String goalDescrip) { 
-        this.goalDescrip = goalDescrip;
+        this.goalDescription = goalDescription;
     }
     public void setStart(String goalStart) { 
         this.goalStart = goalStart;
@@ -90,10 +90,10 @@ public Goal(String goalName, String goalType, String goalDescrip, String goalSta
         this.goalCompleted = goalCompleted;
     }
 
-    public void editGoal(String goalName, String goalType, String goalDescrip, String goalStart, String goalEnd, Boolean goalCompleted) {
+    public void editGoal(String goalName, String goalType, String goalDescription, String goalStart, String goalEnd, Boolean goalCompleted) {
         setGoalName(goalName);
         setGoalType(goalType);
-        setGoalDescription(goalDescrip);
+        setGoalDescription(goalDescription);
         setStart(goalStart);
         setEnd(goalEnd);
         setCompleted(goalCompleted);
