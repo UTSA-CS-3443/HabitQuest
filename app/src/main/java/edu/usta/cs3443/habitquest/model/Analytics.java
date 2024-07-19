@@ -3,28 +3,53 @@ package edu.usta.cs3443.habitquest.model;
 /**
  * Analytics: The Analytics class represents the analytic data for a user's progress on their goals. The attributes store analytic data and methods to generate reports.
  * Attributes:
- * user_id - the id of the user
- * goals_completed - the goals the user has completed.
- * active_goals - the active goals the user has active.
- * progress_trend - generates a report of the user’s progress.
- * Methods:
- * generateReport() - generates a report of the user’s progress.
+* goalsCompleted - the goals the user has completed.
+* activeGoals - the active goals the user has.
+*
+* Methods:
+* getGoalsCompleted() - gets goals marked as completed.
+* getGoalsNotComplete() - gets past goals not completed.
+* getActiveGoals() - gets active goals.
+* setGoalsCompleted - sets goals marked as completed.
+* setGoalsNotComplete - sets past goals not completed.
+* setActiveGoals - sets active goals.
+* generateProgressReport() - generates a report of the user’s progress.
  */
 public class Analytics {
-    private int user_id;
-    private int goals_completed;
-    private int active_goals;
-    private String progress_trend;
+    private ArrayList<Goal> goalsCompleted;
+    private ArrayList<Goal> activeGoals;
 
-    public Analytics(int user_id, int goals_completed, int active_goals) {
-        this.user_id = user_id;
-        this.goals_completed = goals_completed;
-        this.active_goals = active_goals;
-        this.progress_trend = generateReport();
+    public Analytics() {
+        this.goalsCompleted = new ArrayList<>();
+        this.activeGoals = new ArrayList<>();
+    }
+
+    public ArrayList<Goal> getGoalsCompleted() { 
+        return goalsCompleted;
+    }
+    public ArrayList<Goal> getGoalsNotComplete() {
+        ArrayList<Goal> notCompleteGoals = new ArrayList<>();
+        for (Goal goal : activeGoals) {
+            if (!goal.isCompleted()) {
+                notCompleteGoals.add(goal);
+            }
+        }
+        return notCompleteGoals;
+    }
+    
+    public ArrayList<Goal> getActiveGoals() { 
+        return activeGoals;
+    }
+
+    public void setGoalsCompleted(ArrayList<Goal> goalsCompleted) { 
+        this.goalsCompleted = goalsCompleted;
+    }
+    public void setActiveGoals(ArrayList<Goal> activeGoals) { 
+        this.activeGoals = activeGoals;
     }
 
     public String generateReport() {
-
+    // Generate a progress report based on the goals data
         return "";
     }
 
