@@ -3,47 +3,101 @@ package edu.usta.cs3443.habitquest.model;
 /**
  * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
  *
- * Attributes:
- * goal_id - unique identifier for a goal or habit.
- * user_id - the id of the user who owns the goal.
- * goal_type - the type of goal (daily, short-term, long-term, etc).
- * goal_descrip - description of the goal.
- * goal_created - timestamp of when the goal was created.
- * goal_completed - boolean indicating if the goal is completed.
- * goal_start - the date the goal starts.
- * goal_end - the date the goal ends.
- * Methods:
- * createGoal() - creates a new goal.
- * updateGoal() - updates the goal.
- * deleteGoal() - delete the goal.
+* Attributes:
+* goalName - name of goal.
+* goalType - type of goal (personal, education, etc).
+* goalDescrip - description of the goal.
+* goalStart - the date the goal starts.
+* goalEnd - the date the goal ends.
+* goalCompleted - boolean indicating if the goal was completed.
+*
+* Methods:
+* createGoal() - creates a new goal.
+* updateGoal() - updates the goal.
+* deleteGoal() - delete the goal.
+* getGoal() - retrieves the goal.
+* getGoalName() - retrieve goal name.
+* getGoalType() - retrieve goal type.
+* getGoalDescription() - retrieve goal description.
+* getStart() - retrieve start date.
+* getEnd() - retrieve end date.
+* getCompleted() - retrieve completed goal data.
+* getNotCompleted() - retrieve non-completed goal data.
+* setGoal() - retrieves the goal.
+* setGoalName() - retrieve goal name.
+* setGoalType() - retrieve goal type.
+* setGoalDescription() - retrieve goal description.
+* setStart() - retrieve start date.
+* setEnd() - retrieve end date.
+* setCompleted() - retrieve completed goal data.
+* isCompleted() - true/false completion data.
  * @author
  */
+
 public class Goal {
-    private String goal_id;
-    private String goal_type;
-    private String goal_descrip;
-    private String goal_created;
-    private boolean goal_completed;
-    private String goal_start;
-    private String goal_end;
-    private String user_id;
+    private String goalName;
+    private String goalType;
+    private String goalDescrip;
+    private String goalStart;
+    private String goalEnd;
+    private Boolean goalCompleted;
+    
 
-    public Goal() {
-        // TODO Auto-generated constructor stub
+public Goal(String goalName, String goalType, String goalDescrip, String goalStart, String goalEnd) {
+        this.goalName = goalName;
+        this.goalType = goalType;
+        this.goalDescrip = goalDescrip;
+        this.goalStart = goalStart;
+        this.goalEnd = goalEnd;
+        this.goalCompleted = false;
     }
-    //create goal
-    public void createGoal(String goal_id, String goal_type, String goal_descrip, String goal_created, boolean goal_completed, String goal_start, String goal_end, String user_id) {
-
+    
+    public String getGoalName() { 
+        return goalName;
     }
-    //update goal
-    public void updateGoal(String goal_id, String goal_type, String goal_descrip, String goal_created, boolean goal_completed, String goal_start, String goal_end, String user_id) {
-
+    public String getGoalType() { 
+        return goalType;
     }
-    //delete goal
-    public void deleteGoal(String goal_id, String goal_type, String goal_descrip, String goal_created, boolean goal_completed, String goal_start, String goal_end, String user_id) {
-
+    public String getGoalDescription() { 
+        return goalDescrip;
+    }
+    public String getStart() { 
+        return goalStart;
+    }
+    public String getEnd() { 
+        return goalEnd;
+    }
+    public Boolean isCompleted() { 
+        return goalCompleted;
     }
 
+    public void setGoalName(String goalName) { 
+        this.goalName = goalName;
+    }
+    public void setGoalType(String goalType) { 
+        this.goalType = goalType;
+    }
+    public void setGoalDescription(String goalDescrip) { 
+        this.goalDescrip = goalDescrip;
+    }
+    public void setStart(String goalStart) { 
+        this.goalStart = goalStart;
+    }
+    public void setEnd(String goalEnd) { 
+        this.goalEnd = goalEnd;
+    }
+    public void setCompleted(Boolean goalCompleted) { 
+        this.goalCompleted = goalCompleted;
+    }
 
+    public void editGoal(String goalName, String goalType, String goalDescrip, String goalStart, String goalEnd, Boolean goalCompleted) {
+        setGoalName(goalName);
+        setGoalType(goalType);
+        setGoalDescription(goalDescrip);
+        setStart(goalStart);
+        setEnd(goalEnd);
+        setCompleted(goalCompleted);
+    }
 
+    
 }
