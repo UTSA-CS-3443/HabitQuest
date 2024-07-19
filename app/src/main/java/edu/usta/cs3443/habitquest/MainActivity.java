@@ -1,5 +1,6 @@
 package edu.usta.cs3443.habitquest;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import edu.usta.cs3443.habitquest.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +23,9 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Context context =this;
+        User user = new User("username", "password","email","name","phone","address","gender");
+        user.getUser(this);
+        user.createProfile(context);
     }
 }

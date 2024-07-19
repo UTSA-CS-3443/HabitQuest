@@ -1,5 +1,15 @@
 package edu.usta.cs3443.habitquest.model;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Attributes:
  * user_id - unique identifier for the user.
@@ -92,4 +102,67 @@ public class User {
     public void setDate_created(String date_created) {
         this.date_created = date_created;
     }
+
+    //saves user to database/csv
+    public void createProfile(Context context) {
+        //checks if user credentials are valid/ arent in use
+        //checks if there is user database file
+        List<String> lines;
+        try {
+            lines = loadAllLinesFromAssets(context, "sample_user.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //checks if user credentials are valid/ arent in use
+        for (String line : lines) {
+            //String[] parts = line.split(",");
+            Log.d("User", line);
+
+        }
+
+
+    }
+    //loads user from database/csv
+    public void getUser(Context context) {
+        //checks if there is user database file
+        List<String> lines;
+
+        try {
+            lines = loadAllLinesFromAssets(context, "sample_user.csv");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+            }
+        //prints user data
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            Log.d("User", line);
+        }
+
+    }
+
+    //updates user's profile
+    public void updateProfile() {
+
+    }
+    //loads data from database/csv into a list
+
+    private List<String> loadAllLinesFromAssets(Context context, String filename) throws IOException {
+        List<String> lines = new ArrayList<>();
+        AssetManager assetManager = context.getAssets();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(assetManager.open(filename)))) {
+            //clear first line
+            br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            throw new IOException("Error reading file: " + filename, e);
+        }
+
+        return lines;
+    }
+
+
 }
