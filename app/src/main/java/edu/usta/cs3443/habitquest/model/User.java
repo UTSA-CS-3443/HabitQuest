@@ -130,7 +130,31 @@ public class User {
         setUserEmail(userEmail);
     }
 
-        public void addGoal(Goal goal) { 
+    //updates user's profile
+    public void updateProfile() {
+
+    }
+    //loads data from database/csv into a list
+
+    private List<String> loadAllLinesFromAssets(Context context, String filename) throws IOException {
+        List<String> lines = new ArrayList<>();
+        AssetManager assetManager = context.getAssets();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(assetManager.open(filename)))) {
+            //clear first line
+            br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            throw new IOException("Error reading file: " + filename, e);
+        }
+
+        return lines;
+    }
+
+            public void addGoal(Goal goal) { 
         this.goals.add(goal);
         updateAnalytics();
     }
@@ -176,30 +200,5 @@ public class User {
     public String generateProgressReport() {
         return analytics.generateProgressReport();
     }
-
-    //updates user's profile
-    public void updateProfile() {
-
-    }
-    //loads data from database/csv into a list
-
-    private List<String> loadAllLinesFromAssets(Context context, String filename) throws IOException {
-        List<String> lines = new ArrayList<>();
-        AssetManager assetManager = context.getAssets();
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(assetManager.open(filename)))) {
-            //clear first line
-            br.readLine();
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            throw new IOException("Error reading file: " + filename, e);
-        }
-
-        return lines;
-    }
-
 
 }
