@@ -42,8 +42,8 @@ public class User {
     private String userBday;
     private String userPronouns;
     private String userEmail;
-    private ArrayList<Goals> goals; 
-    private Analytics analytics;
+    private final ArrayList<Goal> goals;
+    private final Analytics analytics;
 
     public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
         this.userName = userName;
