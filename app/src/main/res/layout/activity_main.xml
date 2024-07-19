@@ -13,6 +13,7 @@
         android:layout_height="59dp"
         android:layout_marginTop="663dp"
         android:layout_marginBottom="1dp"
+        android:background="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
@@ -24,20 +25,24 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="115dp"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_login"
+        app:srcCompat="@drawable/habitquest"
         tools:visibility="visible" />
 
     <Button
         android:id="@+id/set_goal"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="@string/set_a_goal_habit"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:backgroundTint="#a487f5"
+        android:text="Set a Goal or Habit"
+        android:textColor="#2e2e2f"
+        android:textSize="15dp"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/prof_set"
         app:layout_constraintEnd_toStartOf="@+id/todays_goals"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,39 +52,51 @@
 
     <Button
         android:id="@+id/todays_goals"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:text="@string/today_s_goals"
+        android:backgroundTint="#baa3fa"
+        android:textColor="#2e2e2f"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/prog_rep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/set_goal"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        app:cornerRadius="0dp"/>
 
     <Button
         android:id="@+id/prof_set"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:text="@string/profile_settings"
+        android:backgroundTint="#c5b2f8"
+        android:textColor="#2e2e2f"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
         app:layout_constraintEnd_toStartOf="@+id/prog_rep"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/set_goal"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        app:cornerRadius="0dp"/>
 
     <Button
         android:id="@+id/prog_rep"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:text="@string/progress_report"
+        android:backgroundTint="#d7c9fe"
+        android:textColor="#2e2e2f"
+        android:textSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/prof_set"
         app:layout_constraintTop_toBottomOf="@+id/todays_goals"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        app:cornerRadius="0dp"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
