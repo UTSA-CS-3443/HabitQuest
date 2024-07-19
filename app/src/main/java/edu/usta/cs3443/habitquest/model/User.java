@@ -12,95 +12,78 @@ import java.util.List;
 
 /**
  * Attributes:
- * user_id - unique identifier for the user.
- * user_bday - user’s birthday.
- * user_pronouns - user’s preferred pronouns.
- * user_email - user’s email.
- * user_passwd - user’s password (stored secretly).
- * last_login - timestamp of the user’s last login.
- * date_created - timestamp of when the user’s profile was created.
- * Methods:
- * createProfile() - creates a new user profile; the method initializes the user’s attributes and saves the profile to the database.
- * updateProfile() - update’s the user’s profile information to include changing: email, password, pronouns.
- * deleteProfile() - deletes the users profile from the database.
- * getDailyGoals() - retrieves the user’s daily goals.
- * getShorttermGoals() - retrieves the user’s short-term goals.
- * getLongtermGoals() - retrieves the user’s long-term goals.
- * getUser()- retrieves profile from database
+ * userName - user's name data
+ * userBday - user’s birthday data
+ * userPronouns - user’s preferred pronouns data
+ * userEmail - user’s email data
+ * goals - stores the user's goals in arraylist
+ * analytics - object to pull user analytic data from
+*
+* Methods:
+* getUserName() - retrieves user's name from database.
+* getUserBday() - retrieves user bday.
+* getUserPronouns() - retrieves user’s set pronouns.
+* getUserEmail() - retrieves the user's email.
+* setUserName() - set profile from database.
+* setUserBday() - set user bday.
+* setUserPronouns() - set user’s set pronouns.
+* setUserEmail() - set the user's email.
+* createProfile() - creates a new user profile; the method initializes the user’s attributes and saves the profile to the database.
+* getUser() - retrieves user from database
+* editProfile() - update’s the user’s profile information to include changing: email, * password, pronouns.
+* addGoal(Goals goal) - add a new goal/habit.
+* deleteGoal(Goals goal) - delete an existing goal/habit.
+* editGoal(Goals goal) - edit an existing goal/habit.
+* generateProgressReport() - pulls user data for analytics.
  */
+
 public class User {
-    private String user_id;
-    private String user_bday;
-    private String user_pronouns;
-    private String user_email;
-    private String user_passwd;
-    private String last_login;
-    private String date_created;
+    private String userName;
+    private String userBday;
+    private String userPronouns;
+    private String userEmail;
+    private ArrayList<Goals> goals; 
+    private Analytics analytics;
 
-    public User(String user_id, String user_bday, String user_pronouns, String user_email, String user_passwd, String last_login, String date_created){
-        this.user_id = user_id;
-        this.user_bday = user_bday;
-        this.user_pronouns = user_pronouns;
-        this.user_email = user_email;
-        this.user_passwd = user_passwd;
-        this.last_login = last_login;
-        this.date_created = date_created;
+    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
+        this.userName = userName;
+        this.userBday = userBday;
+        this.userPronouns = userPronouns;
+        this.userEmail = userEmail;
+        this.goals = new ArrayList<>();
+        this.analytics = new Analytics();
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUser_bday() {
-        return user_bday;
+    public String getUserBday() {
+        return userBday;
     }
 
-    public void setUser_bday(String user_bday) {
-        this.user_bday = user_bday;
+    public void setUserBday(String userBday) {
+        this.userBday = userBday;
     }
 
-    public String getUser_pronouns() {
-        return user_pronouns;
+    public String getUserPronouns() {
+        return userPronouns;
     }
 
-    public void setUser_pronouns(String user_pronouns) {
-        this.user_pronouns = user_pronouns;
+    public void setUserPronouns(String userPronouns) {
+        this.userPronouns = userPronouns;
     }
 
-    public String getUser_email() {
-        return user_email;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUser_email(String user_email) {
-        this.user_email = user_email;
-    }
-
-    public String getUser_passwd() {
-        return user_passwd;
-    }
-
-    public void setUser_passwd(String user_passwd) {
-        this.user_passwd = user_passwd;
-    }
-
-    public String getLast_login() {
-        return last_login;
-    }
-
-    public void setLast_login(String last_login) {
-        this.last_login = last_login;
-    }
-
-    public String getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(String date_created) {
-        this.date_created = date_created;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     //saves user to database/csv
@@ -138,6 +121,60 @@ public class User {
             Log.d("User", line);
         }
 
+    }
+
+      public void editProfile(String userName, String userBday, String userPronouns, String userEmail) {
+        setUserName(userName);
+        setUserBday(userBday);
+        setUserPronouns(userPronouns);
+        setUserEmail(userEmail);
+    }
+
+        public void addGoal(Goal goal) { 
+        this.goals.add(goal);
+        updateAnalytics();
+    }
+    
+    public void deleteGoal(Goal goal) {
+        this.goals.remove(goal);
+        updateAnalytics();
+    }
+
+    public ArrayList<Goal> getGoals() { 
+        return goals; 
+    }
+
+    private void updateAnalytics() {
+        ArrayList<Goal> completedGoals = new ArrayList<>();
+        ArrayList<Goal> activeGoals = new ArrayList<>();
+
+        for (Goal goal : goals) {
+            if (goal.isCompleted()) {
+                completedGoals.add(goal);
+            } 
+            else {
+                activeGoals.add(goal);
+            }
+        }
+
+        analytics.setGoalsCompleted(completedGoals);
+        analytics.setActiveGoals(activeGoals);
+    }
+
+    public ArrayList<Goal> getCompletedGoals() {
+        return analytics.getGoalsCompleted();
+    }
+
+    public ArrayList<Goal> getActiveGoals() {
+        return analytics.getActiveGoals();
+    }
+
+    public ArrayList<Goal> getGoalsNotComplete() {
+        return analytics.getGoalsNotComplete();
+    }
+
+    public String generateProgressReport() {
+        return analytics.generateProgressReport();
     }
 
     //updates user's profile
