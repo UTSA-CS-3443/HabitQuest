@@ -8,6 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/*
+ * LoginActivity Controller:
+ * User creation / login
+ * Transition to MainActivity if user is logged in
+*/
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
