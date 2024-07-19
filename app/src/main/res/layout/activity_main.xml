@@ -34,51 +34,51 @@
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/set_goal"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="@string/set_a_goal_habit"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/prof_set"
+        app:layout_constraintEnd_toStartOf="@+id/todays_goals"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/todays_goals"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="@string/today_s_goals"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/prog_rep"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/set_goal"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/prof_set"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="@string/profile_settings"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/prog_rep"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/set_goal"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/prog_rep"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="@string/progress_report"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/prof_set"
+        app:layout_constraintTop_toBottomOf="@+id/todays_goals"
         app:layout_constraintVertical_bias="0.5" />
 
     <androidx.appcompat.widget.Toolbar

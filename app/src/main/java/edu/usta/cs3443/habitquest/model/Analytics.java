@@ -1,5 +1,7 @@
 package edu.usta.cs3443.habitquest.model;
 
+import java.util.ArrayList;
+
 /**
  * Analytics: The Analytics class represents the analytic data for a user's progress on their goals. The attributes store analytic data and methods to generate reports.
  * Attributes:
@@ -53,4 +55,7 @@ public class Analytics {
         return "";
     }
 
+    public String generateProgressReport() {
+        return "";
+    }
 }

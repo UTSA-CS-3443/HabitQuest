@@ -1,7 +1,9 @@
 package edu.usta.cs3443.habitquest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,5 +29,33 @@ public class MainActivity extends AppCompatActivity {
         User user = new User("username", "password","email","name","phone","address","gender");
         user.getUser(this);
         user.createProfile(context);
+
+        Button profile_settings,progress_report,todays_goal,set_goal;
+
+        profile_settings = findViewById(R.id.prof_set);
+        progress_report = findViewById(R.id.prog_rep);
+        todays_goal = findViewById(R.id.todays_goals);
+        set_goal = findViewById(R.id.set_goal);
+
+        profile_settings.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, profile_Settings_Activity.class);
+            startActivity(intent);
+        });
+        progress_report.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, progress_report_Actvity.class);
+            startActivity(intent);
+        });
+        todays_goal.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, todays_goal_Activity.class);
+            startActivity(intent);
+        });
+        set_goal.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, set_Goal_Activity.class);
+            startActivity(intent);
+        });
+
+
+
+
     }
 }
