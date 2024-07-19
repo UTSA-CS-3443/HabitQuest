@@ -11,6 +11,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.usta.cs3443.habitquest.model.User;
 
+/* 
+   * MainActivity Controller:
+   * Application entry after login
+   * Overview user progress
+    */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
