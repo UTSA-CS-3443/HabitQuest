@@ -50,12 +50,8 @@ public class Analytics {
         this.activeGoals = activeGoals;
     }
 
-    public String generateReport() {
-    // Generate a progress report based on the goals data
-        return "";
-    }
-
     public String generateProgressReport() {
+    // Generate a progress report based on the goals data
         return "";
     }
 }
