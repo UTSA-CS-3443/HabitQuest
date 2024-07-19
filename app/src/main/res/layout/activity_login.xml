@@ -52,6 +52,8 @@
       android:layout_marginEnd="48dp"
       android:layout_marginBottom="64dp"
       android:text="@string/action_sign_in"
+      android:backgroundTint="#CBC9FA"
+      android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +82,8 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="148dp"
       android:text="Skip to main"
+      android:backgroundTint="#CBC9FA"
+      android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +99,6 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/logo_login" />
+      app:srcCompat="@drawable/habitquest" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
