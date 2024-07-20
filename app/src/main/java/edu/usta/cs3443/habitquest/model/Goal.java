@@ -46,7 +46,7 @@ public class Goal {
 public Goal(String goalName, String goalType, String goalDescription, String goalStart, String goalEnd) {
         this.goalName = goalName;
         this.goalType = goalType;
-        this.goalDescrip = goalDescription;
+        this.goalDescription = goalDescription;
         this.goalStart = goalStart;
         this.goalEnd = goalEnd;
         this.goalCompleted = false;
