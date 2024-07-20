@@ -2,11 +2,14 @@ package edu.usta.cs3443.habitquest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -14,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 import edu.usta.cs3443.habitquest.model.User;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         Context context =this;
-        User user = new User("username", "password","email","name","phone","address","gender");
+        ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
+        User user = new User("johnsmith", "11/11/1999", "he/him", "john.doe@example.com", "password", "7/1/2023", "6/1/2023");
         user.getUser(this);
-        user.createProfile(context);
+        try {
+            user.createProfile(context);
+            //duplicate to test if it works
+            user.createProfile(context);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         Button profile_settings,progress_report,todays_goal,set_goal;
 
