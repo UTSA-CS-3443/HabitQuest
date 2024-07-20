@@ -11,29 +11,47 @@
         android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="13dp"
         android:ems="10"
         android:inputType="date"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="185dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="443dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="243dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
 
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="14dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="126dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CurrentDate" />
 
     <TextView
         android:id="@+id/CurrentDate"
@@ -41,13 +59,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text=" "
-        android:textColor="#707070"
+        android:text="test"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf=""
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
