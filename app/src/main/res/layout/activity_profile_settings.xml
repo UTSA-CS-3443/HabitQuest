@@ -25,21 +25,31 @@
         android:id="@+id/editTextBday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="13dp"
         android:ems="10"
         android:inputType="date"
         android:text="01/01"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="185dp" />
 
+
     <EditText
         android:id="@+id/editTextPronouns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="443dp"
         android:ems="10"
         android:inputType="text"
         android:text="Pronouns"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="243dp" />
+
 
     <EditText
         android:id="@+id/editTextEmailAddress"
@@ -55,9 +65,14 @@
         android:id="@+id/editTextText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginBottom="14dp"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
+
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="126dp" />
 
