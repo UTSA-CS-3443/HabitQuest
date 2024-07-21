@@ -40,8 +40,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:autofillHints="@string/prompt_goalName"
-        android:hint="@string/prompt_goalName"
+        android:autofillHints="prompt_goalName"
+        android:hint="prompt_goalName"
         android:padding="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +68,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="210dp"
-        android:autofillHints="@string/prompt_goalDescription"
-        android:hint="@string/prompt_goalDescription"
+        android:autofillHints="prompt_goalDescription"
+        android:hint="prompt_goalDescription"
         android:padding="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,8 +96,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
-        android:autofillHints="@string/prompt_startDate"
-        android:hint="@string/prompt_startDate"
+        android:autofillHints="prompt_startDate"
+        android:hint="prompt_startDate"
         android:padding="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -124,8 +124,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="390dp"
-        android:autofillHints="@string/prompt_endDate"
-        android:hint="@string/prompt_endDate"
+        android:autofillHints="prompt_endDate"
+        android:hint="prompt_endDate"
         android:padding="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +147,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="450dp" />
 
-    <?xml version="1.0" encoding="utf-8"?>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -329,27 +329,35 @@
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/goBackButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="629dp"
+            android:layout_marginEnd="186dp"
+            android:backgroundTint="#4e2e76"
+            android:text="action_go_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
 
-    <Button
-        android:id="@+id/goBackButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#4e2e76"
-        android:text="@string/action_go_back"
-        app:layout_constraintWidth_percent="0.5"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="625dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/addHabitButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="625dp"
+        android:layout_marginEnd="36dp"
         android:backgroundTint="#4e2e76"
-        android:text="@string/action_add_habit"
-        app:layout_constraintWidth_percent="0.5"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="625dp" />
+        android:text="action_add_habit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
