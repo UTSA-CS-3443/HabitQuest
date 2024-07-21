@@ -8,6 +8,20 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/bottomNavigationView2"
+      android:layout_width="408dp"
+      android:layout_height="59dp"
+      android:layout_marginTop="663dp"
+      android:layout_marginBottom="1dp"
+      android:background="#4e2e76"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.666"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="1.0" />
+
   <EditText
       android:id="@+id/username"
       android:layout_width="0dp"
@@ -96,9 +110,44 @@
       android:layout_marginStart="16dp"
       android:layout_marginBottom="8dp"
       app:layout_constraintBottom_toTopOf="@+id/username"
+      app:layout_constraintEnd_toEndOf="@+id/toolbar"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="@+id/toolbar"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias=".6"
+      app:srcCompat="@drawable/habitquest" />
+
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="409dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="1dp"
+      android:layout_marginEnd="1dp"
+      android:layout_marginBottom="6dp"
+      android:background="#4e2e76"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      app:layout_constraintBottom_toTopOf="@+id/imageView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/CurrentDate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:gravity="center"
+      android:text=" "
+      android:textColor="#707070"
+      android:textSize="16sp"
+      android:textStyle="bold"
+      app:layout_constraintBottom_toTopOf="@+id/imageView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/habitquest" />
+      tools:ignore="SpeakableTextPresentCheck" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
