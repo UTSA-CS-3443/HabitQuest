@@ -13,4 +13,23 @@
     <string name="progress_report">Progress Report</string>
     <string name="today_s_goals">Today\'s Goals</string>
     <string name="set_a_goal_habit">Set A Goal/ Habit</string>
+
+    <!-- Strings for goal/habit settings -->
+    <string name="goal_habit_name">Goal/Habit Name</string>  // New string
+    <string name="prompt_goal_name">Enter Goal/Habit Name</string>  // New string
+    <string name="goal_habit_description">Description of Goal/Habit</string>  // New string
+    <string name="prompt_goal_description">Enter Goal/Habit Description</string>  // New string
+    <string name="goal_start_date">Goal/Habit Start Date</string>  // New string
+    <string name="prompt_start_date">Enter Start Date</string>  // New string
+    <string name="goal_end_date">Goal/Habit End Date</string>  // New string
+    <string name="prompt_end_date">Enter End Date</string>  // New string
+    <string name="goal_recurrence">Goal/Habit Recurrence</string>  // New string
+    <string name="label_s">S</string>  // New string
+    <string name="label_m">M</string>  // New string
+    <string name="label_t">T</string>  // New string
+    <string name="label_w">W</string>  // New string
+    <string name="label_th">TH</string>  // New string
+    <string name="label_f">F</string>  // New string
+    <string name="action_go_back">Go Back</string>  // New string
+    <string name="action_add_habit">Add Habit</string>  // New string
 </resources>
