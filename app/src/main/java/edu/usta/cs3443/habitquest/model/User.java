@@ -18,23 +18,23 @@ import java.util.List;
  * userEmail - user’s email data
  * goals - stores the user's goals in arraylist
  * analytics - object to pull user analytic data from
-*
-* Methods:
-* getUserName() - retrieves user's name from database.
-* getUserBday() - retrieves user bday.
-* getUserPronouns() - retrieves user’s set pronouns.
-* getUserEmail() - retrieves the user's email.
-* setUserName() - set profile from database.
-* setUserBday() - set user bday.
-* setUserPronouns() - set user’s set pronouns.
-* setUserEmail() - set the user's email.
-* createProfile() - creates a new user profile; the method initializes the user’s attributes and saves the profile to the database.
-* getUser() - retrieves user from database
-* editProfile() - update’s the user’s profile information to include changing: email, * password, pronouns.
-* addGoal(Goals goal) - add a new goal/habit.
-* deleteGoal(Goals goal) - delete an existing goal/habit.
-* editGoal(Goals goal) - edit an existing goal/habit.
-* generateProgressReport() - pulls user data for analytics.
+ *
+ * Methods:
+ * getUserName() - retrieves user's name from database.
+ * getUserBday() - retrieves user bday.
+ * getUserPronouns() - retrieves user’s set pronouns.
+ * getUserEmail() - retrieves the user's email.
+ * setUserName() - set profile from database.
+ * setUserBday() - set user bday.
+ * setUserPronouns() - set user’s set pronouns.
+ * setUserEmail() - set the user's email.
+ * createProfile() - creates a new user profile; the method initializes the user’s attributes and saves the profile to the database.
+ * getUser() - retrieves user from database
+ * editProfile() - update’s the user’s profile information to include changing: email, * password, pronouns.
+ * addGoal(Goals goal) - add a new goal/habit.
+ * deleteGoal(Goals goal) - delete an existing goal/habit.
+ * editGoal(Goals goal) - edit an existing goal/habit.
+ * generateProgressReport() - pulls user data for analytics.
  */
 
 public class User {
@@ -114,7 +114,7 @@ public class User {
             lines = loadAllLinesFromAssets(context, "sample_user.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
-            }
+        }
         //prints user data
         for (String line : lines) {
             String[] parts = line.split(",");
@@ -123,7 +123,7 @@ public class User {
 
     }
 
-      public void editProfile(String userName, String userBday, String userPronouns, String userEmail) {
+    public void editProfile(String userName, String userBday, String userPronouns, String userEmail) {
         setUserName(userName);
         setUserBday(userBday);
         setUserPronouns(userPronouns);
@@ -154,18 +154,18 @@ public class User {
         return lines;
     }
 
-            public void addGoal(Goal goal) { 
+    public void addGoal(Goal goal) {
         this.goals.add(goal);
         updateAnalytics();
     }
-    
+
     public void deleteGoal(Goal goal) {
         this.goals.remove(goal);
         updateAnalytics();
     }
 
-    public ArrayList<Goal> getGoals() { 
-        return goals; 
+    public ArrayList<Goal> getGoals() {
+        return goals;
     }
 
     private void updateAnalytics() {
@@ -173,9 +173,9 @@ public class User {
         ArrayList<Goal> activeGoals = new ArrayList<>();
 
         for (Goal goal : goals) {
-            if (goal.isCompleted()) {
+            if (goal.isGoalCompleted()) {  // Changed method name from isCompleted to isGoalCompleted
                 completedGoals.add(goal);
-            } 
+            }
             else {
                 activeGoals.add(goal);
             }
@@ -200,5 +200,4 @@ public class User {
     public String generateProgressReport() {
         return analytics.generateProgressReport();
     }
-
 }
