@@ -32,7 +32,7 @@ public class Analytics {
     public ArrayList<Goal> getGoalsNotComplete() {
         ArrayList<Goal> notCompleteGoals = new ArrayList<>();
         for (Goal goal : activeGoals) {
-            if (!goal.isCompleted()) {
+             if (!goal.isGoalCompleted()) {
                 notCompleteGoals.add(goal);
             }
         }
