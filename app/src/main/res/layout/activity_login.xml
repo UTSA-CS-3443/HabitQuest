@@ -57,7 +57,6 @@
 
   <Button
       android:id="@+id/login"
-      android:enabled="false"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="start"
@@ -65,14 +64,15 @@
       android:layout_marginTop="16dp"
       android:layout_marginEnd="48dp"
       android:layout_marginBottom="64dp"
-      android:text="@string/action_sign_in"
       android:backgroundTint="#CBC9FA"
+      android:enabled="false"
+      android:text="@string/action_sign_in"
       android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password"
-      app:layout_constraintVertical_bias="0.2" />
+      app:layout_constraintVertical_bias="0.09" />
 
   <ProgressBar
       android:id="@+id/loading"
@@ -94,17 +94,18 @@
       android:id="@+id/skiptomain"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="148dp"
       android:layout_marginStart="48dp"
       android:layout_marginTop="16dp"
       android:layout_marginEnd="48dp"
-      android:text="Skip to main"
+      android:layout_marginBottom="148dp"
       android:backgroundTint="#CBC9FA"
+      android:text="Skip to main"
       android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/login" />
+      app:layout_constraintTop_toBottomOf="@+id/password"
+      app:layout_constraintVertical_bias="0.777" />
 
   <ImageView
       android:id="@+id/imageView"
