@@ -1,14 +1,26 @@
 package edu.usta.cs3443.habitquest.model;
+import android.os.Environment;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.os.Environment;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Attributes:
@@ -44,14 +56,21 @@ public class User {
     private String userEmail;
     private final ArrayList<Goal> goals;
     private final Analytics analytics;
+    private String user_passwd;
+    private String last_login;
+    private String date_created;
 
     public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
         this.userName = userName;
         this.userBday = userBday;
         this.userPronouns = userPronouns;
         this.userEmail = userEmail;
+        this.user_passwd = user_passwd;
+        this.last_login = last_login;
+        this.date_created = date_created;
         this.goals = new ArrayList<>();
         this.analytics = new Analytics();
+
     }
 
     public String getUserName() {
@@ -87,7 +106,7 @@ public class User {
     }
 
     //saves user to database/csv
-    public void createProfile(Context context) {
+    public void createProfile(Context context) throws IOException {
         //checks if user credentials are valid/ arent in use
         //checks if there is user database file
         List<String> lines;
@@ -96,15 +115,64 @@ public class User {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //checks if user credentials are valid/ arent in use
+        boolean userExists = false;
         for (String line : lines) {
-            //String[] parts = line.split(",");
-            Log.d("User", line);
+            String[] parts = line.split(",");
+            if (parts.length >= 2 && (parts[0].equals(userName) || parts[3].equals(userEmail))) {
+                userExists = true;
+                Log.d("User", "User already exists");
+                break; // Exit the loop if a match is found
+            }
+        }
+
+        if (!userExists) {
+            Log.d("User", "User created");
+            // Add user to database (implementation needed)
+
+            // Add user to CSV file (assuming writeToFile appends)
+            String newUserLine = String.join(",", userName, userBday, userPronouns, userEmail, user_passwd, last_login, date_created);
+            writeToFile(newUserLine, "sample_user.csv", context);
+
 
         }
 
 
     }
+    private void writeToFile(String data, String filename, Context context ) throws IOException {
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+        Log.d("User", "File path: " + file.getAbsolutePath());
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(data.getBytes());
+            outputStream.close();
+            Log.d("User", "User created");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //read from database/csv
+    public String readFile(String filename, Context context) throws IOException {
+        // Get the file object using the previously created approach (assuming context is available)
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
+        // Check if the file exists
+        if (!file.exists()) {
+            // Handle the case where the file doesn't exist (e.g., return an empty string)
+            return "";
+        }
+
+        // Read the file content
+        StringBuilder content = new StringBuilder();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                content.append(scanner.nextLine()).append("\n");
+            }
+        }
+
+        // Return the file content as a string
+        return content.toString();
+    }
+
     //loads user from database/csv
     public void getUser(Context context) {
         //checks if there is user database file
