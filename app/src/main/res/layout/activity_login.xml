@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".LoginActivity">
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -105,7 +106,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password"
-      app:layout_constraintVertical_bias="0.777" />
+      app:layout_constraintVertical_bias="0.95" />
 
   <ImageView
       android:id="@+id/imageView"
@@ -138,20 +139,5 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0" />
 
-  <TextView
-      android:id="@+id/CurrentDate"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:gravity="center"
-      android:text=" "
-      android:textColor="#707070"
-      android:textSize="16sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/imageView"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:ignore="SpeakableTextPresentCheck" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

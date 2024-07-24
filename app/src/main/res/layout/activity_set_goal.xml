@@ -336,8 +336,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#4e2e76"
-        android:textColor="#707070"
+        android:backgroundTint="#CBC9FA"
+        android:textColor="#2e2e2e"
         android:text="@string/action_go_back"
         app:layout_constraintEnd_toStartOf="@+id/addHabitButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -352,27 +352,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#4e2e76"
-        android:textColor="#707070"
+        android:backgroundTint="#CBC9FA"
+        android:textColor="#2e2e2e"
         android:text="@string/action_add_habit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/goBackButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.32" />
 
-    <TextView
-        android:id="@+id/CurrentDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text=" "
-        android:textColor="#707070"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
