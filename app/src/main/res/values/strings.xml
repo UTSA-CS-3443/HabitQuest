@@ -30,6 +30,15 @@
     <string name="label_w">W</string>  // New string
     <string name="label_th">TH</string>  // New string
     <string name="label_f">F</string>  // New string
+    <string name="goal_type">Type of Goal</string>
+    <string-array name="goal_type_array">
+        <item>Select a Goal Type</item>
+        <item>Financial</item>
+        <item>Health</item>
+        <item>Personal</item>
+        <item>Professional</item>
+    </string-array>
+
     <string name="action_go_back">Go Back</string>  // New string
     <string name="action_add_habit">Add Habit</string>  // New string
 </resources>
