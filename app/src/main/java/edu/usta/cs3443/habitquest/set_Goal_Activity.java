@@ -8,9 +8,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -26,6 +31,7 @@ public class set_Goal_Activity extends AppCompatActivity {
 
     private EditText goalNameEditText, goalDescriptionEditText, goalStartDateEditText, goalEndDateEditText;
     private CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7;
+    private Spinner goalTypeSpinner;
     private Button addHabitButton, goBackButton;
 
     @Override
@@ -37,6 +43,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         goalDescriptionEditText = findViewById(R.id.goalDescriptionEditText);
         goalStartDateEditText = findViewById(R.id.goalStartDateEditText);
         goalEndDateEditText = findViewById(R.id.goalEndDateEditText);
+        goalTypeSpinner = findViewById(R.id.goalTypeSpinner);
 
         checkbox1 = findViewById(R.id.checkbox1);
         checkbox2 = findViewById(R.id.checkbox2);
@@ -45,6 +52,12 @@ public class set_Goal_Activity extends AppCompatActivity {
         checkbox5 = findViewById(R.id.checkbox5);
         checkbox6 = findViewById(R.id.checkbox6);
         checkbox7 = findViewById(R.id.checkbox7);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.goal_type_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        goalTypeSpinner.setAdapter(adapter);
+
 
         addHabitButton = findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(v -> addAndReadHabit());
@@ -59,6 +72,8 @@ public class set_Goal_Activity extends AppCompatActivity {
         String goalStartDate = goalStartDateEditText.getText().toString();
         String goalEndDate = goalEndDateEditText.getText().toString();
 
+        String goalType = (String) goalTypeSpinner.getSelectedItem();
+
         StringBuilder recurrence = new StringBuilder();
         if (checkbox1.isChecked()) recurrence.append("S ");
         if (checkbox2.isChecked()) recurrence.append("M ");
@@ -68,7 +83,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         if (checkbox6.isChecked()) recurrence.append("F ");
         if (checkbox7.isChecked()) recurrence.append("S ");
 
-        Goal newGoal = new Goal(goalName, "type", goalDescription, goalStartDate, goalEndDate);
+        Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
         // Path to the internal storage file
         File file = new File(getFilesDir(), "goals.csv");
