@@ -17,7 +17,7 @@ import java.util.ArrayList;
 * setActiveGoals - sets active goals.
 * generateProgressReport() - generates a report of the user’s progress.
  */
-public class Analytics {
+public class  Analytics {
     private ArrayList<Goal> goalsCompleted;
     private ArrayList<Goal> activeGoals;
 
