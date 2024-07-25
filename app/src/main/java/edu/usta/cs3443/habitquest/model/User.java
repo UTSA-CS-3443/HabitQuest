@@ -129,6 +129,9 @@ public class User {
             String newUserLine = String.join(",", userName, userBday, userPronouns, userEmail, user_passwd, last_login, date_created);
             writeToFile(newUserLine, "sample_user.csv", context);
 
+            //print user data
+            Log.d("User", newUserLine);
+
 
         }
 
