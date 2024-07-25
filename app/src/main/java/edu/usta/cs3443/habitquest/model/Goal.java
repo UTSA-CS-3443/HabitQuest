@@ -1,5 +1,16 @@
 package edu.usta.cs3443.habitquest.model;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.usta.cs3443.habitquest.MainActivity;
+
 /**
  * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
  *
@@ -74,5 +85,43 @@ public class Goal {
         setGoalStart(goalStart);   // Changed method name from setStart to setGoalStart
         setGoalEnd(goalEnd);   // Changed method name from setEnd to setGoalEnd
         setGoalCompleted(goalCompleted);   // Changed method name from setCompleted to setGoalCompleted
+    }
+
+    // Load goals from CSV
+    public static List<Goal> loadGoalsFromCSV(Context context) {
+        List<Goal> goals = new ArrayList<>();
+        AssetManager assetManager = context.getAssets();
+
+        try {
+            InputStream inputStream = assetManager.open("sample_goals.csv");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+
+            // Skip the header line
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                if (columns.length == 6) {
+                    String goalName = columns[0].trim();
+                    String goalType = columns[1].trim();
+                    String goalDescription = columns[2].trim();
+                    String goalStart = columns[3].trim();
+                    String goalEnd = columns[4].trim();
+                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim().toUpperCase());
+
+                    Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
+                    goal.setGoalCompleted(goalCompleted);
+                    goals.add(goal);
+                }
+            }
+
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return goals;
     }
 }
