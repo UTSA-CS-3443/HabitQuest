@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".LoginActivity">
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -57,7 +57,6 @@
 
   <Button
       android:id="@+id/login"
-      android:enabled="false"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="start"
@@ -65,18 +64,18 @@
       android:layout_marginTop="16dp"
       android:layout_marginEnd="48dp"
       android:layout_marginBottom="64dp"
-      android:text="@string/action_sign_in"
       android:backgroundTint="#CBC9FA"
+      android:enabled="false"
+      android:text="@string/action_sign_in"
       android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password"
-      app:layout_constraintVertical_bias="0.2" />
+      app:layout_constraintVertical_bias="0.09" />
 
   <ProgressBar
       android:id="@+id/loading"
-      android:visibility="gone"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
@@ -84,6 +83,7 @@
       android:layout_marginTop="64dp"
       android:layout_marginEnd="32dp"
       android:layout_marginBottom="64dp"
+      android:visibility="gone"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="@+id/password"
       app:layout_constraintStart_toStartOf="@+id/password"
@@ -94,14 +94,18 @@
       android:id="@+id/skiptomain"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="148dp"
-      android:text="Skip to main"
+      android:layout_marginStart="48dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="48dp"
+      android:layout_marginBottom="38dp"
       android:backgroundTint="#CBC9FA"
+      android:text="Skip to main"
       android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/login" />
+      app:layout_constraintTop_toBottomOf="@+id/password"
+      app:layout_constraintVertical_bias="0.832" />
 
   <ImageView
       android:id="@+id/imageView"
@@ -134,20 +138,21 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0" />
 
-  <TextView
-      android:id="@+id/CurrentDate"
+  <Button
+      android:id="@+id/registerbtn"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:gravity="center"
-      android:text=" "
-      android:textColor="#707070"
-      android:textSize="16sp"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toTopOf="@+id/imageView"
+      android:layout_marginStart="155dp"
+      android:layout_marginTop="541dp"
+      android:layout_marginEnd="155dp"
+      android:layout_marginBottom="142dp"
+      android:backgroundTint="#CBC9FA"
+      android:text="Register"
+      android:textColor="@color/black"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:ignore="SpeakableTextPresentCheck" />
+      app:layout_constraintTop_toTopOf="parent" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

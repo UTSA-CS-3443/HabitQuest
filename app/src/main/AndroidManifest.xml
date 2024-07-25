@@ -19,6 +19,8 @@
         <activity
             android:name=".set_Goal_Activity"
             android:exported="false" />
+        <activity android:name=".signupActivity"
+            android:exported="false" />
         <activity
             android:name=".progress_report_Actvity"
             android:exported="false" />

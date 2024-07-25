@@ -22,7 +22,7 @@ import edu.usta.cs3443.habitquest.model.CheckLogin;
 */
 
 public class LoginActivity extends AppCompatActivity {
-    Button loginButton, skipButton;
+    Button loginButton, skipButton,registerButton;
     EditText username;
     EditText password;
 
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         skipButton = findViewById(R.id.skiptomain);
+        registerButton = findViewById(R.id.registerbtn);
 
         loginButton.setOnClickListener(v -> {
             //gets username and password from EditText
@@ -57,6 +58,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+        registerButton.setOnClickListener(v -> {
+                    //goes to registerActivity
+                    Intent intent = new Intent(this, signupActivity.class);
+                    startActivity(intent);
+                });
 
         skipButton.setOnClickListener(v -> {
             //set logged in to true

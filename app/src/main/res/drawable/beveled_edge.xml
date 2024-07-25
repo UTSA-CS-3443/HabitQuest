@@ -4,16 +4,16 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#757575"/>
-            <corners android:radius="10dp"/>
-            <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp"/>
+            <corners android:radius="30dp"/>
+            <padding android:left="1dp" android:top="1dp" android:right="1dp" android:bottom="1dp"/>
         </shape>
     </item>
     <!-- Optional shadow effect -->
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#000000"/>
-            <corners android:radius="10dp"/>
-            <padding android:left="5dp" android:top="5dp" android:right="5dp" android:bottom="5dp"/>
+            <corners android:radius="30dp"/>
+            <padding android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp"/>
         </shape>
     </item>
 </layer-list>
