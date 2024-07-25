@@ -1,0 +1,191 @@
+Index: .idea/deploymentTargetSelector.xml
+===================================================================
+diff --git a/.idea/deploymentTargetSelector.xml b/.idea/deploymentTargetSelector.xml
+deleted file mode 100644
+--- a/.idea/deploymentTargetSelector.xml	(revision 330b296c6fe4223eea7fc0d5834c42de3ad698f5)
++++ /dev/null	(revision 330b296c6fe4223eea7fc0d5834c42de3ad698f5)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="deploymentTargetSelector">
+-    <selectionStates>
+-      <SelectionState runConfigName="app">
+-        <option name="selectionMode" value="DROPDOWN" />
+-      </SelectionState>
+-    </selectionStates>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_profile_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#FFFFFF\"\r\n    tools:context=\".profile_Settings_Activity\">\r\n\r\n    <com.google.android.material.bottomnavigation.BottomNavigationView\r\n        android:id=\"@+id/bottomNavigationView2\"\r\n        android:layout_width=\"408dp\"\r\n        android:layout_height=\"59dp\"\r\n        android:layout_marginTop=\"663dp\"\r\n        android:layout_marginBottom=\"1dp\"\r\n        android:background=\"#4e2e76\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.666\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/editbutton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"312dp\"\r\n        android:backgroundTint=\"#CBC9FA\"\r\n        android:text=\"Edit Profile\"\r\n        android:textColor=\"#2e2e2e\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/userEmail\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button2\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:backgroundTint=\"#CBC9FA\"\r\n        android:text=\"Return to Home\"\r\n        android:textColor=\"#2e2e2e\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editbutton\"\r\n        app:layout_constraintTop_toTopOf=\"@id/toolbar\"\r\n        app:layout_constraintVertical_bias=\"0.631\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/button3\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:backgroundTint=\"#CBC9FA\"\r\n        android:text=\"Log Out\"\r\n        android:textColor=\"#2e2e2e\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/button2\"\r\n        app:layout_constraintTop_toTopOf=\"@id/toolbar\"\r\n        app:layout_constraintVertical_bias=\"0.736\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/user\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"35dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"128dp\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/toolbar\"\r\n        app:layout_constraintHorizontal_bias=\"0.02\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/toolbar\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/user\"\r\n        tools:visibility=\"visible\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/calendar\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"35dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"188dp\"\r\n        android:layout_marginBottom=\"8dp\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/toolbar\"\r\n        app:layout_constraintHorizontal_bias=\"0.02\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/toolbar\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/toolbar\"\r\n        app:srcCompat=\"@drawable/calendar\"\r\n        tools:visibility=\"visible\"/>\r\n\r\n    <ImageView\r\n        android:id=\"@+id/diamond\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"35dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"244dp\"\r\n        android:layout_marginBottom=\"8dp\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/toolbar\"\r\n        app:layout_constraintHorizontal_bias=\"0.02\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/toolbar\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/diamond\"\r\n        tools:visibility=\"visible\"/>\r\n\r\n\r\n    <ImageView\r\n        android:id=\"@+id/mail\"\r\n        android:layout_width=\"35dp\"\r\n        android:layout_height=\"35dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"304dp\"\r\n        android:layout_marginBottom=\"8dp\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/toolbar\"\r\n        app:layout_constraintHorizontal_bias=\"0.02\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/toolbar\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/mail\"\r\n        tools:visibility=\"visible\"\r\n        />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/userBday\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"184dp\"\r\n        android:layout_marginEnd=\"101dp\"\r\n        android:layout_marginBottom=\"508dp\"\r\n        android:text=\"01/01\"\r\n        android:textColor=\"#2e2e2e\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.09\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/calendar\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/userPronouns\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"237dp\"\r\n        android:layout_marginEnd=\"101dp\"\r\n        android:layout_marginBottom=\"452dp\"\r\n        android:text=\"Pronouns\"\r\n        android:textColor=\"#2e2e2e\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.109\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/diamond\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/userEmail\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"296dp\"\r\n        android:layout_marginEnd=\"101dp\"\r\n        android:layout_marginBottom=\"388dp\"\r\n        android:text=\"Email\"\r\n        android:textColor=\"#2e2e2e\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.089\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/mail\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.8\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/userName\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"10dp\"\r\n        android:layout_marginTop=\"129dp\"\r\n        android:layout_marginEnd=\"101dp\"\r\n        android:layout_marginBottom=\"5dp\"\r\n        android:text=\"Name\"\r\n        android:textColor=\"#2e2e2e\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/userBday\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.09\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/user\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.2\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"70dp\"\r\n        android:layout_height=\"70dp\"\r\n        android:layout_marginTop=\"568dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:srcCompat=\"@drawable/habitquest_plum\"\r\n        tools:visibility=\"visible\" />\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/toolbar\"\r\n        android:layout_width=\"409dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"1dp\"\r\n        android:layout_marginTop=\"1dp\"\r\n        android:layout_marginEnd=\"1dp\"\r\n        android:background=\"#4e2e76\"\r\n        android:minHeight=\"?attr/actionBarSize\"\r\n        android:theme=\"?attr/actionBarTheme\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_profile_settings.xml b/app/src/main/res/layout/activity_profile_settings.xml
+--- a/app/src/main/res/layout/activity_profile_settings.xml	(revision 330b296c6fe4223eea7fc0d5834c42de3ad698f5)
++++ b/app/src/main/res/layout/activity_profile_settings.xml	(date 1721926695338)
+@@ -27,6 +27,7 @@
+         android:id="@+id/editbutton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
++        android:layout_marginTop="371dp"
+         android:layout_marginBottom="312dp"
+         android:backgroundTint="#CBC9FA"
+         android:text="Edit Profile"
+@@ -35,7 +36,7 @@
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/userEmail"
++        app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="1.0" />
+ 
+     <Button
+@@ -92,7 +93,7 @@
+         app:layout_constraintStart_toStartOf="@+id/toolbar"
+         app:layout_constraintTop_toTopOf="@+id/toolbar"
+         app:srcCompat="@drawable/calendar"
+-        tools:visibility="visible"/>
++        tools:visibility="visible" />
+ 
+     <ImageView
+         android:id="@+id/diamond"
+@@ -106,7 +107,7 @@
+         app:layout_constraintStart_toStartOf="@+id/toolbar"
+         app:layout_constraintTop_toTopOf="parent"
+         app:srcCompat="@drawable/diamond"
+-        tools:visibility="visible"/>
++        tools:visibility="visible" />
+ 
+ 
+     <ImageView
+@@ -121,8 +122,7 @@
+         app:layout_constraintStart_toStartOf="@+id/toolbar"
+         app:layout_constraintTop_toTopOf="parent"
+         app:srcCompat="@drawable/mail"
+-        tools:visibility="visible"
+-        />
++        tools:visibility="visible" />
+ 
+ 
+     <TextView
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#FFFFFF\"\r\n    tools:context=\".LoginActivity\">\r\n\r\n  <com.google.android.material.bottomnavigation.BottomNavigationView\r\n      android:id=\"@+id/bottomNavigationView2\"\r\n      android:layout_width=\"408dp\"\r\n      android:layout_height=\"59dp\"\r\n      android:layout_marginTop=\"663dp\"\r\n      android:layout_marginBottom=\"1dp\"\r\n      android:background=\"#4e2e76\"\r\n      app:layout_constraintBottom_toBottomOf=\"parent\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintHorizontal_bias=\"0.666\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toTopOf=\"parent\"\r\n      app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n  <EditText\r\n      android:id=\"@+id/username\"\r\n      android:layout_width=\"0dp\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginStart=\"24dp\"\r\n      android:layout_marginTop=\"340dp\"\r\n      android:layout_marginEnd=\"24dp\"\r\n      android:autofillHints=\"@string/prompt_email\"\r\n      android:hint=\"@string/prompt_email\"\r\n      android:inputType=\"textEmailAddress\"\r\n      android:minHeight=\"48dp\"\r\n      android:selectAllOnFocus=\"true\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintHorizontal_bias=\"0.0\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n  <EditText\r\n      android:id=\"@+id/password\"\r\n      android:layout_width=\"0dp\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginStart=\"24dp\"\r\n      android:layout_marginTop=\"8dp\"\r\n      android:layout_marginEnd=\"24dp\"\r\n      android:autofillHints=\"@string/prompt_password\"\r\n      android:hint=\"@string/prompt_password\"\r\n      android:imeActionLabel=\"@string/action_sign_in_short\"\r\n      android:imeOptions=\"actionDone\"\r\n      android:inputType=\"textPassword\"\r\n      android:minHeight=\"48dp\"\r\n      android:selectAllOnFocus=\"true\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toBottomOf=\"@+id/username\" />\r\n\r\n  <Button\r\n      android:id=\"@+id/login\"\r\n      android:layout_width=\"wrap_content\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_gravity=\"start\"\r\n      android:layout_marginStart=\"48dp\"\r\n      android:layout_marginTop=\"16dp\"\r\n      android:layout_marginEnd=\"48dp\"\r\n      android:layout_marginBottom=\"64dp\"\r\n      android:backgroundTint=\"#CBC9FA\"\r\n      android:enabled=\"false\"\r\n      android:text=\"Sign in\"\r\n      android:textColor=\"#2e2e2e\"\r\n      app:layout_constraintBottom_toBottomOf=\"parent\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toBottomOf=\"@+id/password\"\r\n      app:layout_constraintVertical_bias=\"0.125\" />\r\n\r\n  <ProgressBar\r\n      android:id=\"@+id/loading\"\r\n      android:layout_width=\"wrap_content\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_gravity=\"center\"\r\n      android:layout_marginStart=\"32dp\"\r\n      android:layout_marginTop=\"64dp\"\r\n      android:layout_marginEnd=\"32dp\"\r\n      android:layout_marginBottom=\"64dp\"\r\n      android:visibility=\"gone\"\r\n      app:layout_constraintBottom_toBottomOf=\"parent\"\r\n      app:layout_constraintEnd_toEndOf=\"@+id/password\"\r\n      app:layout_constraintStart_toStartOf=\"@+id/password\"\r\n      app:layout_constraintTop_toTopOf=\"parent\"\r\n      app:layout_constraintVertical_bias=\"0.3\" />\r\n\r\n  <Button\r\n      android:id=\"@+id/skiptomain\"\r\n      android:layout_width=\"wrap_content\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginStart=\"48dp\"\r\n      android:layout_marginTop=\"16dp\"\r\n      android:layout_marginEnd=\"48dp\"\r\n      android:layout_marginBottom=\"38dp\"\r\n      android:backgroundTint=\"#CBC9FA\"\r\n      android:text=\"Skip to main\"\r\n      android:textColor=\"#2e2e2e\"\r\n      app:layout_constraintBottom_toBottomOf=\"parent\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toBottomOf=\"@+id/password\"\r\n      app:layout_constraintVertical_bias=\"0.832\" />\r\n\r\n  <ImageView\r\n      android:id=\"@+id/imageView\"\r\n      android:layout_width=\"match_parent\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginBottom=\"8dp\"\r\n      app:layout_constraintBottom_toTopOf=\"@+id/username\"\r\n      app:layout_constraintEnd_toEndOf=\"@+id/toolbar\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toTopOf=\"parent\"\r\n      app:flow_horizontalBias=\".6\"\r\n      app:layout_constraintVertical_bias=\".6\"\r\n      app:srcCompat=\"@drawable/habitquest\" />\r\n\r\n  <androidx.appcompat.widget.Toolbar\r\n      android:id=\"@+id/toolbar\"\r\n      android:layout_width=\"409dp\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginStart=\"1dp\"\r\n      android:layout_marginEnd=\"1dp\"\r\n      android:layout_marginBottom=\"6dp\"\r\n      android:background=\"#4e2e76\"\r\n      android:minHeight=\"?attr/actionBarSize\"\r\n      android:theme=\"?attr/actionBarTheme\"\r\n      app:layout_constraintBottom_toTopOf=\"@+id/imageView\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintHorizontal_bias=\"0.0\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toTopOf=\"parent\"\r\n      app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n  <Button\r\n      android:id=\"@+id/registerbtn\"\r\n      android:layout_width=\"wrap_content\"\r\n      android:layout_height=\"wrap_content\"\r\n      android:layout_marginStart=\"155dp\"\r\n      android:layout_marginTop=\"541dp\"\r\n      android:layout_marginEnd=\"155dp\"\r\n      android:layout_marginBottom=\"142dp\"\r\n      android:backgroundTint=\"#CBC9FA\"\r\n      android:text=\"Register\"\r\n      android:textColor=\"@color/black\"\r\n      app:layout_constraintBottom_toBottomOf=\"parent\"\r\n      app:layout_constraintEnd_toEndOf=\"parent\"\r\n      app:layout_constraintHorizontal_bias=\"1.0\"\r\n      app:layout_constraintStart_toStartOf=\"parent\"\r\n      app:layout_constraintTop_toTopOf=\"parent\"\r\n      app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_login.xml b/app/src/main/res/layout/activity_login.xml
+--- a/app/src/main/res/layout/activity_login.xml	(revision 330b296c6fe4223eea7fc0d5834c42de3ad698f5)
++++ b/app/src/main/res/layout/activity_login.xml	(date 1721927083098)
+@@ -29,11 +29,13 @@
+       android:layout_marginStart="24dp"
+       android:layout_marginTop="340dp"
+       android:layout_marginEnd="24dp"
++      android:layout_marginBottom="343dp"
+       android:autofillHints="@string/prompt_email"
+       android:hint="@string/prompt_email"
+       android:inputType="textEmailAddress"
+       android:minHeight="48dp"
+       android:selectAllOnFocus="true"
++      app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="parent"
+@@ -44,8 +46,9 @@
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="24dp"
+-      android:layout_marginTop="8dp"
++      android:layout_marginTop="397dp"
+       android:layout_marginEnd="24dp"
++      android:layout_marginBottom="287dp"
+       android:autofillHints="@string/prompt_password"
+       android:hint="@string/prompt_password"
+       android:imeActionLabel="@string/action_sign_in_short"
+@@ -53,28 +56,29 @@
+       android:inputType="textPassword"
+       android:minHeight="48dp"
+       android:selectAllOnFocus="true"
++      app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+-      app:layout_constraintTop_toBottomOf="@+id/username" />
++      app:layout_constraintTop_toTopOf="parent" />
+ 
+   <Button
+       android:id="@+id/login"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="start"
+-      android:layout_marginStart="48dp"
+-      android:layout_marginTop="16dp"
+-      android:layout_marginEnd="48dp"
+-      android:layout_marginBottom="64dp"
++      android:layout_marginStart="160dp"
++      android:layout_marginTop="480dp"
++      android:layout_marginEnd="160dp"
++      android:layout_marginBottom="203dp"
+       android:backgroundTint="#CBC9FA"
+       android:enabled="false"
+       android:text="Sign in"
+       android:textColor="#2e2e2e"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
++      app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+-      app:layout_constraintTop_toBottomOf="@+id/password"
+-      app:layout_constraintVertical_bias="0.125" />
++      app:layout_constraintTop_toTopOf="parent" />
+ 
+   <ProgressBar
+       android:id="@+id/loading"
+@@ -96,29 +100,29 @@
+       android:id="@+id/skiptomain"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+-      android:layout_marginStart="48dp"
+-      android:layout_marginTop="16dp"
+-      android:layout_marginEnd="48dp"
+-      android:layout_marginBottom="38dp"
++      android:layout_marginStart="142dp"
++      android:layout_marginTop="603dp"
++      android:layout_marginEnd="142dp"
++      android:layout_marginBottom="80dp"
+       android:backgroundTint="#CBC9FA"
+       android:text="Skip to main"
+       android:textColor="#2e2e2e"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
++      app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+-      app:layout_constraintTop_toBottomOf="@+id/password"
+-      app:layout_constraintVertical_bias="0.832" />
++      app:layout_constraintTop_toTopOf="parent" />
+ 
+   <ImageView
+       android:id="@+id/imageView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="8dp"
++      app:flow_horizontalBias=".6"
+       app:layout_constraintBottom_toTopOf="@+id/username"
+       app:layout_constraintEnd_toEndOf="@+id/toolbar"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+-      app:flow_horizontalBias=".6"
+       app:layout_constraintVertical_bias=".6"
+       app:srcCompat="@drawable/habitquest" />
+ 
+@@ -152,7 +156,7 @@
+       android:textColor="@color/black"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+-      app:layout_constraintHorizontal_bias="1.0"
++      app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="1.0" />
