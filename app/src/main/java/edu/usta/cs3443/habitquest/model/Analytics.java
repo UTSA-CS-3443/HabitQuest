@@ -51,7 +51,43 @@ public class  Analytics {
     }
 
     public String generateProgressReport() {
-    // Generate a progress report based on the goals data
-        return "";
+        StringBuilder report = new StringBuilder();
+        report.append("Progress Report:\n\n");
+
+        // Completed Goals
+        report.append("Goals Completed:\n");
+        ArrayList<Goal> completedGoals = getGoalsCompleted();
+        if (completedGoals.isEmpty()) {
+            report.append("No goals completed yet.\n");
+        } else {
+            for (Goal goal : completedGoals) {
+                report.append("- ").append(goal.getGoalName()).append(": ")
+                        .append(goal.getGoalDescription()).append("\n");
+            }
+        }
+        // Not Completed Goals
+        report.append("\nGoals Not Completed:\n");
+        ArrayList<Goal> notCompletedGoals = getGoalsNotComplete();
+        if (notCompletedGoals.isEmpty()) {
+            report.append("All goals are completed or not yet started.\n");
+        } else {
+            for (Goal goal : notCompletedGoals) {
+                report.append("- ").append(goal.getGoalName()).append(": ")
+                        .append(goal.getGoalDescription()).append("\n");
+            }
+        }
+
+        // Active Goals
+        report.append("\nActive Goals:\n");
+        ArrayList<Goal> activeGoals = getActiveGoals();
+        if (activeGoals.isEmpty()) {
+            report.append("No active goals.\n");
+        } else {
+            for (Goal goal : activeGoals) {
+                report.append("- ").append(goal.getGoalName()).append(": ")
+                        .append(goal.getGoalDescription()).append("\n");
+            }
+        }
+        return report.toString();
     }
 }

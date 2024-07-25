@@ -20,6 +20,7 @@ import java.util.Scanner;
  * userBday - user’s birthday data
  * userPronouns - user’s preferred pronouns data
  * userEmail - user’s email data
+ * user_passwd - user's password data (to be hidden)
  * goals - stores the user's goals in arraylist
  * analytics - object to pull user analytic data from
  *
@@ -28,10 +29,12 @@ import java.util.Scanner;
  * getUserBday() - retrieves user bday.
  * getUserPronouns() - retrieves user’s set pronouns.
  * getUserEmail() - retrieves the user's email.
+ * getUserPasswd - retrieve the user password.
  * setUserName() - set profile from database.
  * setUserBday() - set user bday.
  * setUserPronouns() - set user’s set pronouns.
  * setUserEmail() - set the user's email.
+ * setUserPasswd() - set the user's password
  * createProfile() - creates a new user profile; the method initializes the user’s attributes and saves the profile to the database.
  * getUser() - retrieves user from database
  * editProfile() - update’s the user’s profile information to include changing: email, * password, pronouns.
