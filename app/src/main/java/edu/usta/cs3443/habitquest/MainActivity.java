@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             });
             Context context = this;
             ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
-            User user = new User("johnsmith", "11/11/1999", "he/him", "john.doe@example.com", "password", "7/1/2023", "6/1/2023");
+            User user = new User("John Doe", "10/12", "he/him", "john.doe@example.com", "Password123!", "07/25/2024", "07/15/2024");
             user.getUser(this);
             try {
                 user.createProfile(context);
