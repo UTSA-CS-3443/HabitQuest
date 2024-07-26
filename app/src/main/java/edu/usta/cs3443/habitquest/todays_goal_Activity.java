@@ -1,15 +1,19 @@
 package edu.usta.cs3443.habitquest;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
+
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import edu.usta.cs3443.habitquest.model.Goal; // Import your Goal model
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import edu.usta.cs3443.habitquest.model.Goal;
+import edu.usta.cs3443.habitquest.model.GoalAdapter;
 
 public class todays_goal_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
