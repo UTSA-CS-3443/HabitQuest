@@ -1,6 +1,7 @@
 package edu.usta.cs3443.habitquest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -29,7 +30,7 @@ public class signupActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        EditText email,username,password,password_confirm,name,birthday,pronoun;
+        EditText email,username,password,password_confirm,birthday,pronoun;
         Button signup;
 
         email = findViewById(R.id.username);
@@ -61,12 +62,18 @@ public class signupActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
+            // Save user data to SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", username.getText().toString());
+            editor.putString("birthday", birthday.getText().toString());
+            editor.putString("pronoun", pronoun.getText().toString());
+            editor.putString("email", email.getText().toString());
+            editor.apply();
+
             Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show();
-            //Set user to logged in
-            CheckLogin.setLoggedIn(this,true);
+            CheckLogin.setLoggedIn(this, true);
 
-
-            //go to main activity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
@@ -77,7 +84,7 @@ public class signupActivity extends AppCompatActivity {
         // Get the current date and time
         java.util.Date currentDate = new java.util.Date();
         // Format the date and time as a string in the desired format
-        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("MM-dd-yyyy");
         return dateFormat.format(currentDate);
     }
 

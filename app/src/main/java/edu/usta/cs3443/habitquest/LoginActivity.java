@@ -13,7 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.IOException;
+
 import edu.usta.cs3443.habitquest.model.CheckLogin;
+import edu.usta.cs3443.habitquest.model.User;
 
 /*
  * LoginActivity Controller:
@@ -52,11 +55,27 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_SHORT).show();
 
 
-            }else{
-                //needs to be worked on
-                Log.d("LoginActivity", "Username: " + username + ", Password: " + password);
+            }else {
+                try {
+                    User user = User.authenticateUser(username, password, this);
+                    if (user != null) {
+                        Log.d("LoginActivity", "Login successful");
+                        // Set logged in to true
+                        CheckLogin.setLoggedIn(this, true);
+                        // Pass user data to MainActivity
+                        Intent intent = new Intent(this, MainActivity.class);
+                        intent.putExtra("userName", user.getUserName());
+                        intent.putExtra("userEmail", user.getUserEmail());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Error loading user data", Toast.LENGTH_SHORT).show();
+                }
             }
-
         });
         registerButton.setOnClickListener(v -> {
                     //goes to registerActivity

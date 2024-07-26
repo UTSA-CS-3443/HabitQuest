@@ -71,7 +71,7 @@
       android:layout_marginEnd="160dp"
       android:layout_marginBottom="203dp"
       android:backgroundTint="#CBC9FA"
-      android:enabled="false"
+      android:enabled="true"
       android:text="Sign in"
       android:textColor="#2e2e2e"
       app:layout_constraintBottom_toBottomOf="parent"
