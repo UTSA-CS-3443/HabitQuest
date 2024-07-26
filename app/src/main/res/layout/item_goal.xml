@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/beveled_edge"
+    android:layout_margin="4dp">
+
+    <TextView
+        android:id="@+id/goalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3D3B3B"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/goalType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#3D3B3B"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/goalDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#3D3B3B"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/goalStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#3D3B3B"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/goalEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#3D3B3B"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end">
+
+        <TextView
+            android:id="@+id/editGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textColor="#A451F5"
+            android:padding="8dp"
+            android:textAppearance="?attr/textAppearanceListItemSecondary" />
+
+        <TextView
+            android:id="@+id/deleteGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:textColor="#A451F5"
+            android:padding="8dp"
+            android:textAppearance="?attr/textAppearanceListItemSecondary" />
+
+        <CheckBox
+            android:id="@+id/goalCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
