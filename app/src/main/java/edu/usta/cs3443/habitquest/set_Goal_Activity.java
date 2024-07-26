@@ -83,7 +83,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
         // Path to the internal storage file
-        File file = new File(getFilesDir(), "goals.csv");
+        File file = new File(getFilesDir(), "gsample_goals.csv");
         Log.d(TAG, "File path: " + file.getAbsolutePath());
 
         // Add the habit to the CSV file
@@ -103,5 +103,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e(TAG, "Error reading CSV", e);
         }
+
+
     }
 }
