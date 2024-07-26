@@ -1,0 +1,55 @@
+Index: app/src/main/java/edu/usta/cs3443/habitquest/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.usta.cs3443.habitquest;\r\n\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\n\r\nimport edu.usta.cs3443.habitquest.model.CheckLogin;\r\nimport edu.usta.cs3443.habitquest.model.User;\r\n\r\n/* \r\n   * MainActivity Controller:\r\n   * Application entry after login\r\n   * Overview user progress\r\n    */\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        if (!CheckLogin.isLoggedIn(this)) {\r\n            // User is not logged in, start LoginActivity\r\n            Intent intent = new Intent(this, LoginActivity.class);\r\n            startActivity(intent);\r\n            finish();\r\n        } else {\r\n            // User is logged in, proceed to main content\r\n\r\n            EdgeToEdge.enable(this);\r\n            setContentView(R.layout.activity_main);\r\n            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {\r\n                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());\r\n                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);\r\n                return insets;\r\n            });\r\n            Context context = this;\r\n            ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){\r\n            User user = new User(\"johnsmith\", \"11/11/1999\", \"he/him\", \"john.doe@example.com\", \"password\", \"7/1/2023\", \"6/1/2023\");\r\n            user.getUser(this);\r\n            try {\r\n                user.createProfile(context);\r\n                //duplicate to test if it works\r\n                user.createProfile(context);\r\n            } catch (Exception e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n\r\n            Button profile_settings, progress_report, todays_goal, set_goal;\r\n\r\n            profile_settings = findViewById(R.id.prof_set);\r\n            progress_report = findViewById(R.id.prog_rep);\r\n            todays_goal = findViewById(R.id.todays_goals);\r\n            set_goal = findViewById(R.id.set_goal);\r\n\r\n            profile_settings.setOnClickListener(v -> {\r\n                Intent intent = new Intent(MainActivity.this, profile_Settings_Activity.class);\r\n                startActivity(intent);\r\n            });\r\n            progress_report.setOnClickListener(v -> {\r\n                Intent intent = new Intent(MainActivity.this, progress_report_Actvity.class);\r\n                startActivity(intent);\r\n            });\r\n            todays_goal.setOnClickListener(v -> {\r\n                Intent intent = new Intent(MainActivity.this, todays_goal_Activity.class);\r\n                startActivity(intent);\r\n            });\r\n            set_goal.setOnClickListener(v -> {\r\n                Intent intent = new Intent(MainActivity.this, set_Goal_Activity.class);\r\n                startActivity(intent);\r\n            });\r\n\r\n        }\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/usta/cs3443/habitquest/MainActivity.java b/app/src/main/java/edu/usta/cs3443/habitquest/MainActivity.java
+--- a/app/src/main/java/edu/usta/cs3443/habitquest/MainActivity.java	
++++ b/app/src/main/java/edu/usta/cs3443/habitquest/MainActivity.java	
+@@ -44,15 +44,7 @@
+             });
+             Context context = this;
+             ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
+-            User user = new User("johnsmith", "11/11/1999", "he/him", "john.doe@example.com", "password", "7/1/2023", "6/1/2023");
+-            user.getUser(this);
+-            try {
+-                user.createProfile(context);
+-                //duplicate to test if it works
+-                user.createProfile(context);
+-            } catch (Exception e) {
+-                throw new RuntimeException(e);
+-            }
++
+ 
+             Button profile_settings, progress_report, todays_goal, set_goal;
+ 
+Index: app/src/main/java/edu/usta/cs3443/habitquest/model/CheckLogin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.usta.cs3443.habitquest.model;\r\n\r\nimport android.content.Context;\r\nimport android.content.SharedPreferences;\r\n\r\npublic class CheckLogin {\r\n\r\n    private static final String PREFS_NAME = \"user_prefs\";\r\n    private static final String IS_LOGGED_IN = \"isLoggedIn\";\r\n\r\n    public static boolean isLoggedIn(Context context) {\r\n        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);\r\n        return prefs.getBoolean(IS_LOGGED_IN, false);\r\n    }\r\n\r\n    public static void setLoggedIn(Context context, boolean loggedIn) {\r\n        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);\r\n        SharedPreferences.Editor editor = prefs.edit();\r\n        editor.putBoolean(IS_LOGGED_IN, loggedIn);\r\n        editor.apply();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/usta/cs3443/habitquest/model/CheckLogin.java b/app/src/main/java/edu/usta/cs3443/habitquest/model/CheckLogin.java
+--- a/app/src/main/java/edu/usta/cs3443/habitquest/model/CheckLogin.java	
++++ b/app/src/main/java/edu/usta/cs3443/habitquest/model/CheckLogin.java	
+@@ -7,6 +7,7 @@
+ 
+     private static final String PREFS_NAME = "user_prefs";
+     private static final String IS_LOGGED_IN = "isLoggedIn";
++    private static final String USERNAME = "username";
+ 
+     public static boolean isLoggedIn(Context context) {
+         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+@@ -19,4 +20,9 @@
+         editor.putBoolean(IS_LOGGED_IN, loggedIn);
+         editor.apply();
+     }
++    //sets the username in shared pref
++//    public static void
++
++    //change the current username
++
+ }

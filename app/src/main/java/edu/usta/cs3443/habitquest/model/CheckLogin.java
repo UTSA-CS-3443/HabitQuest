@@ -7,6 +7,7 @@ public class CheckLogin {
 
     private static final String PREFS_NAME = "user_prefs";
     private static final String IS_LOGGED_IN = "isLoggedIn";
+    private static final String USERNAME = "username";
 
     public static boolean isLoggedIn(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
@@ -19,4 +20,9 @@ public class CheckLogin {
         editor.putBoolean(IS_LOGGED_IN, loggedIn);
         editor.apply();
     }
+    //sets the username in shared pref
+//    public static void
+
+    //change the current username
+
 }

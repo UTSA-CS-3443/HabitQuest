@@ -1,14 +1,18 @@
-package edu.usta.cs3443.habitquest;
+package edu.usta.cs3443.habitquest.model;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
-import edu.usta.cs3443.habitquest.model.Goal;
+
+import edu.usta.cs3443.habitquest.R;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
     private List<Goal> goals;
@@ -43,6 +47,36 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             goal.setGoalCompleted(isChecked);
             // Notify the model or database of the change
             // You might need to update the data source or notify the database here
+        });
+        // Set a listener to handle edit and delete actions
+        holder.editGoal.setOnClickListener(v -> {
+            // Handle edit action
+            // Open a dialog or activity to edit the goal
+
+        });
+        holder.deleteGoal.setOnClickListener(v -> {
+            // Handle delete action
+            // Remove the goal from the list and notify the adapter
+
+            //check if the goal is within the list
+            if (goals.contains(goal)) {
+                goals.remove(goal);
+               // goals.remove(position);
+                notifyItemRemoved(position);
+
+            }else{
+                //goal is not in the list
+                Log.d("GoalAdapter", "Goal not found in list");
+                //show all the goals to console
+                Log.d("GoalAdapter", "Goals:");
+                for (Goal g : goals) {
+                    Log.d("GoalAdapter", g.getGoalName());
+                }
+                //name of current goal
+                String goalName = goal.getGoalName();
+                Log.d("GoalAdapter", "Goal not found in list: " + goalName);
+
+            }
         });
     }
 
