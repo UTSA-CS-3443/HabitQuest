@@ -1,15 +1,27 @@
 package edu.usta.cs3443.habitquest.model;
 
 import android.content.Context;
+import android.net.ParseException;
 import android.os.Environment;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
+
+import edu.usta.cs3443.habitquest.MainActivity;
 
 /**
  * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
@@ -61,30 +73,32 @@ public class Goal {
         this.goalCompleted = false;
     }
 
-    // Getters
+    // Getters and Setters
     public String getGoalName() { return goalName; }
     public String getGoalType() { return goalType; }
     public String getGoalDescription() { return goalDescription; }
-    public String getGoalStart() { return goalStart; }   // Changed method name from getStart to getGoalStart
-    public String getGoalEnd() { return goalEnd; }   // Changed method name from getEnd to getGoalEnd
-    public Boolean isGoalCompleted() { return goalCompleted; }   // Changed method name from isCompleted to isGoalCompleted
+    public String getGoalStart() { return goalStart; }
+    public String getGoalEnd() { return goalEnd; }
+    public Boolean isGoalCompleted() { return goalCompleted; }
 
-    // Setters
     public void setGoalName(String goalName) { this.goalName = goalName; }
     public void setGoalType(String goalType) { this.goalType = goalType; }
-    public void setGoalDescription(String goalDescription) { this.goalDescription = goalDescription; }   // Corrected parameter name from goalDescrip to goalDescription
-    public void setGoalStart(String goalStart) { this.goalStart = goalStart; }   // Changed method name from setStart to setGoalStart
-    public void setGoalEnd(String goalEnd) { this.goalEnd = goalEnd; }   // Changed method name from setEnd to setGoalEnd
-    public void setGoalCompleted(Boolean goalCompleted) { this.goalCompleted = goalCompleted; }   // Changed method name from setCompleted to setGoalCompleted
+    public void setGoalDescription(String goalDescription) { this.goalDescription = goalDescription; }
+    public void setGoalStart(String goalStart) { this.goalStart = goalStart; }
+    public void setGoalEnd(String goalEnd) { this.goalEnd = goalEnd; }
+    public void setGoalCompleted(Boolean goalCompleted) { this.goalCompleted = goalCompleted; }
 
-    // Edit goal
-    public void editGoal(String goalName, String goalType, String goalDescription, String goalStart, String goalEnd, Boolean goalCompleted) {
-        setGoalName(goalName);
-        setGoalType(goalType);
-        setGoalDescription(goalDescription);
-        setGoalStart(goalStart);   // Changed method name from setStart to setGoalStart
-        setGoalEnd(goalEnd);   // Changed method name from setEnd to setGoalEnd
-        setGoalCompleted(goalCompleted);   // Changed method name from setCompleted to setGoalCompleted
+
+    // Check if the goal is expired
+    public boolean isExpired(Date today) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date endDate = sdf.parse(goalEnd);
+            return endDate.before(today);
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // Load goals from CSV
@@ -92,6 +106,33 @@ public class Goal {
         List<Goal> goals = new ArrayList<>();
         String filename = "egsample_goals.csv";
 
+        // Load pre-loaded goals from sample_goals.csv
+        try (InputStream inputStream = context.getAssets().open("sample_goals.csv");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            String line;
+            // Skip the header line
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+                if (columns.length == 6) {
+                    String goalName = columns[0].trim();
+                    String goalType = columns[1].trim();
+                    String goalDescription = columns[2].trim();
+                    String goalStart = columns[3].trim();
+                    String goalEnd = columns[4].trim();
+                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
+
+                    Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
+                    goal.setGoalCompleted(goalCompleted);
+                    goals.add(goal);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Load newly created goals from goals.csv
         try {
             String csvContent = readFile(filename, context);
             //test if it works

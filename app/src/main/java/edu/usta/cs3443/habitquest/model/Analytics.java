@@ -1,23 +1,11 @@
 package edu.usta.cs3443.habitquest.model;
 
-import java.util.ArrayList;
+import android.content.Context;
 
-/**
- * Analytics: The Analytics class represents the analytic data for a user's progress on their goals. The attributes store analytic data and methods to generate reports.
- * Attributes:
-* goalsCompleted - the goals the user has completed.
-* activeGoals - the active goals the user has.
-*
-* Methods:
-* getGoalsCompleted() - gets goals marked as completed.
-* getGoalsNotComplete() - gets past goals not completed.
-* getActiveGoals() - gets active goals.
-* setGoalsCompleted - sets goals marked as completed.
-* setGoalsNotComplete - sets past goals not completed.
-* setActiveGoals - sets active goals.
-* generateProgressReport() - generates a report of the user’s progress.
- */
-public class  Analytics {
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Analytics {
     private ArrayList<Goal> goalsCompleted;
     private ArrayList<Goal> activeGoals;
 
@@ -26,27 +14,65 @@ public class  Analytics {
         this.activeGoals = new ArrayList<>();
     }
 
-    public ArrayList<Goal> getGoalsCompleted() { 
+    public ArrayList<Goal> getGoalsCompleted() {
         return goalsCompleted;
     }
+
     public ArrayList<Goal> getGoalsNotComplete() {
         ArrayList<Goal> notCompleteGoals = new ArrayList<>();
         for (Goal goal : activeGoals) {
-             if (!goal.isGoalCompleted()) {
+            if (!goal.isGoalCompleted()) {
                 notCompleteGoals.add(goal);
             }
         }
         return notCompleteGoals;
     }
-    
-    public ArrayList<Goal> getActiveGoals() { 
+
+    public ArrayList<Goal> getActiveGoals() {
         return activeGoals;
     }
 
-    public void setGoalsCompleted(ArrayList<Goal> goalsCompleted) { 
+    public void setGoalsCompleted(ArrayList<Goal> goalsCompleted) {
         this.goalsCompleted = goalsCompleted;
     }
-    public void setActiveGoals(ArrayList<Goal> activeGoals) { 
+
+    public void setActiveGoals(ArrayList<Goal> activeGoals) {
+        this.activeGoals = activeGoals;
+    }
+
+    public int getNumberOfGoalsCompleted() {
+        return getGoalsCompleted().size();
+    }
+
+    public int getNumberOfGoalsNotCompleted() {
+        return getGoalsNotComplete().size();
+    }
+
+    public int getNumberOfActiveGoals() {
+        int count = 0;
+        Date today = new Date();
+        for (Goal goal : activeGoals) {
+            if (!goal.isExpired(today)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void loadGoalsFromCSV(Context context) {
+        ArrayList<Goal> allGoals = Goal.loadGoalsFromCSV(context);
+        ArrayList<Goal> completedGoals = new ArrayList<>();
+        ArrayList<Goal> activeGoals = new ArrayList<>();
+
+        for (Goal goal : allGoals) {
+            if (goal.isGoalCompleted()) {
+                completedGoals.add(goal);
+            } else {
+                activeGoals.add(goal);
+            }
+        }
+
+        this.goalsCompleted = completedGoals;
         this.activeGoals = activeGoals;
     }
 
@@ -54,38 +80,41 @@ public class  Analytics {
         StringBuilder report = new StringBuilder();
         report.append("Progress Report:\n\n");
 
-        // Completed Goals
-        report.append("Goals Completed:\n");
-        ArrayList<Goal> completedGoals = getGoalsCompleted();
-        if (completedGoals.isEmpty()) {
+        // Goals Completed
+        int completedGoalsCount = getNumberOfGoalsCompleted();
+        report.append("Goals Completed: ").append(completedGoalsCount).append("\n");
+        if (completedGoalsCount == 0) {
             report.append("No goals completed yet.\n");
         } else {
-            for (Goal goal : completedGoals) {
+            for (Goal goal : getGoalsCompleted()) {
                 report.append("- ").append(goal.getGoalName()).append(": ")
                         .append(goal.getGoalDescription()).append("\n");
             }
         }
-        // Not Completed Goals
-        report.append("\nGoals Not Completed:\n");
-        ArrayList<Goal> notCompletedGoals = getGoalsNotComplete();
-        if (notCompletedGoals.isEmpty()) {
+
+        // Goals Not Completed
+        int notCompletedGoalsCount = getNumberOfGoalsNotCompleted();
+        report.append("\nGoals Not Completed: ").append(notCompletedGoalsCount).append("\n");
+        if (notCompletedGoalsCount == 0) {
             report.append("All goals are completed or not yet started.\n");
         } else {
-            for (Goal goal : notCompletedGoals) {
+            for (Goal goal : getGoalsNotComplete()) {
                 report.append("- ").append(goal.getGoalName()).append(": ")
                         .append(goal.getGoalDescription()).append("\n");
             }
         }
 
         // Active Goals
-        report.append("\nActive Goals:\n");
-        ArrayList<Goal> activeGoals = getActiveGoals();
-        if (activeGoals.isEmpty()) {
+        int activeGoalsCount = getNumberOfActiveGoals();
+        report.append("\nActive Goals: ").append(activeGoalsCount).append("\n");
+        if (activeGoalsCount == 0) {
             report.append("No active goals.\n");
         } else {
-            for (Goal goal : activeGoals) {
-                report.append("- ").append(goal.getGoalName()).append(": ")
-                        .append(goal.getGoalDescription()).append("\n");
+            for (Goal goal : getActiveGoals()) {
+                if (!goal.isExpired(new Date())) { // Make sure the goal is active
+                    report.append("- ").append(goal.getGoalName()).append(": ")
+                            .append(goal.getGoalDescription()).append("\n");
+                }
             }
         }
         return report.toString();
