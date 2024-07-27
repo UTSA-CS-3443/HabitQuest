@@ -1,6 +1,5 @@
 package edu.usta.cs3443.habitquest;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,7 +56,11 @@ public class set_Goal_Activity extends AppCompatActivity {
         addHabitButton.setOnClickListener(v -> addAndReadHabit());
 
         goBackButton = findViewById(R.id.goBackButton);
-        goBackButton.setOnClickListener(v -> finish());
+        goBackButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(set_Goal_Activity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
     }
 
     private void addAndReadHabit() {

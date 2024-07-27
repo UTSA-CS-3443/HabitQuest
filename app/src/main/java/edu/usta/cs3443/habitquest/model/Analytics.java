@@ -60,7 +60,7 @@ public class Analytics {
     }
 
     public void loadGoalsFromCSV(Context context) {
-        ArrayList<Goal> allGoals = Goal.loadGoalsFromCSV(context);
+        ArrayList<Goal> allGoals = (ArrayList<Goal>) Goal.loadGoalsFromCSV(context);
         ArrayList<Goal> completedGoals = new ArrayList<>();
         ArrayList<Goal> activeGoals = new ArrayList<>();
 
