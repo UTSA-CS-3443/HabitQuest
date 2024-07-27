@@ -1,30 +1,28 @@
 package edu.usta.cs3443.habitquest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.EditText;
-import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import edu.usta.cs3443.habitquest.model.Goal;
 
 public class set_Goal_Activity extends AppCompatActivity {
 
-    private static final String TAG = "set_Goal_Activity"; 
+    private static final String TAG = "set_Goal_Activity";
 
     private EditText goalNameEditText, goalDescriptionEditText, goalStartDateEditText, goalEndDateEditText;
     private CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7;
@@ -55,7 +53,6 @@ public class set_Goal_Activity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         goalTypeSpinner.setAdapter(adapter);
 
-
         addHabitButton = findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(v -> addAndReadHabit());
 
@@ -68,42 +65,32 @@ public class set_Goal_Activity extends AppCompatActivity {
         String goalDescription = goalDescriptionEditText.getText().toString();
         String goalStartDate = goalStartDateEditText.getText().toString();
         String goalEndDate = goalEndDateEditText.getText().toString();
-
         String goalType = (String) goalTypeSpinner.getSelectedItem();
 
-        StringBuilder recurrence = new StringBuilder();
-        if (checkbox1.isChecked()) recurrence.append("S ");
-        if (checkbox2.isChecked()) recurrence.append("M ");
-        if (checkbox3.isChecked()) recurrence.append("T ");
-        if (checkbox4.isChecked()) recurrence.append("W ");
-        if (checkbox5.isChecked()) recurrence.append("TH ");
-        if (checkbox6.isChecked()) recurrence.append("F ");
-        if (checkbox7.isChecked()) recurrence.append("S ");
+        if (goalName.isEmpty() || goalDescription.isEmpty() || goalStartDate.isEmpty() || goalEndDate.isEmpty() || goalType.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        // Create a new Goal object
         Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
         // Path to the internal storage file
-        File file = new File(getFilesDir(), "gsample_goals.csv");
+        File file = new File(getFilesDir(), "goals.csv");
         Log.d(TAG, "File path: " + file.getAbsolutePath());
 
         // Add the habit to the CSV file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + recurrence.toString().trim() + "\n");
+            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalType() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + "false" + "\n");
             Log.d(TAG, "Goal added: " + newGoal.getGoalName());
+            Toast.makeText(this, "Goal added successfully!", Toast.LENGTH_SHORT).show();
+
+            // Redirect to today's goals activity
+            Intent intent = new Intent(set_Goal_Activity.this, todays_goal_Activity.class);
+            startActivity(intent);
         } catch (IOException e) {
             Log.e(TAG, "Error writing to CSV", e);
+            Toast.makeText(this, "Error adding goal", Toast.LENGTH_SHORT).show();
         }
-
-        // Read and log the CSV file contents
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Log.d(TAG, "CSV Line: " + line);
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Error reading CSV", e);
-        }
-
-
     }
 }

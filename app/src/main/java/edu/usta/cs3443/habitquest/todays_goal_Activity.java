@@ -1,7 +1,6 @@
 package edu.usta.cs3443.habitquest;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -16,6 +15,7 @@ import edu.usta.cs3443.habitquest.model.Goal;
 import edu.usta.cs3443.habitquest.model.GoalAdapter;
 
 public class todays_goal_Activity extends AppCompatActivity {
+    private static final String TAG = "todays_goal_Activity";
     private RecyclerView recyclerView;
     private GoalAdapter goalAdapter;
     private List<Goal> goalList;
@@ -41,8 +41,21 @@ public class todays_goal_Activity extends AppCompatActivity {
     }
 
     private void loadGoals() {
+        // Load goals from goals.csv file
         goalList = Goal.loadGoalsFromCSV(this);
-        goalAdapter = new GoalAdapter(goalList);
-        recyclerView.setAdapter(goalAdapter);
+
+        // Initialize or update adapter
+        if (goalAdapter == null) {
+            goalAdapter = new GoalAdapter(goalList);
+            recyclerView.setAdapter(goalAdapter);
+        } else {
+            goalAdapter.notifyDataSetChanged(); // Refresh the adapter if it already exists
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadGoals();
     }
 }
