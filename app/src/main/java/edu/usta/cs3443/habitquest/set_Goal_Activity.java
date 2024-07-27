@@ -1,25 +1,23 @@
 package edu.usta.cs3443.habitquest;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Spinner;
 import android.widget.EditText;
-import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import edu.usta.cs3443.habitquest.model.Goal;
 
 public class set_Goal_Activity extends AppCompatActivity {
@@ -83,12 +81,14 @@ public class set_Goal_Activity extends AppCompatActivity {
         Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
         // Path to the internal storage file
-        File file = new File(getFilesDir(), "gsample_goals.csv");
+        File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "egsample_goals.csv");
+
+        //File file = new File(getFilesDir(), "gsample_goals.csv");
         Log.d(TAG, "File path: " + file.getAbsolutePath());
 
         // Add the habit to the CSV file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + recurrence.toString().trim() + "\n");
+            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + recurrence.toString().trim() +",false" + "\n");
             Log.d(TAG, "Goal added: " + newGoal.getGoalName());
         } catch (IOException e) {
             Log.e(TAG, "Error writing to CSV", e);

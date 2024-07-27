@@ -1,15 +1,15 @@
 package edu.usta.cs3443.habitquest.model;
 
 import android.content.Context;
-import android.content.res.AssetManager;
+import android.os.Environment;
+import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.usta.cs3443.habitquest.MainActivity;
+import java.util.Scanner;
 
 /**
  * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
@@ -90,38 +90,68 @@ public class Goal {
     // Load goals from CSV
     public static List<Goal> loadGoalsFromCSV(Context context) {
         List<Goal> goals = new ArrayList<>();
-        AssetManager assetManager = context.getAssets();
+        String filename = "egsample_goals.csv";
 
         try {
-            InputStream inputStream = assetManager.open("sample_goals.csv");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
+            String csvContent = readFile(filename, context);
+            //test if it works
+            Log.d("Goal", csvContent);
+            String[] lines = csvContent.split("\n");
 
-            // Skip the header line
-            reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
+            for (String line : lines) {
                 String[] columns = line.split(",");
+                //test if it works
+                Log.d("Goal", "Line: " + line);
+                Log.d("Goal", "Columns: " + columns.length);
 
                 if (columns.length == 6) {
-                    String goalName = columns[0].trim();
-                    String goalType = columns[1].trim();
-                    String goalDescription = columns[2].trim();
-                    String goalStart = columns[3].trim();
-                    String goalEnd = columns[4].trim();
-                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim().toUpperCase());
+                    try {
+                        //log for testing
+                        Log.d("Goal", "Line: " + line);
+                        Log.d("Goal", "Columns: " + columns.length);
 
-                    Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
-                    goal.setGoalCompleted(goalCompleted);
-                    goals.add(goal);
+                        String goalName = columns[0].trim();
+                        String goalType = columns[1].trim();
+                        String goalDescription = columns[2].trim();
+                        String goalStart = columns[3].trim();
+                        String goalEnd = columns[4].trim();
+                        Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim().toUpperCase());
+
+                        // Basic data validation
+                        // Date format validation (replace with your desired format)
+
+                        Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
+                        goal.setGoalCompleted(goalCompleted);
+                        goals.add(goal);
+                    } catch (IllegalArgumentException e) {
+                        // Handle parsing errors
+                        System.err.println("Error parsing line: " + line);
+                        e.printStackTrace();
+                    }
                 }
             }
-
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // Handle file not found
+        } catch (IOException e) {
+            // Handle other IO exceptions
         }
 
         return goals;
+    }
+    public static String readFile(String filename, Context context) throws IOException {
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
+        if (!file.exists()) {
+            return "";
+        }
+
+        StringBuilder content = new StringBuilder();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                content.append(scanner.nextLine()).append("\n");
+            }
+        }
+
+        return content.toString();
     }
 }
