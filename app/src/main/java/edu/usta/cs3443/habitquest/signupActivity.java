@@ -6,12 +6,15 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import edu.usta.cs3443.habitquest.model.CheckLogin;
 import edu.usta.cs3443.habitquest.model.User;
 
 public class signupActivity extends AppCompatActivity {
@@ -49,6 +52,8 @@ public class signupActivity extends AppCompatActivity {
             } else {
                 User newUser = new User(userName, userBday, userPronouns, userEmail, userPassword, lastLogin, dateCreated);
                 try {
+                    //set user to logged in
+                    CheckLogin.setLoggedIn(signupActivity.this, true);
                     newUser.createProfile(signupActivity.this);
                     Toast.makeText(signupActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(signupActivity.this, LoginActivity.class);
