@@ -111,7 +111,7 @@ public class User {
 
     private static List<String> loadAllLinesFromFile(Context context, String filename) throws IOException {
         List<String> lines = new ArrayList<>();
-        File file = new File(context.getFilesDir(), filename);
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
 
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -127,7 +127,7 @@ public class User {
     }
 
     private void writeToFile(String data, String filename, Context context) {
-        File file = new File(context.getFilesDir(), filename);
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
         Log.d("User", "File path: " + file.getAbsolutePath());
 
         try (FileOutputStream outputStream = new FileOutputStream(file, true)) {
@@ -139,7 +139,7 @@ public class User {
     }
 
     public String readFile(String filename, Context context) throws IOException {
-        File file = new File(context.getFilesDir(), filename);
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
 
         if (!file.exists()) {
             return "";
@@ -192,8 +192,8 @@ public class User {
         return null; // Return null if no matching user is found
     }
 
-    public static List<String> loadAllLinesFromInternalStorage(Context context) throws IOException {
-        File file = new File(context.getFilesDir(), "users.csv");
+    public static List<String> loadAllLinesFromInternalStorage(Context context, String filename) throws IOException {
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
         return Files.readAllLines(file.toPath());
     }
 
