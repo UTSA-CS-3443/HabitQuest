@@ -1,0 +1,33 @@
+Index: app/src/main/java/edu/usta/cs3443/habitquest/progress_report_Actvity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package edu.usta.cs3443.habitquest;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport edu.usta.cs3443.habitquest.model.User;\r\n\r\npublic class progress_report_Actvity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_progress_report_actvity);\r\n\r\n        TextView progressResultsTextView = findViewById(R.id.textView2);\r\n        Button backButton = findViewById(R.id.button2);\r\n\r\n        // Fetch user and analytics data\r\n        User currentUser = getCurrentUser(); // Implement this method to get the current user\r\n        String progressReport = currentUser.generateProgressReport();\r\n\r\n        // Set the progress report to the TextView\r\n        progressResultsTextView.setText(progressReport);\r\n\r\n        // Set up back button listener\r\n        backButton.setOnClickListener(v -> {\r\n            Intent intent = new Intent(progress_report_Actvity.this, MainActivity.class);\r\n            startActivity(intent);\r\n        });\r\n    }\r\n\r\n    // Helper method to retrieve User object from Intent\r\n    private User getCurrentUser() {\r\n        // Assuming User data is passed through Intent extras; adjust as needed\r\n        // For simplicity, creating a new User object here. Replace with your logic.\r\n        return new User(\"John Doe\", \"01/01/1990\", \"He/Him\", \"john.doe@example.com\", \"password\", \"last_login\", \"date_created\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/edu/usta/cs3443/habitquest/progress_report_Actvity.java b/app/src/main/java/edu/usta/cs3443/habitquest/progress_report_Actvity.java
+--- a/app/src/main/java/edu/usta/cs3443/habitquest/progress_report_Actvity.java	(revision e10aa467f92dfe1f52be0e39a14838710f34f6e9)
++++ b/app/src/main/java/edu/usta/cs3443/habitquest/progress_report_Actvity.java	(date 1722100895337)
+@@ -36,7 +36,7 @@
+     // Helper method to retrieve User object from Intent
+     private User getCurrentUser() {
+         // Assuming User data is passed through Intent extras; adjust as needed
+-        // For simplicity, creating a new User object here. Replace with your logic.
++        // For simplicity, creating a new User object here.
+         return new User("John Doe", "01/01/1990", "He/Him", "john.doe@example.com", "password", "last_login", "date_created");
+     }
+ }
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM__Changes_.xml	(revision e10aa467f92dfe1f52be0e39a14838710f34f6e9)
++++ /dev/null	(revision e10aa467f92dfe1f52be0e39a14838710f34f6e9)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM_[Changes]" date="1721522301619" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 7/20/2024 7:38 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_20_2024_7_38_PM_[Changes]/shelved.patch
+deleted file mode 100644

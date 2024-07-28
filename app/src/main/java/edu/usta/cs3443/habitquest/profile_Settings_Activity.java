@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import edu.usta.cs3443.habitquest.model.CheckLogin;
 
 public class profile_Settings_Activity extends AppCompatActivity {
+    private static final String TAG = "profile_Settings_Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +37,19 @@ public class profile_Settings_Activity extends AppCompatActivity {
 
         // Retrieve user data from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", "");
-        String birthday = sharedPreferences.getString("birthday", "");
-        String pronoun = sharedPreferences.getString("pronoun", "");
-        String email = sharedPreferences.getString("email", "");
+        String username = sharedPreferences.getString("username", "No username");
+        String birthday = sharedPreferences.getString("birthday", "No birthday");
+        String pronoun = sharedPreferences.getString("pronoun", "No pronouns");
+        String email = sharedPreferences.getString("email", "No email");
+        String password = sharedPreferences.getString("password", "No password");
+
+        // Log retrieved data
+        Log.d(TAG, "Loaded user data:");
+        Log.d(TAG, "Name: " + username);
+        Log.d(TAG, "Birthday: " + birthday);
+        Log.d(TAG, "Pronouns: " + pronoun);
+        Log.d(TAG, "Email: " + email);
+        Log.d(TAG, "Password: " + password);
 
         // Set the retrieved data to TextViews
         userName.setText(username);
@@ -51,7 +61,7 @@ public class profile_Settings_Activity extends AppCompatActivity {
         Button editButton = findViewById(R.id.editbutton);
         editButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, UserActivity.class);
-            Log.d("profile_Settings_Activity", "Edit button clicked");
+            Log.d(TAG, "Edit button clicked");
             startActivity(intent);
         });
 

@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import edu.usta.cs3443.habitquest.model.CheckLogin;
-import edu.usta.cs3443.habitquest.model.User;
 
 /* 
    * MainActivity Controller:
@@ -44,15 +43,15 @@ public class MainActivity extends AppCompatActivity {
             });
             Context context = this;
             ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
-            User user = new User("John Doe", "10/12", "he/him", "john.doe@example.com", "Password123!", "07/25/2024", "07/15/2024");
-            user.getUser(this);
-            try {
+            //User user = new User("John Doe", "10/12", "he/him", "john.doe@example.com", "Password123!", "07/25/2024", "07/15/2024");
+            //user.getUser(this);
+            /*try {
                 user.createProfile(context);
                 //duplicate to test if it works
                 user.createProfile(context);
             } catch (Exception e) {
                 throw new RuntimeException(e);
-            }
+            }*/
 
             Button profile_settings, progress_report, todays_goal, set_goal;
 

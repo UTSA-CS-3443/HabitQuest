@@ -60,15 +60,6 @@
         android:layout_gravity="end">
 
         <TextView
-            android:id="@+id/editGoal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit"
-            android:textColor="#A451F5"
-            android:padding="8dp"
-            android:textAppearance="?attr/textAppearanceListItemSecondary" />
-
-        <TextView
             android:id="@+id/deleteGoal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
