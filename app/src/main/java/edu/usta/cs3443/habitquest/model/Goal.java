@@ -6,8 +6,10 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -97,7 +99,7 @@ public class Goal {
     // Load goals from CSV
     public static List<Goal> loadGoalsFromCSV(Context context) {
         List<Goal> goals = new ArrayList<>();
-        String filename = "egsample_goals.csv";
+        String filename = "goals.csv";
 
         // Load pre-loaded goals from sample_goals.csv
         try (InputStream inputStream = context.getAssets().open("sample_goals.csv");
@@ -128,19 +130,16 @@ public class Goal {
         // Load newly created goals from goals.csv
         try {
             String csvContent = readFile(filename, context);
-            //test if it works
             Log.d("Goal", csvContent);
             String[] lines = csvContent.split("\n");
 
             for (String line : lines) {
                 String[] columns = line.split(",");
-                //test if it works
                 Log.d("Goal", "Line: " + line);
                 Log.d("Goal", "Columns: " + columns.length);
 
                 if (columns.length == 6) {
                     try {
-                        //log for testing
                         Log.d("Goal", "Line: " + line);
                         Log.d("Goal", "Columns: " + columns.length);
 
@@ -151,14 +150,10 @@ public class Goal {
                         String goalEnd = columns[4].trim();
                         Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim().toUpperCase());
 
-                        // Basic data validation
-                        // Date format validation (replace with your desired format)
-
                         Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
                         goal.setGoalCompleted(goalCompleted);
                         goals.add(goal);
                     } catch (IllegalArgumentException e) {
-                        // Handle parsing errors
                         System.err.println("Error parsing line: " + line);
                         e.printStackTrace();
                     }
@@ -172,6 +167,7 @@ public class Goal {
 
         return goals;
     }
+
     public static String readFile(String filename, Context context) throws IOException {
         File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
 
@@ -188,7 +184,45 @@ public class Goal {
 
         return content.toString();
     }
-    //delete goals
+    public static void deleteGoalFromCSV(Goal goalToDelete, Context context) throws IOException {
+        String filename = "goals.csv";
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
+        if (!file.exists()) {
+            return;
+        }
+
+        List<String> lines = new ArrayList<>();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (String line : lines) {
+                String[] columns = line.split(",");
+                if (columns.length == 6) {
+                    String goalName = columns[0].trim();
+                    String goalType = columns[1].trim();
+                    String goalDescription = columns[2].trim();
+                    String goalStart = columns[3].trim();
+                    String goalEnd = columns[4].trim();
+                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
+
+                    if (!goalToDelete.getGoalName().equals(goalName) ||
+                            !goalToDelete.getGoalType().equals(goalType) ||
+                            !goalToDelete.getGoalDescription().equals(goalDescription) ||
+                            !goalToDelete.getGoalStart().equals(goalStart) ||
+                            !goalToDelete.getGoalEnd().equals(goalEnd) ||
+                            !goalToDelete.isGoalCompleted().equals(goalCompleted)) {
+                        writer.write(line);
+                        writer.newLine();
+                    }
+                }
+            }
+        }
+    }
 
 
 }

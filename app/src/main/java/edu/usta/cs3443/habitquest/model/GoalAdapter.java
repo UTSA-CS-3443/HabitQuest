@@ -1,5 +1,6 @@
 package edu.usta.cs3443.habitquest.model;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.List;
 
 import edu.usta.cs3443.habitquest.R;
@@ -48,31 +50,30 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             // Notify the model or database of the change
             // You might need to update the data source or notify the database here
         });
+
         holder.deleteGoal.setOnClickListener(v -> {
             // Handle delete action
-            // Remove the goal from the list and notify the adapter
-
-            //check if the goal is within the list
-            if (goals.contains(goal)) {
-                goals.remove(goal);
-               // goals.remove(position);
-                notifyItemRemoved(position);
-
-            }else{
-                //goal is not in the list
-                Log.d("GoalAdapter", "Goal not found in list");
-                //show all the goals to console
-                Log.d("GoalAdapter", "Goals:");
-                for (Goal g : goals) {
-                    Log.d("GoalAdapter", g.getGoalName());
-                }
-                //name of current goal
-                String goalName = goal.getGoalName();
-                Log.d("GoalAdapter", "Goal not found in list: " + goalName);
-
-            }
+            deleteGoal(goal, holder.itemView.getContext(), position);
         });
     }
+
+    private void deleteGoal(Goal goal, Context context, int position) {
+        if (goals.contains(goal)) {
+            goals.remove(position);
+            notifyItemRemoved(position);
+            // Delete goal from file
+            try {
+                Goal.deleteGoalFromCSV(goal, context);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Goal is not in the list
+            Log.d("GoalAdapter", "Goal not found in list");
+        }
+    }
+
+
 
     @Override
     public int getItemCount() {

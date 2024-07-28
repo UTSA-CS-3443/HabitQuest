@@ -2,6 +2,7 @@ package edu.usta.cs3443.habitquest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -122,8 +123,8 @@ public class set_Goal_Activity extends AppCompatActivity {
         // Create a new Goal object
         Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
-        // Path to the internal storage file
-        File file = new File(getFilesDir(), "goals.csv");
+        // Path to the external storage file
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "goals.csv");
         Log.d(TAG, "File path: " + file.getAbsolutePath());
 
         // Add the habit to the CSV file
