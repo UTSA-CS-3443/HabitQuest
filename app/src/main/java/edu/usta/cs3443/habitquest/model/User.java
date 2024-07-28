@@ -8,8 +8,11 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,10 +72,22 @@ public class User {
         this.userEmail = userEmail;
     }
 
+    public String getUser_passwd() {
+        return user_passwd;
+    }
+
+    public String getUserLastLogin() {
+        return last_login;
+    }
+
+    public String getDateCreated() {
+        return date_created;
+    }
+
     public void createProfile(Context context) throws IOException {
         List<String> lines;
         try {
-            lines = loadAllLinesFromAssets(context, "sample_user.csv");
+            lines = loadAllLinesFromFile(context, "users.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -89,13 +104,30 @@ public class User {
         if (!userExists) {
             Log.d("User", "User created");
             String newUserLine = String.join(",", userName, userBday, userPronouns, userEmail, user_passwd, last_login, date_created);
-            writeToFile(newUserLine, "sample_user.csv", context);
+            writeToFile(newUserLine, "users.csv", context);
             Log.d("User", newUserLine);
         }
     }
 
+    private static List<String> loadAllLinesFromFile(Context context, String filename) throws IOException {
+        List<String> lines = new ArrayList<>();
+        File file = new File(context.getFilesDir(), filename);
+
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                // Skip the header line if present
+                br.readLine();
+                while ((line = br.readLine()) != null) {
+                    lines.add(line);
+                }
+            }
+        }
+        return lines;
+    }
+
     private void writeToFile(String data, String filename, Context context) {
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+        File file = new File(context.getFilesDir(), filename);
         Log.d("User", "File path: " + file.getAbsolutePath());
 
         try (FileOutputStream outputStream = new FileOutputStream(file, true)) {
@@ -107,7 +139,7 @@ public class User {
     }
 
     public String readFile(String filename, Context context) throws IOException {
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+        File file = new File(context.getFilesDir(), filename);
 
         if (!file.exists()) {
             return "";
@@ -149,7 +181,7 @@ public class User {
     }
 
     public static User authenticateUser(String email, String password, Context context) throws IOException {
-        List<String> lines = loadAllLinesFromAssets(context, "sample_user.csv");
+        List<String> lines = loadAllLinesFromFile(context, "users.csv");
         for (String line : lines) {
             String[] parts = line.split(",");
             if (parts.length >= 7 && parts[3].equals(email) && parts[4].equals(password)) {
@@ -158,6 +190,11 @@ public class User {
             }
         }
         return null; // Return null if no matching user is found
+    }
+
+    public static List<String> loadAllLinesFromInternalStorage(Context context) throws IOException {
+        File file = new File(context.getFilesDir(), "users.csv");
+        return Files.readAllLines(file.toPath());
     }
 
     private static List<String> loadAllLinesFromAssets(Context context, String filename) throws IOException {
@@ -171,6 +208,23 @@ public class User {
             }
         }
         return lines;
+    }
+
+    private void copyUsersFileToInternalStorage(Context context) {
+        try {
+            InputStream in = context.getAssets().open("users.csv");
+            File outFile = new File(context.getFilesDir(), "users.csv");
+            FileOutputStream out = new FileOutputStream(outFile);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addGoal(Goal goal) {
@@ -202,6 +256,7 @@ public class User {
         analytics.setGoalsCompleted(completedGoals);
         analytics.setActiveGoals(activeGoals);
     }
+
 
     public ArrayList<Goal> getCompletedGoals() {
         return analytics.getGoalsCompleted();

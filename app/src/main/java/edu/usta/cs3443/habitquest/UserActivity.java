@@ -15,11 +15,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 /*
-    * UserActivity Controller
-    * View and edit user profile information
-*/
+ * UserActivity Controller
+ * View and edit user profile information
+ */
 
 public class UserActivity extends AppCompatActivity {
+    private static final String TAG = "UserActivity";
     Button saveButton, backButton;
     private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword;
 
@@ -59,16 +60,39 @@ public class UserActivity extends AppCompatActivity {
         // Initialize Buttons
         saveButton = findViewById(R.id.skiptomain);
         saveButton.setOnClickListener(v -> {
+            // Capture new data from EditTexts
+            String newName = editTextName.getText().toString();
+            String newBday = editTextBday.getText().toString();
+            String newPronouns = editTextPronouns.getText().toString();
+            String newEmail = editTextEmail.getText().toString();
+            String newPassword = editTextPassword.getText().toString();
+
+            // Log new data
+            Log.d(TAG, "Saving new data:");
+            Log.d(TAG, "Name: " + newName);
+            Log.d(TAG, "Birthday: " + newBday);
+            Log.d(TAG, "Pronouns: " + newPronouns);
+            Log.d(TAG, "Email: " + newEmail);
+            Log.d(TAG, "Password: " + newPassword);
+
             // Save new user data to SharedPreferences
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("username", editTextName.getText().toString());
-            editor.putString("birthday", editTextBday.getText().toString());
-            editor.putString("pronoun", editTextPronouns.getText().toString());
-            editor.putString("email", editTextEmail.getText().toString());
-            editor.putString("password", editTextPassword.getText().toString());
+            editor.putString("username", newName);
+            editor.putString("birthday", newBday);
+            editor.putString("pronoun", newPronouns);
+            editor.putString("email", newEmail);
+            editor.putString("password", newPassword);
             editor.apply();
 
-            Toast.makeText(UserActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+            // Verify if the data was saved correctly
+            String savedPassword = sharedPreferences.getString("password", "");
+            Log.d(TAG, "Saved password: " + savedPassword);
+
+            if (newPassword.equals(savedPassword)) {
+                Toast.makeText(UserActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(UserActivity.this, "Failed to save changes", Toast.LENGTH_SHORT).show();
+            }
 
             // Go back to profile settings activity
             Intent intent = new Intent(this, profile_Settings_Activity.class);

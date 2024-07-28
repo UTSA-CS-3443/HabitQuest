@@ -48,12 +48,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             // Notify the model or database of the change
             // You might need to update the data source or notify the database here
         });
-        // Set a listener to handle edit and delete actions
-        holder.editGoal.setOnClickListener(v -> {
-            // Handle edit action
-            // Open a dialog or activity to edit the goal
-
-        });
         holder.deleteGoal.setOnClickListener(v -> {
             // Handle delete action
             // Remove the goal from the list and notify the adapter
@@ -92,7 +86,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
         TextView goalStart;
         TextView goalEnd;
         CheckBox goalCompleted;
-        TextView editGoal;
         TextView deleteGoal;
 
         public GoalViewHolder(@NonNull View itemView) {
@@ -103,7 +96,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             goalStart = itemView.findViewById(R.id.goalStart);
             goalEnd = itemView.findViewById(R.id.goalEnd);
             goalCompleted = itemView.findViewById(R.id.goalCompleted);
-            editGoal = itemView.findViewById(R.id.editGoal);
             deleteGoal = itemView.findViewById(R.id.deleteGoal);
         }
     }

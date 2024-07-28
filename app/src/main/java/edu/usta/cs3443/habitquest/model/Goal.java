@@ -45,7 +45,6 @@ import java.util.Scanner;
  * setGoalStart() - set start date.   // Changed method name from setStart to setGoalStart
  * setGoalEnd() - set end date.   // Changed method name from setEnd to setGoalEnd
  * setGoalCompleted() - set completion status.   // Changed method name from setCompleted to setGoalCompleted
- * editGoal() - edit the goal details.
  * isCompleted() - true/false completion data.
  */
 
@@ -190,8 +189,6 @@ public class Goal {
         return content.toString();
     }
     //delete goals
-    //update goals
-    //edit goals
 
 
 }

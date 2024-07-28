@@ -1,92 +1,68 @@
 package edu.usta.cs3443.habitquest;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-import edu.usta.cs3443.habitquest.model.CheckLogin;
 import edu.usta.cs3443.habitquest.model.User;
 
 public class signupActivity extends AppCompatActivity {
+
+    private EditText userNameEditText;
+    private EditText userBdayEditText;
+    private EditText userPronounsEditText;
+    private EditText userEmailEditText;
+    private EditText userPasswordEditText;
+    private Button signupButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile_signup);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        userNameEditText = findViewById(R.id.name);
+        userBdayEditText = findViewById(R.id.birthday);
+        userPronounsEditText = findViewById(R.id.Pronouns);
+        userEmailEditText = findViewById(R.id.username);
+        userPasswordEditText = findViewById(R.id.password);
+        signupButton = findViewById(R.id.signup);
+
+        signupButton.setOnClickListener(view -> {
+            String userName = userNameEditText.getText().toString().trim();
+            String userBday = userBdayEditText.getText().toString().trim();
+            String userPronouns = userPronounsEditText.getText().toString().trim();
+            String userEmail = userEmailEditText.getText().toString().trim();
+            String userPassword = userPasswordEditText.getText().toString().trim();
+            String lastLogin = getCurrentDate();
+            String dateCreated = getCurrentDate();
+
+            if (userName.isEmpty() || userBday.isEmpty() || userPronouns.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()) {
+                Toast.makeText(signupActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            } else {
+                User newUser = new User(userName, userBday, userPronouns, userEmail, userPassword, lastLogin, dateCreated);
+                try {
+                    newUser.createProfile(signupActivity.this);
+                    Toast.makeText(signupActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(signupActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (IOException e) {
+                    Log.e("SignupActivity", "Error creating user profile", e);
+                    Toast.makeText(signupActivity.this, "Error creating user profile", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
-        EditText email,username,password,password_confirm,birthday,pronoun;
-        Button signup;
-
-        email = findViewById(R.id.username);
-        username = findViewById(R.id.name);
-        password = findViewById(R.id.password);
-        password_confirm = findViewById(R.id.password_confirm);
-        birthday = findViewById(R.id.birthday);
-        pronoun = findViewById(R.id.Pronouns);
-
-        signup = findViewById(R.id.signup);
-        //the button was disabled ???
-        signup.setOnClickListener(v -> {
-//checks if button is clicked
-            Log.d("signupActivity", "IT WAS CLICKED");
-            if (email.getText().toString().isEmpty() || username.getText().toString().isEmpty() ||pronoun.getText().toString().isEmpty() || password.getText().toString().isEmpty() || password_confirm.getText().toString().isEmpty() || birthday.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (!password.getText().toString().equals(password_confirm.getText().toString())) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            //    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
-            User user = new User( username.getText().toString(), birthday.getText().toString(),pronoun.getText().toString(), email.getText().toString(), password.getText().toString(),getCurrentDate(), getCurrentDate());
-            try {
-                user.createProfile(this);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            // Save user data to SharedPreferences
-            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("username", username.getText().toString());
-            editor.putString("birthday", birthday.getText().toString());
-            editor.putString("pronoun", pronoun.getText().toString());
-            editor.putString("email", email.getText().toString());
-            editor.apply();
-
-            Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show();
-            CheckLogin.setLoggedIn(this, true);
-
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
-
     }
-    //gets current date in format yyyy-mm-dd from the system
+
     private String getCurrentDate() {
-        // Get the current date and time
-        java.util.Date currentDate = new java.util.Date();
-        // Format the date and time as a string in the desired format
-        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("MM-dd-yyyy");
-        return dateFormat.format(currentDate);
+        return new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
     }
-
-
 }
