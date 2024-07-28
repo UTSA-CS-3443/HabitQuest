@@ -3,11 +3,13 @@ package edu.usta.cs3443.habitquest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +40,48 @@ public class set_Goal_Activity extends AppCompatActivity {
         goalStartDateEditText = findViewById(R.id.goalStartDateEditText);
         goalEndDateEditText = findViewById(R.id.goalEndDateEditText);
         goalTypeSpinner = findViewById(R.id.goalTypeSpinner);
+
+        // Find the TextView by its ID
+        TextView goalRecurrenceLabel = findViewById(R.id.GoalRecurrenceLabel);
+
+        // Set the visibility to GONE or INVISIBLE
+        goalRecurrenceLabel.setVisibility(View.GONE);
+
+        // Find all TextView views by their IDs
+        TextView label1 = findViewById(R.id.label1);
+        TextView label2 = findViewById(R.id.label2);
+        TextView label3 = findViewById(R.id.label3);
+        TextView label4 = findViewById(R.id.label4);
+        TextView label5 = findViewById(R.id.label5);
+        TextView label6 = findViewById(R.id.label6);
+        TextView label7 = findViewById(R.id.label7);
+
+        // Set visibility to GONE or INVISIBLE
+        label1.setVisibility(View.GONE);
+        label2.setVisibility(View.GONE);
+        label3.setVisibility(View.GONE);
+        label4.setVisibility(View.GONE);
+        label5.setVisibility(View.GONE);
+        label6.setVisibility(View.GONE);
+        label7.setVisibility(View.GONE);
+
+        // Find all CheckBox views by their IDs
+        CheckBox checkbox1 = findViewById(R.id.checkbox1);
+        CheckBox checkbox2 = findViewById(R.id.checkbox2);
+        CheckBox checkbox3 = findViewById(R.id.checkbox3);
+        CheckBox checkbox4 = findViewById(R.id.checkbox4);
+        CheckBox checkbox5 = findViewById(R.id.checkbox5);
+        CheckBox checkbox6 = findViewById(R.id.checkbox6);
+        CheckBox checkbox7 = findViewById(R.id.checkbox7);
+
+        // Set visibility to GONE or INVISIBLE
+        checkbox1.setVisibility(View.GONE);
+        checkbox2.setVisibility(View.GONE);
+        checkbox3.setVisibility(View.GONE);
+        checkbox4.setVisibility(View.GONE);
+        checkbox5.setVisibility(View.GONE);
+        checkbox6.setVisibility(View.GONE);
+        checkbox7.setVisibility(View.GONE);
 
         checkbox1 = findViewById(R.id.checkbox1);
         checkbox2 = findViewById(R.id.checkbox2);
