@@ -1,7 +1,6 @@
 package edu.usta.cs3443.habitquest.model;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Environment;
 import android.util.Log;
 
@@ -131,7 +130,7 @@ public class User {
         Log.d("User", "File path: " + file.getAbsolutePath());
 
         try (FileOutputStream outputStream = new FileOutputStream(file, true)) {
-            outputStream.write((data + "\n").getBytes());
+            outputStream.write(( data + "\n").getBytes());
             Log.d("User", "User data written to file");
         } catch (IOException e) {
             e.printStackTrace();
@@ -159,7 +158,8 @@ public class User {
         List<String> lines;
 
         try {
-            lines = loadAllLinesFromAssets(context, "sample_user.csv");
+            //lines = loadAllLinesFromAssets(context, "sample_user.csv");
+            lines = loadAllLinesFromInternalStorage(context, "users.csv");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -184,9 +184,18 @@ public class User {
         List<String> lines = loadAllLinesFromFile(context, "users.csv");
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 7 && parts[3].equals(email) && parts[4].equals(password)) {
+            Log.d("User", "Line: " + line);
+            Log.d("User", "Parts: " + parts.length);
+            if (parts.length < 7) {
+                Log.d("User", "User not authenticated");
+
+            }else if (parts[3].equals(email) && parts[4].equals(password) ) {
+                Log.d("User", "User authenticated");
                 // If credentials match, return a new User object
                 return new User(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
+            }else {
+                Log.d("User", "User not authenticated");
+                // If credentials don't match, return null
             }
         }
         return null; // Return null if no matching user is found

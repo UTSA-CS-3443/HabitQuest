@@ -52,11 +52,12 @@ public class signupActivity extends AppCompatActivity {
             } else {
                 User newUser = new User(userName, userBday, userPronouns, userEmail, userPassword, lastLogin, dateCreated);
                 try {
-                    //set user to logged in
-                    CheckLogin.setLoggedIn(signupActivity.this, true);
-                    newUser.createProfile(signupActivity.this);
+
+                    newUser.createProfile(this);
                     Toast.makeText(signupActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(signupActivity.this, LoginActivity.class);
+
+                    CheckLogin.setLoggedIn(this, true);
+                    Intent intent = new Intent(this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (IOException e) {
