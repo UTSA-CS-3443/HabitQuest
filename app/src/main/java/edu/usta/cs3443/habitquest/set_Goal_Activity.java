@@ -1,22 +1,22 @@
 package edu.usta.cs3443.habitquest;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import edu.usta.cs3443.habitquest.model.Goal;
 
 public class set_Goal_Activity extends AppCompatActivity {
@@ -25,7 +25,6 @@ public class set_Goal_Activity extends AppCompatActivity {
 
     private EditText goalNameEditText, goalDescriptionEditText, goalStartDateEditText, goalEndDateEditText;
     private CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7;
-    private Spinner goalTypeSpinner;
     private Button addHabitButton, goBackButton;
 
     @Override
@@ -37,7 +36,6 @@ public class set_Goal_Activity extends AppCompatActivity {
         goalDescriptionEditText = findViewById(R.id.goalDescriptionEditText);
         goalStartDateEditText = findViewById(R.id.goalStartDateEditText);
         goalEndDateEditText = findViewById(R.id.goalEndDateEditText);
-        goalTypeSpinner = findViewById(R.id.goalTypeSpinner);
 
         checkbox1 = findViewById(R.id.checkbox1);
         checkbox2 = findViewById(R.id.checkbox2);
@@ -47,20 +45,11 @@ public class set_Goal_Activity extends AppCompatActivity {
         checkbox6 = findViewById(R.id.checkbox6);
         checkbox7 = findViewById(R.id.checkbox7);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.goal_type_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        goalTypeSpinner.setAdapter(adapter);
-
         addHabitButton = findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(v -> addAndReadHabit());
 
         goBackButton = findViewById(R.id.goBackButton);
-        goBackButton.setOnClickListener(v -> {
-                    Intent intent = new Intent(set_Goal_Activity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-        );
+        goBackButton.setOnClickListener(v -> finish());
     }
 
     private void addAndReadHabit() {
@@ -68,32 +57,72 @@ public class set_Goal_Activity extends AppCompatActivity {
         String goalDescription = goalDescriptionEditText.getText().toString();
         String goalStartDate = goalStartDateEditText.getText().toString();
         String goalEndDate = goalEndDateEditText.getText().toString();
-        String goalType = (String) goalTypeSpinner.getSelectedItem();
 
-        if (goalName.isEmpty() || goalDescription.isEmpty() || goalStartDate.isEmpty() || goalEndDate.isEmpty() || goalType.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        StringBuilder recurrence = new StringBuilder();
+        if (checkbox1.isChecked()) recurrence.append("S ");
+        if (checkbox2.isChecked()) recurrence.append("M ");
+        if (checkbox3.isChecked()) recurrence.append("T ");
+        if (checkbox4.isChecked()) recurrence.append("W ");
+        if (checkbox5.isChecked()) recurrence.append("TH ");
+        if (checkbox6.isChecked()) recurrence.append("F ");
+        if (checkbox7.isChecked()) recurrence.append("S ");
 
-        // Create a new Goal object
-        Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
+        Goal newGoal = new Goal(goalName, "type", goalDescription, goalStartDate, goalEndDate);
 
-        // Path to the internal storage file
         File file = new File(getFilesDir(), "goals.csv");
         Log.d(TAG, "File path: " + file.getAbsolutePath());
 
-        // Add the habit to the CSV file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalType() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + "false" + "\n");
+            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + recurrence.toString().trim() + "\n");
             Log.d(TAG, "Goal added: " + newGoal.getGoalName());
-            Toast.makeText(this, "Goal added successfully!", Toast.LENGTH_SHORT).show();
-
-            // Redirect to today's goals activity
-            Intent intent = new Intent(set_Goal_Activity.this, todays_goal_Activity.class);
-            startActivity(intent);
         } catch (IOException e) {
             Log.e(TAG, "Error writing to CSV", e);
-            Toast.makeText(this, "Error adding goal", Toast.LENGTH_SHORT).show();
         }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Log.d(TAG, "CSV Line: " + line);
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Error reading CSV", e);
+        }
+
+        // Clearing the input fields and checkboxes when goal is created
+        goalNameEditText.setText("");
+        goalDescriptionEditText.setText("");
+        goalStartDateEditText.setText("");
+        goalEndDateEditText.setText("");
+        checkbox1.setChecked(false);
+        checkbox2.setChecked(false);
+        checkbox3.setChecked(false);
+        checkbox4.setChecked(false);
+        checkbox5.setChecked(false);
+        checkbox6.setChecked(false);
+        checkbox7.setChecked(false);
+
+        // New custom toast message when goal is created
+        LinearLayout toastLayout = new LinearLayout(this);
+        toastLayout.setOrientation(LinearLayout.HORIZONTAL);
+        toastLayout.setBackgroundResource(android.R.drawable.toast_frame)
+        toastLayout.setPadding(16, 16, 16, 16);
+
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.habitquest_plum);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(64, 64);
+        imageView.setLayoutParams(params);
+        imageView.setPadding(0, 0, 16, 0);
+        TextView textView = new TextView(this);
+        textView.setText("Goal Added!");
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(16);
+
+        toastLayout.addView(imageView);
+        toastLayout.addView(textView);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(toastLayout);
+        toast.show();
     }
 }
