@@ -42,15 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 return insets;
             });
             Context context = this;
-            ///    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
-            //User user = new User("John Doe", "10/12", "he/him", "john.doe@example.com", "Password123!", "07/25/2024", "07/15/2024");
-            //user.getUser(this);
-            /*try {
-                user.createProfile(context);
-                //duplicate to test if it works
-                user.createProfile(context);
-            } catch (Exception e) {
+            /*List<String> lines;
+            try {
+                lines = Analytics.getGoaldata(context);
+            } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+            for (String line : lines) {
+                Log.d("MainActivity", line);
             }*/
 
             Button profile_settings, progress_report, todays_goal, set_goal;

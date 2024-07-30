@@ -49,6 +49,12 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             goal.setGoalCompleted(isChecked);
             // Notify the model or database of the change
             // You might need to update the data source or notify the database here
+            //this code is malformed and needs to be fixed, it duplicates the all the goals in the list
+            /*try {
+                goal.markGoalCompleted(goal, holder.itemView.getContext());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }*/
         });
 
         holder.deleteGoal.setOnClickListener(v -> {

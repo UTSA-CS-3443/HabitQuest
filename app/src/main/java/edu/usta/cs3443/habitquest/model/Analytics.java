@@ -1,13 +1,21 @@
 package edu.usta.cs3443.habitquest.model;
 
 import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Analytics {
     private ArrayList<Goal> goalsCompleted;
     private ArrayList<Goal> activeGoals;
+    private static List<String> goals;
 
     public Analytics() {
         this.goalsCompleted = new ArrayList<>();
@@ -75,13 +83,66 @@ public class Analytics {
         this.goalsCompleted = completedGoals;
         this.activeGoals = activeGoals;
     }
+    //gets goal data from csv file
+    public static List<String> getGoaldata(Context context) throws IOException {
+        List<String> goals2 = new ArrayList<>();
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "goals.csv");
+        Log.d("Analytics", "File path: " + file.getAbsolutePath());
+        /*try (Scanner scanner = new Scanner(file)) {
+            Log.d("Analytics", "File opened");
+            while (scanner.hasNextLine()) {
+                Log.d("Analytics", "Line: " + scanner.nextLine());
+                String line = scanner.nextLine();
+                goals.add(line);
+            }
 
-    public String generateProgressReport() {
+        }*/
+        goals2 = loadAllLinesFromInternal(context, "goals.csv");
+        goals = goals2;
+        return goals2;
+    }
+    public static List<String> loadAllLinesFromInternal(Context context, String filename) throws IOException {
+        List<String> lines = new ArrayList<>();
+        File file = new File(context.getFilesDir(), filename);
+
+
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                // Skip the header line if present
+                //br.readLine();
+                while ((line = br.readLine()) != null) {
+                    Log.d("TAG", "loadAllLinesFromInternal: " + line);
+                    lines.add(line);
+                }
+            }
+        } else {
+            Log.d("TAG", "loadAllLinesFromInternal: file does not exist");
+        }
+
+        return lines;
+    }
+
+
+    public String generateProgressReport(Context context) throws IOException {
+        // Initialize the report
+        //load goals from csv file
+        loadGoalsFromCSV(context);
+        //delete the goals from the csv file
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "goals.csv");
+
+        Log.d("Analytics", "File path: " + file.getAbsolutePath());
+        //show content of goals.csv
+        Log.d("Analytics", "File content: " + getGoaldata(context));
+
+
+
         StringBuilder report = new StringBuilder();
         report.append("Progress Report:\n\n");
 
         // Goals Completed
-        int completedGoalsCount = getNumberOfGoalsCompleted();
+
+        int completedGoalsCount =  getNumberOfGoalsCompleted(); //getNumberOfGoalsCompleted();
         report.append("Goals Completed: ").append(completedGoalsCount).append("\n");
         if (completedGoalsCount == 0) {
             report.append("No goals completed yet.\n");
@@ -105,7 +166,7 @@ public class Analytics {
         }
 
         // Active Goals
-        int activeGoalsCount = getNumberOfActiveGoals();
+        int activeGoalsCount = goals.size(); //getNumberOfActiveGoals();
         report.append("\nActive Goals: ").append(activeGoalsCount).append("\n");
         if (activeGoalsCount == 0) {
             report.append("No active goals.\n");
