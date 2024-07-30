@@ -1,6 +1,10 @@
 package edu.usta.cs3443.habitquest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -19,7 +23,8 @@ public class todays_goal_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GoalAdapter goalAdapter;
     private List<Goal> goalList;
-
+    private Button addHabitButton;
+    private Button homeButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,28 @@ public class todays_goal_Activity extends AppCompatActivity {
 
         // Load goals from CSV and set adapter
         loadGoals();
+
+        homeButton = findViewById(R.id.homeButton);
+        addHabitButton = findViewById(R.id.addHabitButton);
+
+        //Home button
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(todays_goal_Activity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Add habit button
+        addHabitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(todays_goal_Activity.this, set_Goal_Activity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void loadGoals() {
@@ -58,4 +85,5 @@ public class todays_goal_Activity extends AppCompatActivity {
         super.onResume();
         loadGoals();
     }
+
 }
