@@ -31,7 +31,7 @@ import java.util.List;
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
     Button saveButton, backButton;
-    private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword;
+    private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword, editTextPasswordConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class UserActivity extends AppCompatActivity {
         editTextPronouns = findViewById(R.id.editTextPronouns);
         editTextEmail = findViewById(R.id.editTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextPasswordConfirm = findViewById(R.id.editTextPasswordConfirm);
 
         // Load current user data from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -75,6 +76,13 @@ public class UserActivity extends AppCompatActivity {
             String newPronouns = editTextPronouns.getText().toString();
             String newEmail = editTextEmail.getText().toString();
             String newPassword = editTextPassword.getText().toString();
+            String confirmPassword = editTextPasswordConfirm.getText().toString();
+
+            // Check if passwords match
+            if (!newPassword.equals(confirmPassword)) {
+                Toast.makeText(UserActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // Log new data
             Log.d(TAG, "Saving new data:");
