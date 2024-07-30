@@ -223,6 +223,45 @@ public class Goal {
             }
         }
     }
+    //change goal to completed, this would rewrite the goals.csv file with chage in goalCompleted
+    public void markGoalCompleted(Goal goalToComplete, Context context) throws IOException {
+        List<Goal> goals = loadGoalsFromCSV(context);
+
+        // Find the goal to update
+        for (Goal goal : goals) {
+            if (goal.equals(goalToComplete)) {
+                goal.setGoalCompleted(true);
+                break;
+            }
+        }
+
+        // Rewrite the CSV file
+        writeGoalsToCSV(goals, context);
+    }
+
+    private void writeGoalsToCSV(List<Goal> goals, Context context) throws IOException {
+        String filename = "goals.csv";
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
+
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            // Write CSV header
+            writer.write("goalName,goalType,goalDescription,goalStart,goalEnd,goalCompleted\n");
+
+            for (Goal goal : goals) {
+                writer.write(goal.getGoalName() + "," +
+                        goal.getGoalType() + "," +
+                        goal.getGoalDescription() + "," +
+                        // Format dates as needed
+                        goal.getGoalStart() + "," +
+                        goal.getGoalEnd() + "," +
+                        goal.isGoalCompleted() + "\n");
+            }
+        }
+    }
+
+
 
 
 }
