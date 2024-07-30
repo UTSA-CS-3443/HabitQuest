@@ -3,6 +3,7 @@ package edu.usta.cs3443.habitquest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * UserActivity Controller
  * View and edit user profile information
@@ -21,6 +30,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
+    Button saveButton, backButton;
     private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword;
 
     @Override
@@ -41,48 +51,96 @@ public class UserActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-        // Load current user data
+        // Load current user data from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        editTextName.setText(sharedPreferences.getString("username", ""));
-        editTextBday.setText(sharedPreferences.getString("birthday", ""));
-        editTextPronouns.setText(sharedPreferences.getString("pronoun", ""));
-        editTextEmail.setText(sharedPreferences.getString("email", ""));
-        editTextPassword.setText(sharedPreferences.getString("password", ""));
+        String currentName = sharedPreferences.getString("username", "");
+        String currentBday = sharedPreferences.getString("birthday", "");
+        String currentPronouns = sharedPreferences.getString("pronoun", "");
+        String currentEmail = sharedPreferences.getString("email", "");
+        String currentPassword = sharedPreferences.getString("password", "");
+
+        // Set current data to EditTexts
+        editTextName.setText(currentName);
+        editTextBday.setText(currentBday);
+        editTextPronouns.setText(currentPronouns);
+        editTextEmail.setText(currentEmail);
+        editTextPassword.setText(currentPassword);
 
         // Initialize Buttons
-        Button saveButton = findViewById(R.id.skiptomain);
+        saveButton = findViewById(R.id.skiptomain);
         saveButton.setOnClickListener(v -> {
-            String username = editTextName.getText().toString();
-            String birthday = editTextBday.getText().toString();
-            String pronoun = editTextPronouns.getText().toString();
-            String email = editTextEmail.getText().toString();
-            String password = editTextPassword.getText().toString();
+            // Capture new data from EditTexts
+            String newName = editTextName.getText().toString();
+            String newBday = editTextBday.getText().toString();
+            String newPronouns = editTextPronouns.getText().toString();
+            String newEmail = editTextEmail.getText().toString();
+            String newPassword = editTextPassword.getText().toString();
 
-            if (validateInputs(username, birthday, pronoun, email, password)) {
-                // Save data to SharedPreferences
-                SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("username", username);
-                editor.putString("birthday", birthday);
-                editor.putString("pronoun", pronoun);
-                editor.putString("email", email);
-                editor.putString("password", password);
-                editor.apply();
+            // Log new data
+            Log.d(TAG, "Saving new data:");
+            Log.d(TAG, "Name: " + newName);
+            Log.d(TAG, "Birthday: " + newBday);
+            Log.d(TAG, "Pronouns: " + newPronouns);
+            Log.d(TAG, "Email: " + newEmail);
+            Log.d(TAG, "Password: " + newPassword);
 
-                Toast.makeText(UserActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
-                // Optionally navigate back or refresh data
-                finish(); // or startActivity(new Intent(this, ProfileActivity.class));
-            } else {
-                Toast.makeText(UserActivity.this, "Invalid inputs", Toast.LENGTH_SHORT).show();
+            // Save new user data to SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", newName);
+            editor.putString("birthday", newBday);
+            editor.putString("pronoun", newPronouns);
+            editor.putString("email", newEmail);
+            editor.putString("password", newPassword);
+            editor.apply();
+
+            // Update user data file
+            try {
+                updateUserFile(newName, newBday, newPronouns, newEmail, newPassword);
+                Toast.makeText(UserActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+            } catch (IOException e) {
+                Toast.makeText(UserActivity.this, "Failed to save changes", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
+
+            // Go back to profile settings activity
+            Intent intent = new Intent(this, profile_Settings_Activity.class);
+            startActivity(intent);
         });
 
-        Button backButton = findViewById(R.id.button2);
-        backButton.setOnClickListener(v -> finish()); // Go back to the previous activity
+        backButton = findViewById(R.id.button2);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, profile_Settings_Activity.class);
+            startActivity(intent);
+        });
     }
 
-    private boolean validateInputs(String username, String birthday, String pronoun, String email, String password) {
-        // Implement validation logic here
-        return !username.isEmpty() && !email.isEmpty() && !password.isEmpty();
+    private void updateUserFile(String newName, String newBday, String newPronouns, String newEmail, String newPassword) throws IOException {
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "users.csv");
+        List<String> lines = new ArrayList<>();
+        boolean updated = false;
+
+        // Read the file and update the user information
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 7 && parts[3].equals(newEmail)) {
+                    // Update the user data line
+                    lines.add(String.join(",", newName, newBday, newPronouns, newEmail, newPassword, parts[5], parts[6]));
+                    updated = true;
+                } else {
+                    lines.add(line);
+                }
+            }
+        }
+
+        // If user was found and updated, write the changes back to the file
+        if (updated) {
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                for (String l : lines) {
+                    fos.write((l + "\n").getBytes());
+                }
+            }
+        }
     }
 }
