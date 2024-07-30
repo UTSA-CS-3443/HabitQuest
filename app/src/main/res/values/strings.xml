@@ -38,7 +38,7 @@
         <item>Personal</item>
         <item>Professional</item>
     </string-array>
-
+    <string name="action_home">Home</string>
     <string name="action_go_back">Go Back</string>  // New string
     <string name="action_add_habit">Add Habit</string>  // New string
 </resources>
