@@ -18,9 +18,11 @@ import edu.usta.cs3443.habitquest.R;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
     private List<Goal> goals;
+    private Context context;
 
-    public GoalAdapter(List<Goal> goals) {
+    public GoalAdapter(List<Goal> goals, Context context) {
         this.goals = goals;
+        this.context = context;
     }
 
     @NonNull
@@ -47,26 +49,21 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
         // Set a listener to handle changes in the CheckBox
         holder.goalCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> {
             goal.setGoalCompleted(isChecked);
-            // Notify the model or database of the change
-            // You might need to update the data source or notify the database here
-            //this code is malformed and needs to be fixed, it duplicates the all the goals in the list
-            /*try {
-                goal.markGoalCompleted(goal, holder.itemView.getContext());
+            try {
+                goal.markGoalCompleted(goal, context);
             } catch (IOException e) {
-                throw new RuntimeException(e);
-            }*/
+                e.printStackTrace();
+            }
         });
 
-        holder.deleteGoal.setOnClickListener(v -> {
-            // Handle delete action
-            deleteGoal(goal, holder.itemView.getContext(), position);
-        });
+        holder.deleteGoal.setOnClickListener(v -> deleteGoal(goal, holder.getAdapterPosition()));
     }
 
-    private void deleteGoal(Goal goal, Context context, int position) {
+    private void deleteGoal(Goal goal, int position) {
         if (goals.contains(goal)) {
             goals.remove(position);
             notifyItemRemoved(position);
+            notifyItemRangeChanged(position, goals.size());
             // Delete goal from file
             try {
                 Goal.deleteGoalFromCSV(goal, context);
@@ -78,8 +75,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             Log.d("GoalAdapter", "Goal not found in list");
         }
     }
-
-
 
     @Override
     public int getItemCount() {

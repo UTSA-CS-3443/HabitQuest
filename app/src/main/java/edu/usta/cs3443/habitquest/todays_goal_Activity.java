@@ -25,6 +25,7 @@ public class todays_goal_Activity extends AppCompatActivity {
     private List<Goal> goalList;
     private Button addHabitButton;
     private Button homeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public class todays_goal_Activity extends AppCompatActivity {
 
         // Initialize or update adapter
         if (goalAdapter == null) {
-            goalAdapter = new GoalAdapter(goalList);
+            goalAdapter = new GoalAdapter(goalList, this);
             recyclerView.setAdapter(goalAdapter);
         } else {
             goalAdapter.notifyDataSetChanged(); // Refresh the adapter if it already exists
