@@ -146,127 +146,94 @@ public class Goal {
                 if (columns.length == 6) {
                     try {
                         Log.d("Goal", "Line: " + line);
-                        Log.d("Goal", "Columns: " + columns.length);
-
+                        Log.d("Goal", "Columns Length: " + columns.length);
                         String goalName = columns[0].trim();
                         String goalType = columns[1].trim();
                         String goalDescription = columns[2].trim();
                         String goalStart = columns[3].trim();
                         String goalEnd = columns[4].trim();
-                        Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim().toUpperCase());
+                        Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
 
                         Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
                         goal.setGoalCompleted(goalCompleted);
                         goals.add(goal);
-                    } catch (IllegalArgumentException e) {
-                        System.err.println("Error parsing line: " + line);
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        Log.e("Goal", "Error parsing line: " + line, e);
                     }
+                } else {
+                    Log.w("Goal", "Skipping line due to incorrect format: " + line);
                 }
             }
-        } catch (FileNotFoundException e) {
-            // Handle file not found
-        } catch (IOException e) {
-            // Handle other IO exceptions
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return goals;
     }
 
-    public static String readFile(String filename, Context context) throws IOException {
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+    // Read file method
+    private static String readFile(String filename, Context context) throws IOException {
+        File file = new File(context.getFilesDir(), filename);
+        StringBuilder stringBuilder = new StringBuilder();
 
-        if (!file.exists()) {
-            return "";
-        }
-
-        StringBuilder content = new StringBuilder();
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                content.append(scanner.nextLine()).append("\n");
+                stringBuilder.append(scanner.nextLine()).append("\n");
             }
         }
 
-        return content.toString();
+        return stringBuilder.toString();
     }
-    public static void deleteGoalFromCSV(Goal goalToDelete, Context context) throws IOException {
-        String filename = "goals.csv";
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
 
-        if (!file.exists()) {
-            return;
-        }
-
+    // Delete a goal from CSV
+    public static void deleteGoalFromCSV(Goal goal, Context context) throws IOException {
+        File file = new File(context.getFilesDir(), "goals.csv");
         List<String> lines = new ArrayList<>();
+
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
+                String line = scanner.nextLine();
+                if (!line.startsWith(goal.getGoalName())) {
+                    lines.add(line);
+                }
             }
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String line : lines) {
-                String[] columns = line.split(",");
-                if (columns.length == 6) {
-                    String goalName = columns[0].trim();
-                    String goalType = columns[1].trim();
-                    String goalDescription = columns[2].trim();
-                    String goalStart = columns[3].trim();
-                    String goalEnd = columns[4].trim();
-                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+    }
 
-                    if (!goalToDelete.getGoalName().equals(goalName) ||
-                            !goalToDelete.getGoalType().equals(goalType) ||
-                            !goalToDelete.getGoalDescription().equals(goalDescription) ||
-                            !goalToDelete.getGoalStart().equals(goalStart) ||
-                            !goalToDelete.getGoalEnd().equals(goalEnd) ||
-                            !goalToDelete.isGoalCompleted().equals(goalCompleted)) {
-                        writer.write(line);
-                        writer.newLine();
-                    }
+    // Update a goal in CSV
+    public static void updateGoalInCSV(Goal goal, Context context) throws IOException {
+        File file = new File(context.getFilesDir(), "goals.csv");
+        List<String> lines = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.startsWith(goal.getGoalName())) {
+                    lines.add(goal.toCSVString());
+                } else {
+                    lines.add(line);
                 }
             }
         }
-    }
-    //change goal to completed, this would rewrite the goals.csv file with chage in goalCompleted
-    public void markGoalCompleted(Goal goalToComplete, Context context) throws IOException {
-        List<Goal> goals = loadGoalsFromCSV(context);
-
-        // Find the goal to update
-        for (Goal goal : goals) {
-            if (goal.equals(goalToComplete)) {
-                goal.setGoalCompleted(true);
-                break;
-            }
-        }
-
-        // Rewrite the CSV file
-        writeGoalsToCSV(goals, context);
-    }
-
-    private void writeGoalsToCSV(List<Goal> goals, Context context) throws IOException {
-        String filename = "goals.csv";
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
-
-
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            // Write CSV header
-            writer.write("goalName,goalType,goalDescription,goalStart,goalEnd,goalCompleted\n");
-
-            for (Goal goal : goals) {
-                writer.write(goal.getGoalName() + "," +
-                        goal.getGoalType() + "," +
-                        goal.getGoalDescription() + "," +
-                        // Format dates as needed
-                        goal.getGoalStart() + "," +
-                        goal.getGoalEnd() + "," +
-                        goal.isGoalCompleted() + "\n");
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
             }
         }
     }
 
-
-
-
+    // Mark a goal as completed
+    public void markGoalCompleted(Goal goal, Context context) throws IOException {
+        goal.setGoalCompleted(true);
+        updateGoalInCSV(goal, context);
+    }
 }
