@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress"
-        app:layout_constraintVertical_bias="1.4" />
+        app:layout_constraintVertical_bias="2.2" />
 
     <Button
         android:id="@+id/button2"
@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/skiptomain"
         app:layout_constraintTop_toTopOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.847" />
 
     <ImageView
         android:id="@+id/user"
@@ -207,7 +207,7 @@
         android:layout_marginBottom="315dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Password"
+        android:hint="New Password"
         android:textColor="#2e2e2e"
         app:layout_constraintBottom_toBottomOf="@id/bottomNavigationView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -216,17 +216,27 @@
         app:layout_constraintTop_toTopOf="@id/toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="568dp"
+
+    <EditText
+        android:id="@+id/editTextPasswordConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="@string/prompt_password"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textColor="#2e2e2e"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.405"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/habitquest_plum"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
