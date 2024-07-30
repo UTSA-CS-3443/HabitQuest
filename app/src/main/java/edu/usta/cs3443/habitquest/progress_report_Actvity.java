@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 import edu.usta.cs3443.habitquest.model.User;
 
 public class progress_report_Actvity extends AppCompatActivity {
@@ -21,7 +23,12 @@ public class progress_report_Actvity extends AppCompatActivity {
 
         // Fetch user and analytics data
         User currentUser = getCurrentUser(); // Implement this method to get the current user
-        String progressReport = currentUser.generateProgressReport();
+        String progressReport = null;
+        try {
+            progressReport = currentUser.generateProgressReport(this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // Set the progress report to the TextView
         progressResultsTextView.setText(progressReport);
