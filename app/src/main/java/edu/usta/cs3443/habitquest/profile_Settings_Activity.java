@@ -41,15 +41,6 @@ public class profile_Settings_Activity extends AppCompatActivity {
         String birthday = sharedPreferences.getString("birthday", "No birthday");
         String pronoun = sharedPreferences.getString("pronoun", "No pronouns");
         String email = sharedPreferences.getString("email", "No email");
-        String password = sharedPreferences.getString("password", "No password");
-
-        // Log retrieved data
-        Log.d(TAG, "Loaded user data:");
-        Log.d(TAG, "Name: " + username);
-        Log.d(TAG, "Birthday: " + birthday);
-        Log.d(TAG, "Pronouns: " + pronoun);
-        Log.d(TAG, "Email: " + email);
-        Log.d(TAG, "Password: " + password);
 
         // Set the retrieved data to TextViews
         userName.setText(username);
@@ -61,21 +52,22 @@ public class profile_Settings_Activity extends AppCompatActivity {
         Button editButton = findViewById(R.id.editbutton);
         editButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, UserActivity.class);
-            Log.d(TAG, "Edit button clicked");
             startActivity(intent);
         });
 
         Button backButton = findViewById(R.id.button2);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        });
+        backButton.setOnClickListener(v -> finish()); // Go back to the previous activity
 
         Button logOutButton = findViewById(R.id.button3);
         logOutButton.setOnClickListener(v -> {
-            CheckLogin.setLoggedIn(this, false);
+            SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.apply();
+
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish(); // Close current activity
         });
     }
 }

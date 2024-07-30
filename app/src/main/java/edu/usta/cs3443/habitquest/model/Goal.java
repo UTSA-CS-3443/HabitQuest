@@ -84,6 +84,11 @@ public class Goal {
     public void setGoalCompleted(Boolean goalCompleted) { this.goalCompleted = goalCompleted; }
 
 
+    public String toCSVString() {
+        return goalName + "," + goalType + "," + goalDescription + "," + goalStart + "," + goalEnd + "," + goalCompleted;
+    }
+
+
     // Check if the goal is expired
     public boolean isExpired(Date today) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");

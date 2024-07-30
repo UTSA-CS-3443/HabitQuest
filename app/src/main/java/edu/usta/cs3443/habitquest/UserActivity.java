@@ -21,7 +21,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
-    Button saveButton, backButton;
     private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword;
 
     @Override
@@ -42,67 +41,48 @@ public class UserActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmailAddress);
         editTextPassword = findViewById(R.id.editTextPassword);
 
-        // Load current user data from SharedPreferences
+        // Load current user data
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String currentName = sharedPreferences.getString("username", "");
-        String currentBday = sharedPreferences.getString("birthday", "");
-        String currentPronouns = sharedPreferences.getString("pronoun", "");
-        String currentEmail = sharedPreferences.getString("email", "");
-        String currentPassword = sharedPreferences.getString("password", "");
-
-        // Set current data to EditTexts
-        editTextName.setText(currentName);
-        editTextBday.setText(currentBday);
-        editTextPronouns.setText(currentPronouns);
-        editTextEmail.setText(currentEmail);
-        editTextPassword.setText(currentPassword);
+        editTextName.setText(sharedPreferences.getString("username", ""));
+        editTextBday.setText(sharedPreferences.getString("birthday", ""));
+        editTextPronouns.setText(sharedPreferences.getString("pronoun", ""));
+        editTextEmail.setText(sharedPreferences.getString("email", ""));
+        editTextPassword.setText(sharedPreferences.getString("password", ""));
 
         // Initialize Buttons
-        saveButton = findViewById(R.id.skiptomain);
+        Button saveButton = findViewById(R.id.skiptomain);
         saveButton.setOnClickListener(v -> {
-            // Capture new data from EditTexts
-            String newName = editTextName.getText().toString();
-            String newBday = editTextBday.getText().toString();
-            String newPronouns = editTextPronouns.getText().toString();
-            String newEmail = editTextEmail.getText().toString();
-            String newPassword = editTextPassword.getText().toString();
+            String username = editTextName.getText().toString();
+            String birthday = editTextBday.getText().toString();
+            String pronoun = editTextPronouns.getText().toString();
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
 
-            // Log new data
-            Log.d(TAG, "Saving new data:");
-            Log.d(TAG, "Name: " + newName);
-            Log.d(TAG, "Birthday: " + newBday);
-            Log.d(TAG, "Pronouns: " + newPronouns);
-            Log.d(TAG, "Email: " + newEmail);
-            Log.d(TAG, "Password: " + newPassword);
+            if (validateInputs(username, birthday, pronoun, email, password)) {
+                // Save data to SharedPreferences
+                SharedPreferences sharedPref = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("username", username);
+                editor.putString("birthday", birthday);
+                editor.putString("pronoun", pronoun);
+                editor.putString("email", email);
+                editor.putString("password", password);
+                editor.apply();
 
-            // Save new user data to SharedPreferences
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("username", newName);
-            editor.putString("birthday", newBday);
-            editor.putString("pronoun", newPronouns);
-            editor.putString("email", newEmail);
-            editor.putString("password", newPassword);
-            editor.apply();
-
-            // Verify if the data was saved correctly
-            String savedPassword = sharedPreferences.getString("password", "");
-            Log.d(TAG, "Saved password: " + savedPassword);
-
-            if (newPassword.equals(savedPassword)) {
-                Toast.makeText(UserActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
+                // Optionally navigate back or refresh data
+                finish(); // or startActivity(new Intent(this, ProfileActivity.class));
             } else {
-                Toast.makeText(UserActivity.this, "Failed to save changes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "Invalid inputs", Toast.LENGTH_SHORT).show();
             }
-
-            // Go back to profile settings activity
-            Intent intent = new Intent(this, profile_Settings_Activity.class);
-            startActivity(intent);
         });
 
-        backButton = findViewById(R.id.button2);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, profile_Settings_Activity.class);
-            startActivity(intent);
-        });
+        Button backButton = findViewById(R.id.button2);
+        backButton.setOnClickListener(v -> finish()); // Go back to the previous activity
+    }
+
+    private boolean validateInputs(String username, String birthday, String pronoun, String email, String password) {
+        // Implement validation logic here
+        return !username.isEmpty() && !email.isEmpty() && !password.isEmpty();
     }
 }
