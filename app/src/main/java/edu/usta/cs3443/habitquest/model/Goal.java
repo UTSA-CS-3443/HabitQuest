@@ -19,37 +19,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
- *
- * Attributes:
- * goalName - name of goal.
- * goalType - type of goal (personal, education, etc).
- * goalDescrip - description of the goal.
- * goalStart - the date the goal starts.
- * goalEnd - the date the goal ends.
- * goalCompleted - boolean indicating if the goal was completed.
- *
- * Methods:
- * createGoal() - creates a new goal.
- * updateGoal() - updates the goal.
- * deleteGoal() - delete the goal.
- * getGoal() - retrieves the goal.
- * getGoalName() - retrieve goal name.
- * getGoalType() - retrieve goal type.
- * getGoalDescription() - retrieve goal description.
- * getGoalStart() - retrieve start date.   // Changed method name from getStart to getGoalStart
- * getGoalEnd() - retrieve end date.   // Changed method name from getEnd to getGoalEnd
- * isGoalCompleted() - true/false completion data.   // Changed method name from isCompleted to isGoalCompleted
- * setGoalName() - set goal name.
- * setGoalType() - set goal type.
- * setGoalDescription() - set goal description.
- * setGoalStart() - set start date.   // Changed method name from setStart to setGoalStart
- * setGoalEnd() - set end date.   // Changed method name from setEnd to setGoalEnd
- * setGoalCompleted() - set completion status.   // Changed method name from setCompleted to setGoalCompleted
- * isCompleted() - true/false completion data.
- */
-
 public class Goal {
     private String goalName;
     private String goalType;
@@ -83,11 +52,9 @@ public class Goal {
     public void setGoalEnd(String goalEnd) { this.goalEnd = goalEnd; }
     public void setGoalCompleted(Boolean goalCompleted) { this.goalCompleted = goalCompleted; }
 
-
     public String toCSVString() {
         return goalName + "," + goalType + "," + goalDescription + "," + goalStart + "," + goalEnd + "," + goalCompleted;
     }
-
 
     // Check if the goal is expired
     public boolean isExpired(Date today) {
@@ -189,6 +156,7 @@ public class Goal {
 
         return content.toString();
     }
+
     public static void deleteGoalFromCSV(Goal goalToDelete, Context context) throws IOException {
         String filename = "goals.csv";
         File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
@@ -228,7 +196,50 @@ public class Goal {
             }
         }
     }
-    //change goal to completed, this would rewrite the goals.csv file with chage in goalCompleted
+
+    public static void updateGoalInCSV(Goal updatedGoal, Context context) throws IOException { 
+        // New method to update a goal in the CSV file
+        String filename = "goals.csv"; 
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename); 
+
+        if (!file.exists()) { 
+            return; 
+        } 
+
+        List<String> lines = new ArrayList<>(); 
+        try (Scanner scanner = new Scanner(file)) { 
+            while (scanner.hasNextLine()) { 
+                lines.add(scanner.nextLine()); 
+            } 
+        } 
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { 
+            for (String line : lines) { 
+                String[] columns = line.split(","); 
+                if (columns.length == 6) { 
+                    String goalName = columns[0].trim(); 
+                    String goalType = columns[1].trim(); 
+                    String goalDescription = columns[2].trim(); 
+                    String goalStart = columns[3].trim(); 
+                    String goalEnd = columns[4].trim(); 
+                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim()); 
+
+                    if (updatedGoal.getGoalName().equals(goalName) && 
+                            updatedGoal.getGoalType().equals(goalType) && 
+                            updatedGoal.getGoalDescription().equals(goalDescription) && 
+                            updatedGoal.getGoalStart().equals(goalStart) && 
+                            updatedGoal.getGoalEnd().equals(goalEnd)) { 
+                        writer.write(updatedGoal.toCSVString()); 
+                    } else { 
+                        writer.write(line); 
+                    } 
+                    writer.newLine(); 
+                } 
+            } 
+        } 
+    }
+
+    // Change goal to completed, this would rewrite the goals.csv file with change in goalCompleted
     public void markGoalCompleted(Goal goalToComplete, Context context) throws IOException {
         List<Goal> goals = loadGoalsFromCSV(context);
 
@@ -236,19 +247,15 @@ public class Goal {
         for (Goal goal : goals) {
             if (goal.equals(goalToComplete)) {
                 goal.setGoalCompleted(true);
+                updateGoalInCSV(goal, context);  // Update goal in CSV file
                 break;
             }
         }
-
-        // Rewrite the CSV file
-        writeGoalsToCSV(goals, context);
     }
 
     private void writeGoalsToCSV(List<Goal> goals, Context context) throws IOException {
         String filename = "goals.csv";
         File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
-
-
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             // Write CSV header
@@ -265,8 +272,4 @@ public class Goal {
             }
         }
     }
-
-
-
-
 }
