@@ -46,11 +46,9 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
         holder.goalStart.setText(goal.getGoalStart());
         holder.goalEnd.setText(goal.getGoalEnd());
 
-        // Load the checkbox state from SharedPreferences
         boolean isCompleted = sharedPreferences.getBoolean(goal.getGoalName(), false);
         holder.goalCompleted.setChecked(isCompleted);
 
-        // Set a listener to handle changes in the CheckBox
         holder.goalCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> {
             goal.setGoalCompleted(isChecked);
             SharedPreferences.Editor editor = sharedPreferences.edit();
