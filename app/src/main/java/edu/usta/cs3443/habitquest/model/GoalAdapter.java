@@ -1,6 +1,7 @@
 package edu.usta.cs3443.habitquest.model;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,13 @@ import edu.usta.cs3443.habitquest.R;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
     private List<Goal> goals;
+    private Context context;
+    private SharedPreferences sharedPreferences;
 
-    public GoalAdapter(List<Goal> goals) {
+    public GoalAdapter(List<Goal> goals, Context context) {
         this.goals = goals;
+        this.context = context;
+        this.sharedPreferences = context.getSharedPreferences("goal_preferences", Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -41,32 +46,30 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
         holder.goalStart.setText(goal.getGoalStart());
         holder.goalEnd.setText(goal.getGoalEnd());
 
-        // Set the CheckBox state based on goalCompleted
-        holder.goalCompleted.setChecked(goal.isGoalCompleted());
+        // Load the checkbox state from SharedPreferences
+        boolean isCompleted = sharedPreferences.getBoolean(goal.getGoalName(), false);
+        holder.goalCompleted.setChecked(isCompleted);
 
         // Set a listener to handle changes in the CheckBox
         holder.goalCompleted.setOnCheckedChangeListener((buttonView, isChecked) -> {
             goal.setGoalCompleted(isChecked);
-            // Notify the model or database of the change
-            // You might need to update the data source or notify the database here
-            //this code is malformed and needs to be fixed, it duplicates the all the goals in the list
-            /*try {
-                goal.markGoalCompleted(goal, holder.itemView.getContext());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }*/
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(goal.getGoalName(), isChecked);
+            editor.apply();
         });
 
-        holder.deleteGoal.setOnClickListener(v -> {
-            // Handle delete action
-            deleteGoal(goal, holder.itemView.getContext(), position);
-        });
+        holder.deleteGoal.setOnClickListener(v -> deleteGoal(goal, holder.getAdapterPosition()));
     }
 
-    private void deleteGoal(Goal goal, Context context, int position) {
+    private void deleteGoal(Goal goal, int position) {
         if (goals.contains(goal)) {
             goals.remove(position);
             notifyItemRemoved(position);
+            notifyItemRangeChanged(position, goals.size());
+            // Remove the goal from SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.remove(goal.getGoalName());
+            editor.apply();
             // Delete goal from file
             try {
                 Goal.deleteGoalFromCSV(goal, context);
@@ -78,8 +81,6 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             Log.d("GoalAdapter", "Goal not found in list");
         }
     }
-
-
 
     @Override
     public int getItemCount() {
