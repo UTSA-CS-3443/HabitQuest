@@ -131,6 +131,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(newGoal.getGoalName() + "," + newGoal.getGoalType() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + "false" + "\n");
             Log.d(TAG, "Goal added: " + newGoal.getGoalName());
+
             Toast.makeText(this, "Goal added successfully!", Toast.LENGTH_SHORT).show();
 
             // Redirect to today's goals activity
