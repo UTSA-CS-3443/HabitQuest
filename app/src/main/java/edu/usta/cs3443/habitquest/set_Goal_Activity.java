@@ -1,16 +1,17 @@
 package edu.usta.cs3443.habitquest;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,17 +20,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
 
 import edu.usta.cs3443.habitquest.model.Goal;
 
 public class set_Goal_Activity extends AppCompatActivity {
 
-    private static final String TAG = "set_Goal_Activity";
-
     private EditText goalNameEditText, goalDescriptionEditText, goalStartDateEditText, goalEndDateEditText;
-    private CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7;
     private Spinner goalTypeSpinner;
-    private Button addHabitButton, goBackButton;
+    private Button addHabitButton, goBackButton, startDateButton, endDateButton;
+    private DatePickerDialog startDatePickerDialog, endDatePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,58 +40,16 @@ public class set_Goal_Activity extends AppCompatActivity {
         goalDescriptionEditText = findViewById(R.id.goalDescriptionEditText);
         goalStartDateEditText = findViewById(R.id.goalStartDateEditText);
         goalEndDateEditText = findViewById(R.id.goalEndDateEditText);
+        startDateButton = findViewById(R.id.startDateButton);
+        endDateButton = findViewById(R.id.endDateButton);
+
+        initDatePicker();
+
+        // Set default date to today
+        goalStartDateEditText.setText(getTodaysDate());
+        goalEndDateEditText.setText(getTodaysDate());
+
         goalTypeSpinner = findViewById(R.id.goalTypeSpinner);
-
-        // Find the TextView by its ID
-        TextView goalRecurrenceLabel = findViewById(R.id.GoalRecurrenceLabel);
-
-        // Set the visibility to GONE or INVISIBLE
-        goalRecurrenceLabel.setVisibility(View.GONE);
-
-        // Find all TextView views by their IDs
-        TextView label1 = findViewById(R.id.label1);
-        TextView label2 = findViewById(R.id.label2);
-        TextView label3 = findViewById(R.id.label3);
-        TextView label4 = findViewById(R.id.label4);
-        TextView label5 = findViewById(R.id.label5);
-        TextView label6 = findViewById(R.id.label6);
-        TextView label7 = findViewById(R.id.label7);
-
-        // Set visibility to GONE or INVISIBLE
-        label1.setVisibility(View.GONE);
-        label2.setVisibility(View.GONE);
-        label3.setVisibility(View.GONE);
-        label4.setVisibility(View.GONE);
-        label5.setVisibility(View.GONE);
-        label6.setVisibility(View.GONE);
-        label7.setVisibility(View.GONE);
-
-        // Find all CheckBox views by their IDs
-        CheckBox checkbox1 = findViewById(R.id.checkbox1);
-        CheckBox checkbox2 = findViewById(R.id.checkbox2);
-        CheckBox checkbox3 = findViewById(R.id.checkbox3);
-        CheckBox checkbox4 = findViewById(R.id.checkbox4);
-        CheckBox checkbox5 = findViewById(R.id.checkbox5);
-        CheckBox checkbox6 = findViewById(R.id.checkbox6);
-        CheckBox checkbox7 = findViewById(R.id.checkbox7);
-
-        // Set visibility to GONE or INVISIBLE
-        checkbox1.setVisibility(View.GONE);
-        checkbox2.setVisibility(View.GONE);
-        checkbox3.setVisibility(View.GONE);
-        checkbox4.setVisibility(View.GONE);
-        checkbox5.setVisibility(View.GONE);
-        checkbox6.setVisibility(View.GONE);
-        checkbox7.setVisibility(View.GONE);
-
-        checkbox1 = findViewById(R.id.checkbox1);
-        checkbox2 = findViewById(R.id.checkbox2);
-        checkbox3 = findViewById(R.id.checkbox3);
-        checkbox4 = findViewById(R.id.checkbox4);
-        checkbox5 = findViewById(R.id.checkbox5);
-        checkbox6 = findViewById(R.id.checkbox6);
-        checkbox7 = findViewById(R.id.checkbox7);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.goal_type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -101,11 +59,76 @@ public class set_Goal_Activity extends AppCompatActivity {
         addHabitButton.setOnClickListener(v -> addAndReadHabit());
 
         goBackButton = findViewById(R.id.goBackButton);
-        goBackButton.setOnClickListener(v -> {
-                    Intent intent = new Intent(set_Goal_Activity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-        );
+        goBackButton.setOnClickListener(v -> startActivity(new Intent(set_Goal_Activity.this, MainActivity.class)));
+
+        startDateButton.setOnClickListener(v -> startDatePickerDialog.show());
+        endDateButton.setOnClickListener(v -> endDatePickerDialog.show());
+    }
+
+    private void initDatePicker() {
+        DatePickerDialog.OnDateSetListener startDateSetListener = (datePicker, year, month, day) -> {
+            month++;
+            String date = makeDateString(day, month, year);
+            goalStartDateEditText.setText(date);
+        };
+
+        DatePickerDialog.OnDateSetListener endDateSetListener = (datePicker, year, month, day) -> {
+            month++;
+            String date = makeDateString(day, month, year);
+            goalEndDateEditText.setText(date);
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        startDatePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, startDateSetListener, year, month, day);
+        endDatePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, endDateSetListener, year, month, day);
+    }
+
+    private String getTodaysDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month++;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private String makeDateString(int day, int month, int year) {
+        return getMonthFormat(month) + " " + day + " " + year;
+    }
+
+    private String getMonthFormat(int month) {
+        // Return appropriate month format
+        if(month == 1)
+            return "JAN";
+        if(month == 2)
+            return "FEB";
+        if(month == 3)
+            return "MAR";
+        if(month == 4)
+            return "APR";
+        if(month == 5)
+            return "MAY";
+        if(month == 6)
+            return "JUN";
+        if(month == 7)
+            return "JUL";
+        if(month == 8)
+            return "AUG";
+        if(month == 9)
+            return "SEP";
+        if(month == 10)
+            return "OCT";
+        if(month == 11)
+            return "NOV";
+        if(month == 12)
+            return "DEC";
+
+        //default should never happen
+        return "JAN";
     }
 
     private void addAndReadHabit() {

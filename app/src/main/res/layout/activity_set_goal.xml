@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -41,10 +40,10 @@
         android:layout_height="wrap_content"
         android:autofillHints="prompt_goalName"
         android:hint="@string/prompt_goal_name"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:textColor="#000000"
         android:inputType="text"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoalsNamesLabel" />
@@ -69,10 +68,10 @@
         android:layout_height="wrap_content"
         android:autofillHints="prompt_goalDescription"
         android:hint="@string/prompt_goal_description"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:textColor="#000000"
         android:inputType="text"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoalsDescriptionLabel" />
@@ -97,11 +96,24 @@
         android:layout_height="wrap_content"
         android:autofillHints="prompt_startDate"
         android:hint="@string/prompt_start_date"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:textColor="#000000"
         android:inputType="date"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/GoalStartDateLabel" />
+
+    <Button
+        android:id="@+id/startDateButton"
+        style="?android:spinnerStyle"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoalStartDateLabel" />
 
@@ -117,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goalStartDateEditText" />
+        app:layout_constraintTop_toBottomOf="@id/startDateButton" />
 
     <EditText
         android:id="@+id/goalEndDateEditText"
@@ -125,11 +137,25 @@
         android:layout_height="wrap_content"
         android:autofillHints="prompt_endDate"
         android:hint="@string/prompt_end_date"
-        android:padding="16dp"
-        android:textSize="16sp"
-        android:textColor="#000000"
         android:inputType="date"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/GoalEndDateLabel" />
+
+
+    <Button
+        android:id="@+id/endDateButton"
+        android:layout_width="192dp"
+        android:layout_height="51dp"
+        style="?android:spinnerStyle"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoalEndDateLabel" />
 
@@ -145,7 +171,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/goalEndDateEditText" />
+        app:layout_constraintTop_toBottomOf="@id/endDateButton" />
 
     <LinearLayout
         android:id="@+id/checkboxContainer"
@@ -353,6 +379,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/GoalsTypeLabel" />
 
+
+
+
     <Button
         android:id="@+id/goBackButton"
         android:layout_width="0dp"
@@ -362,11 +391,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#CBC9FA"
-        android:textColor="#2e2e2e"
         android:text="@string/action_go_back"
+        android:textColor="#2e2e2e"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/addHabitButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.32" />
 
     <Button
@@ -378,12 +407,15 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#CBC9FA"
-        android:textColor="#2e2e2e"
         android:text="@string/action_add_habit"
+        android:textColor="#2e2e2e"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/goBackButton"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintWidth_percent="0.32" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
