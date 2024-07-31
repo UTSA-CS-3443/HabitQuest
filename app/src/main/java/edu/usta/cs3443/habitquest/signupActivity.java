@@ -1,6 +1,7 @@
 package edu.usta.cs3443.habitquest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -64,6 +65,16 @@ public class signupActivity extends AppCompatActivity {
             Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show();
             //Set user to logged in
             CheckLogin.setLoggedIn(this,true);
+
+            // Save user data to SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("username", user.getUserName());
+            editor.putString("birthday", user.getUserBday());
+            editor.putString("pronoun", user.getUserPronouns());
+            editor.putString("email", user.getUserEmail());
+            editor.putBoolean("isLoggedIn", true);  // Set a flag for user logged in status
+            editor.apply();
 
 
             //go to main activity
