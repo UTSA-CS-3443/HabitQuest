@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import edu.usta.cs3443.habitquest.model.Goal;
 
@@ -30,9 +31,12 @@ public class set_Goal_Activity extends AppCompatActivity {
     private Spinner goalTypeSpinner;
     private Button addHabitButton, goBackButton, startDateButton, endDateButton;
     private DatePickerDialog startDatePickerDialog, endDatePickerDialog;
+    private List<Goal> goalList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_goal);
 
@@ -44,6 +48,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         endDateButton = findViewById(R.id.endDateButton);
 
         initDatePicker();
+        //loadGoals();
 
         // Set default date to today
         goalStartDateEditText.setText(getTodaysDate());
@@ -64,6 +69,8 @@ public class set_Goal_Activity extends AppCompatActivity {
         startDateButton.setOnClickListener(v -> startDatePickerDialog.show());
         endDateButton.setOnClickListener(v -> endDatePickerDialog.show());
     }
+
+
 
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener startDateSetListener = (datePicker, year, month, day) -> {

@@ -2,8 +2,8 @@ package edu.usta.cs3443.habitquest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,7 +73,7 @@ public class todays_goal_Activity extends AppCompatActivity {
 
         // Initialize or update adapter
         if (goalAdapter == null) {
-            goalAdapter = new GoalAdapter(goalList);
+            goalAdapter = new GoalAdapter(goalList, this);
             recyclerView.setAdapter(goalAdapter);
         } else {
             goalAdapter.notifyDataSetChanged(); // Refresh the adapter if it already exists
