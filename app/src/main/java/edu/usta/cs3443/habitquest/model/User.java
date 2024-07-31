@@ -279,6 +279,10 @@ public class User {
         return analytics.getGoalsNotComplete();
     }
 
+    public Analytics getAnalytics() {
+        return analytics;
+    }
+
     public String generateProgressReport(Context context) throws IOException {
         return analytics.generateProgressReport(context);
     }

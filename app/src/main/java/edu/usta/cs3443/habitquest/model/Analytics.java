@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Analytics {
     private ArrayList<Goal> goalsCompleted;
@@ -138,7 +139,7 @@ public class Analytics {
 
 
         StringBuilder report = new StringBuilder();
-        report.append("Progress Report:\n\n");
+        report.append("Progress Report:\n\n\n");
 
         // Goals Completed
 
@@ -148,36 +149,23 @@ public class Analytics {
             report.append("No goals completed yet.\n");
         } else {
             for (Goal goal : getGoalsCompleted()) {
-                report.append("- ").append(goal.getGoalName()).append(": ")
+                report.append("• ").append(goal.getGoalName()).append(": ")
                         .append(goal.getGoalDescription()).append("\n");
             }
         }
 
         // Goals Not Completed
         int notCompletedGoalsCount = getNumberOfGoalsNotCompleted();
-        report.append("\nGoals Not Completed: ").append(notCompletedGoalsCount).append("\n");
+        report.append("\nActive Goals: ").append(notCompletedGoalsCount).append("\n");
         if (notCompletedGoalsCount == 0) {
             report.append("All goals are completed or not yet started.\n");
         } else {
             for (Goal goal : getGoalsNotComplete()) {
-                report.append("- ").append(goal.getGoalName()).append(": ")
+                report.append("• ").append(goal.getGoalName()).append(": ")
                         .append(goal.getGoalDescription()).append("\n");
             }
         }
 
-        // Active Goals
-        int activeGoalsCount = goals.size(); //getNumberOfActiveGoals();
-        report.append("\nActive Goals: ").append(activeGoalsCount).append("\n");
-        if (activeGoalsCount == 0) {
-            report.append("No active goals.\n");
-        } else {
-            for (Goal goal : getActiveGoals()) {
-                if (!goal.isExpired(new Date())) { // Make sure the goal is active
-                    report.append("- ").append(goal.getGoalName()).append(": ")
-                            .append(goal.getGoalDescription()).append("\n");
-                }
-            }
-        }
         return report.toString();
     }
 }
