@@ -59,23 +59,32 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
 
         holder.deleteGoal.setOnClickListener(v -> {
             // Handle delete action
-            deleteGoal(goal, holder.itemView.getContext(), position);
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                Goal goalToDelete = goals.get(adapterPosition);
+                deleteGoal(goalToDelete, holder.itemView.getContext(), adapterPosition);
+            }
         });
     }
 
     private void deleteGoal(Goal goal, Context context, int position) {
-        if (goals.contains(goal)) {
-            goals.remove(position);
-            notifyItemRemoved(position);
-            // Delete goal from file
-            try {
-                Goal.deleteGoalFromCSV(goal, context);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (position >= 0 && position < goals.size()) {
+            if (goals.contains(goal)) {
+                goals.remove(position);
+                notifyItemRemoved(position);
+                // Delete goal from file
+                try {
+                    Log.d("GoalAdapter", "Attempting to delete goal: " + goal.getGoalName());
+                    Goal.deleteGoalFromCSV(goal, context);
+                    Log.d("GoalAdapter", "Goal deleted successfully");
+                } catch (IOException e) {
+                    Log.e("GoalAdapter", "Error deleting goal from CSV", e);
+                }
+            } else {
+                Log.d("GoalAdapter", "Goal not found in list: " + goal.getGoalName());
             }
         } else {
-            // Goal is not in the list
-            Log.d("GoalAdapter", "Goal not found in list");
+            Log.e("GoalAdapter", "Invalid position: " + position);
         }
     }
 
