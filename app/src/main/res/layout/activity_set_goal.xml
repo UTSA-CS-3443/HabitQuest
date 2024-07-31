@@ -168,6 +168,7 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,6 +195,7 @@
 
             <TextView
                 android:id="@+id/label1"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_s"
@@ -202,6 +204,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox1"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_s" />
@@ -218,6 +221,7 @@
 
             <TextView
                 android:id="@+id/label2"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_m"
@@ -226,6 +230,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox2"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_m" />
@@ -242,6 +247,7 @@
 
             <TextView
                 android:id="@+id/label3"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_t"
@@ -250,6 +256,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox3"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_t" />
@@ -266,6 +273,7 @@
 
             <TextView
                 android:id="@+id/label4"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_w"
@@ -274,6 +282,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox4"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_w" />
@@ -290,6 +299,7 @@
 
             <TextView
                 android:id="@+id/label5"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_th"
@@ -298,6 +308,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox5"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_th" />
@@ -314,6 +325,7 @@
 
             <TextView
                 android:id="@+id/label6"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_f"
@@ -322,6 +334,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox6"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/label_f" />
@@ -337,6 +350,7 @@
 
             <TextView
                 android:id="@+id/label7"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_s"
@@ -345,6 +359,7 @@
 
             <CheckBox
                 android:id="@+id/checkbox7"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
