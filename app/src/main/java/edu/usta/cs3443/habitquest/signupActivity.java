@@ -18,8 +18,18 @@ import java.io.IOException;
 
 import edu.usta.cs3443.habitquest.model.CheckLogin;
 import edu.usta.cs3443.habitquest.model.User;
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class signupActivity extends AppCompatActivity {
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +93,11 @@ public class signupActivity extends AppCompatActivity {
         });
 
     }
-    //gets current date in format yyyy-mm-dd from the system
+
+    /**
+     * Gets the current date and time in the desired format.
+     * @return the current date and time as a string
+     */
     private String getCurrentDate() {
         // Get the current date and time
         java.util.Date currentDate = new java.util.Date();

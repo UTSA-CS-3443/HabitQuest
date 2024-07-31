@@ -3,18 +3,28 @@ package edu.usta.cs3443.habitquest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.SeekBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
-import edu.usta.cs3443.habitquest.model.User;
 import edu.usta.cs3443.habitquest.model.Analytics;
-
+import edu.usta.cs3443.habitquest.model.User;
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class progress_report_Actvity extends AppCompatActivity {
     private SeekBar seekBarProgress;
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,18 +55,29 @@ public class progress_report_Actvity extends AppCompatActivity {
         });
     }
 
-    // Helper method to retrieve User object from Intent
+    /**
+     * Get the current user from the intent extras.
+     * @return the current user
+     */
     private User getCurrentUser() {
         // Assuming User data is passed through Intent extras; adjust as needed
         // For simplicity, creating a new User object here. Replace with your logic.
         return new User("John Doe", "01/01/1990", "He/Him", "john.doe@example.com", "password", "last_login", "date_created");
     }
-    // Method to update SeekBar progress
+
+    /**
+     * Update the SeekBar progress.
+     * @param progress the progress value
+     */
     private void updateSeekBar(int progress) {
         seekBarProgress.setProgress(progress);
     }
 
-    // Method to calculate progress percentage
+    /**
+     * Calculate the progress percentage based on completed goals.
+     * @param user the user object
+     * @return the progress percentage
+     */
     private int calculateProgressPercentage(User user) {
         Analytics analytics = user.getAnalytics();
         int completedGoals = analytics.getNumberOfGoalsCompleted();

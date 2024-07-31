@@ -23,16 +23,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * UserActivity Controller
+/**
+ * UserActivity.java - Controller for user profile settings
+ *
  * View and edit user profile information
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
  */
-
 public class UserActivity extends AppCompatActivity {
     private static final String TAG = "UserActivity";
     Button saveButton, backButton;
     private EditText editTextName, editTextBday, editTextPronouns, editTextEmail, editTextPassword, editTextPasswordConfirm;
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +130,15 @@ public class UserActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates the user data file with the new user information.
+     * @param newName the name of the user
+     * @param newBday the birthday of the user
+     * @param newPronouns the pronouns of the user
+     * @param newEmail the email of the user
+     * @param newPassword the password of the user
+     * @throws IOException if there is an error writing to the file
+     */
     private void updateUserFile(String newName, String newBday, String newPronouns, String newEmail, String newPassword) throws IOException {
         File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "users.csv");
         List<String> lines = new ArrayList<>();

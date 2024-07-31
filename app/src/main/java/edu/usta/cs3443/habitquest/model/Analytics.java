@@ -11,22 +11,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class Analytics {
     private ArrayList<Goal> goalsCompleted;
     private ArrayList<Goal> activeGoals;
     private static List<String> goals;
 
+    /**
+     * Constructor for Analytics
+     */
     public Analytics() {
         this.goalsCompleted = new ArrayList<>();
         this.activeGoals = new ArrayList<>();
     }
 
+    /**
+     * Getter for goalsCompleted
+     * @return Arraylist of goals completed
+     */
     public ArrayList<Goal> getGoalsCompleted() {
         return goalsCompleted;
     }
 
+    /**
+     * Getter for active goals
+     * @return Arraylist of active goals
+     */
     public ArrayList<Goal> getGoalsNotComplete() {
         ArrayList<Goal> notCompleteGoals = new ArrayList<>();
         for (Goal goal : activeGoals) {
@@ -37,26 +53,50 @@ public class Analytics {
         return notCompleteGoals;
     }
 
+    /**
+     * Getter for active goals
+     * @return Arraylist of active goals
+     */
     public ArrayList<Goal> getActiveGoals() {
         return activeGoals;
     }
 
+    /**
+     * Setter for goalsCompleted
+     * @param goalsCompleted Arraylist of goals completed
+     */
     public void setGoalsCompleted(ArrayList<Goal> goalsCompleted) {
         this.goalsCompleted = goalsCompleted;
     }
 
+    /**
+     * Setter for active goals
+     * @param activeGoals Arraylist of active goals
+     */
     public void setActiveGoals(ArrayList<Goal> activeGoals) {
         this.activeGoals = activeGoals;
     }
 
+    /**
+     * Getter for number of goals completed
+     * @return Number of goals completed
+     */
     public int getNumberOfGoalsCompleted() {
         return getGoalsCompleted().size();
     }
 
+    /**
+     * Getter for number of goals not completed
+     * @return Number of goals not completed
+     */
     public int getNumberOfGoalsNotCompleted() {
         return getGoalsNotComplete().size();
     }
 
+    /**
+     * Getter for number of active goals
+     * @return Number of active goals
+     */
     public int getNumberOfActiveGoals() {
         int count = 0;
         Date today = new Date();
@@ -68,6 +108,10 @@ public class Analytics {
         return count;
     }
 
+    /**
+     * Getter for goals
+     * @param context Context of the application
+     */
     public void loadGoalsFromCSV(Context context) {
         ArrayList<Goal> allGoals = (ArrayList<Goal>) Goal.loadGoalsFromCSV(context);
         ArrayList<Goal> completedGoals = new ArrayList<>();
@@ -84,24 +128,29 @@ public class Analytics {
         this.goalsCompleted = completedGoals;
         this.activeGoals = activeGoals;
     }
-    //gets goal data from csv file
+
+    /**
+     * Getter for goals
+     * @param context Context of the application
+     * @return List of goals
+     * @throws IOException if the file cannot be read
+     */
     public static List<String> getGoaldata(Context context) throws IOException {
         List<String> goals2 = new ArrayList<>();
         File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "goals.csv");
         Log.d("Analytics", "File path: " + file.getAbsolutePath());
-        /*try (Scanner scanner = new Scanner(file)) {
-            Log.d("Analytics", "File opened");
-            while (scanner.hasNextLine()) {
-                Log.d("Analytics", "Line: " + scanner.nextLine());
-                String line = scanner.nextLine();
-                goals.add(line);
-            }
-
-        }*/
         goals2 = loadAllLinesFromInternal(context, "goals.csv");
         goals = goals2;
         return goals2;
     }
+
+    /**
+     * Getter for goals
+     * @param context Context of the application
+     * @param filename Name of the file to load
+     * @return List of goals
+     * @throws IOException if the file cannot be read
+     */
     public static List<String> loadAllLinesFromInternal(Context context, String filename) throws IOException {
         List<String> lines = new ArrayList<>();
         File file = new File(context.getFilesDir(), filename);
@@ -124,7 +173,12 @@ public class Analytics {
         return lines;
     }
 
-
+    /**
+     * Getter for goals
+     * @param context Context of the application
+     * @return List of goals
+     * @throws IOException if the file cannot be read
+     */
     public String generateProgressReport(Context context) throws IOException {
         // Initialize the report
         //load goals from csv file

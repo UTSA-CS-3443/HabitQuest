@@ -3,7 +3,6 @@ package edu.usta.cs3443.habitquest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,12 +11,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import edu.usta.cs3443.habitquest.model.CheckLogin;
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class profile_Settings_Activity extends AppCompatActivity {
     private static final String TAG = "profile_Settings_Activity";
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,7 +17,12 @@ import java.util.List;
 
 import edu.usta.cs3443.habitquest.model.Goal;
 import edu.usta.cs3443.habitquest.model.GoalAdapter;
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class todays_goal_Activity extends AppCompatActivity {
     private static final String TAG = "todays_goal_Activity";
     private RecyclerView recyclerView;
@@ -25,6 +30,11 @@ public class todays_goal_Activity extends AppCompatActivity {
     private List<Goal> goalList;
     private Button addHabitButton;
     private Button homeButton;
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +77,9 @@ public class todays_goal_Activity extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads goals from the CSV file and updates the adapter.
+     */
     private void loadGoals() {
         // Load goals from goals.csv file
         goalList = Goal.loadGoalsFromCSV(this);
@@ -80,6 +93,9 @@ public class todays_goal_Activity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called when the activity is resumed.
+     */
     @Override
     protected void onResume() {
         super.onResume();

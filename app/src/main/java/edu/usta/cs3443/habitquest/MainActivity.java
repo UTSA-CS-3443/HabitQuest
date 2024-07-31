@@ -18,11 +18,19 @@ import edu.usta.cs3443.habitquest.model.CheckLogin;
    * Application entry after login
    * Overview user progress
     */
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class MainActivity extends AppCompatActivity {
 
 
-
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 return insets;
             });
             Context context = this;
-            /*List<String> lines;
-            try {
-                lines = Analytics.getGoaldata(context);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            for (String line : lines) {
-                Log.d("MainActivity", line);
-            }*/
 
             Button profile_settings, progress_report, todays_goal, set_goal;
 

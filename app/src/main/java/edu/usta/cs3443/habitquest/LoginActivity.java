@@ -24,12 +24,21 @@ import edu.usta.cs3443.habitquest.model.User;
  * User creation / login
  * Transition to MainActivity if user is logged in
  */
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class LoginActivity extends AppCompatActivity {
     Button loginButton, skipButton, registerButton;
     EditText username;
     EditText password;
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

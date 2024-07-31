@@ -24,7 +24,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import edu.usta.cs3443.habitquest.model.Goal;
-
+/**
+ *
+ * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez
+ *
+ * Cs 3443 Summer 2024 - Group Project
+ */
 public class set_Goal_Activity extends AppCompatActivity {
 
     private EditText goalNameEditText, goalDescriptionEditText, goalStartDateEditText, goalEndDateEditText;
@@ -33,7 +38,10 @@ public class set_Goal_Activity extends AppCompatActivity {
     private DatePickerDialog startDatePickerDialog, endDatePickerDialog;
     private List<Goal> goalList;
 
-
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState creates a new instance of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -71,7 +79,9 @@ public class set_Goal_Activity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Initializes the date picker dialogs.
+     */
     private void initDatePicker() {
         DatePickerDialog.OnDateSetListener startDateSetListener = (datePicker, year, month, day) -> {
             month++;
@@ -94,6 +104,10 @@ public class set_Goal_Activity extends AppCompatActivity {
         endDatePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, endDateSetListener, year, month, day);
     }
 
+    /**
+     * Gets the current date in the format "MM dd yyyy".
+     * @return the current date as a string
+     */
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -103,10 +117,22 @@ public class set_Goal_Activity extends AppCompatActivity {
         return makeDateString(day, month, year);
     }
 
+    /**
+     * Makes a date string in the format "MM dd yyyy".
+     * @param day the day
+     * @param month the month
+     * @param year the year
+     * @return the date string
+     */
     private String makeDateString(int day, int month, int year) {
         return getMonthFormat(month) + " " + day + " " + year;
     }
 
+    /**
+     * Gets the month format for the given month.
+     * @param month the month
+     * @return the month format
+     */
     private String getMonthFormat(int month) {
         // Return appropriate month format
         if(month == 1)
@@ -138,6 +164,9 @@ public class set_Goal_Activity extends AppCompatActivity {
         return "JAN";
     }
 
+    /**
+     * Adds a new habit to the CSV file and redirects to today's goals activity.
+     */
     private void addAndReadHabit() {
         String goalName = goalNameEditText.getText().toString();
         String goalDescription = goalDescriptionEditText.getText().toString();
