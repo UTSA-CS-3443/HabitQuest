@@ -157,7 +157,7 @@ public class User {
         boolean userExists = false;
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 2 && (parts[0].equals(userName) || parts[3].equals(userEmail))) {
+            if (parts.length >= 2 && ( parts[3].equals(userEmail))) {
                 userExists = true;
                 Log.d("User", "User already exists");
                 break;

@@ -63,6 +63,7 @@ public class signupActivity extends AppCompatActivity {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 return;
             }
+            //if user
 
             //    public User(String userName, String userBday, String userPronouns, String userEmail, String user_passwd, String last_login, String date_created){
             User user = new User( username.getText().toString(), birthday.getText().toString(),pronoun.getText().toString(), email.getText().toString(), password.getText().toString(),getCurrentDate(), getCurrentDate());

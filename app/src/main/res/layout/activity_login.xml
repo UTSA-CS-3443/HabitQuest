@@ -107,6 +107,7 @@
       android:backgroundTint="#CBC9FA"
       android:text="Skip to main"
       android:textColor="#2e2e2e"
+      android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
