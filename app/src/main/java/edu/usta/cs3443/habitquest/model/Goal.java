@@ -236,12 +236,10 @@ public class Goal {
         for (Goal goal : goals) {
             if (goal.equals(goalToComplete)) {
                 goal.setGoalCompleted(true);
+                updateGoalInCSV(goal, context);  // Update goal in CSV file
                 break;
             }
         }
-
-        // Rewrite the CSV file
-        writeGoalsToCSV(goals, context);
     }
 
     private void writeGoalsToCSV(List<Goal> goals, Context context) throws IOException {
@@ -265,6 +263,49 @@ public class Goal {
             }
         }
     }
+
+    public static void updateGoalInCSV(Goal updatedGoal, Context context) throws IOException {
+        // New method to update a goal in the CSV file
+        String filename = "goals.csv";
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+
+        if (!file.exists()) {
+            return;
+        }
+
+        List<String> lines = new ArrayList<>();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (String line : lines) {
+                String[] columns = line.split(",");
+                if (columns.length == 6) {
+                    String goalName = columns[0].trim();
+                    String goalType = columns[1].trim();
+                    String goalDescription = columns[2].trim();
+                    String goalStart = columns[3].trim();
+                    String goalEnd = columns[4].trim();
+                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
+
+                    if (updatedGoal.getGoalName().equals(goalName) &&
+                            updatedGoal.getGoalType().equals(goalType) &&
+                            updatedGoal.getGoalDescription().equals(goalDescription) &&
+                            updatedGoal.getGoalStart().equals(goalStart) &&
+                            updatedGoal.getGoalEnd().equals(goalEnd)) {
+                        writer.write(updatedGoal.toCSVString());
+                    } else {
+                        writer.write(line);
+                    }
+                    writer.newLine();
+                }
+            }
+        }
+    }
+
 
 
 
