@@ -196,8 +196,7 @@ public class Analytics {
         report.append("Progress Report:\n\n\n");
 
         // Goals Completed
-
-        int completedGoalsCount =  getNumberOfGoalsCompleted(); //getNumberOfGoalsCompleted();
+        int completedGoalsCount =  getNumberOfGoalsCompleted();
         report.append("Goals Completed: ").append(completedGoalsCount).append("\n");
         if (completedGoalsCount == 0) {
             report.append("No goals completed yet.\n");

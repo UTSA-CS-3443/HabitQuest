@@ -32,7 +32,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
      */
     public GoalAdapter(List<Goal> goals , Context context) {
         this.goals = goals;
-        this.context = context; // Added context to the constructor to be able to save the state to CSV.
+        this.context = context;
+        // Added context to the constructor to be able to save the state to CSV.
     }
 
     /**

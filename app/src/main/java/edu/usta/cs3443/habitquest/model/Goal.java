@@ -25,35 +25,6 @@ import java.util.Scanner;
  *
  * Cs 3443 Summer 2024 - Group Project
  */
-/*
-*
- * Attributes:
- * goalName - name of goal.
- * goalType - type of goal (personal, education, etc).
- * goalDescribe - description of the goal.
- * goalStart - the date the goal starts.
- * goalEnd - the date the goal ends.
- * goalCompleted - boolean indicating if the goal was completed.
-
- * Methods:
- * createGoal() - creates a new goal.
- * updateGoal() - updates the goal.
- * deleteGoal() - delete the goal.
- * getGoal() - retrieves the goal.
- * getGoalName() - retrieve goal name.
- * getGoalType() - retrieve goal type.
- * getGoalDescription() - retrieve goal description.
- * getGoalStart() - retrieve start date.   // Changed method name from getStart to getGoalStart
- * getGoalEnd() - retrieve end date.   // Changed method name from getEnd to getGoalEnd
- * isGoalCompleted() - true/false completion data.   // Changed method name from isCompleted to isGoalCompleted
- * setGoalName() - set goal name.
- * setGoalType() - set goal type.
- * setGoalDescription() - set goal description.
- * setGoalStart() - set start date.   // Changed method name from setStart to setGoalStart
- * setGoalEnd() - set end date.   // Changed method name from setEnd to setGoalEnd
- * setGoalCompleted() - set completion status.   // Changed method name from setCompleted to setGoalCompleted
- * isCompleted() - true/false completion data.
-*/
 
 public class Goal {
     private String goalName;
@@ -115,36 +86,6 @@ public class Goal {
      * @return goal completion status
      */
     public Boolean isGoalCompleted() { return goalCompleted; }
-
-    /**
-     * Sets goal name
-     * @param goalName goal name
-     */
-    public void setGoalName(String goalName) { this.goalName = goalName; }
-
-    /**
-     * Sets goal type
-     * @param goalType goal type
-     */
-    public void setGoalType(String goalType) { this.goalType = goalType; }
-
-    /**
-     * Sets goal description
-     * @param goalDescription goal description
-     */
-    public void setGoalDescription(String goalDescription) { this.goalDescription = goalDescription; }
-
-    /**
-     * Sets goal start date
-     * @param goalStart goal start date
-     */
-    public void setGoalStart(String goalStart) { this.goalStart = goalStart; }
-
-    /**
-     * Sets goal end date
-     * @param goalEnd goal end date
-     */
-    public void setGoalEnd(String goalEnd) { this.goalEnd = goalEnd; }
 
     /**
      * Sets goal completion status
@@ -417,9 +358,4 @@ public class Goal {
             }
         }
     }
-
-
-
-
-
 }

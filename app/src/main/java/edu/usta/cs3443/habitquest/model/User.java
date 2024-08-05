@@ -119,30 +119,6 @@ public class User {
     }
 
     /**
-     * Getter for password
-     * @return password
-     */
-    public String getUser_passwd() {
-        return user_passwd;
-    }
-
-    /**
-     * Getter for last login
-     * @return last login
-     */
-    public String getUserLastLogin() {
-        return last_login;
-    }
-
-    /**
-     * Getter for date created
-     * @return date created
-     */
-    public String getDateCreated() {
-        return date_created;
-    }
-
-    /**
      * Creates a profile for the user
      * @param context gets the context of the application
      * @throws IOException if the file cannot be read
@@ -258,27 +234,6 @@ public class User {
     }
 
     /**
-     * Edits the profile
-     * @param userName username
-     * @param userBday birthday
-     * @param userPronouns pronouns
-     * @param userEmail email
-     */
-    public void editProfile(String userName, String userBday, String userPronouns, String userEmail) {
-        setUserName(userName);
-        setUserBday(userBday);
-        setUserPronouns(userPronouns);
-        setUserEmail(userEmail);
-    }
-
-    /**
-     * Updates the profile in the database
-     */
-    public void updateProfile() {
-        // Implementation for updating the profile in the database
-    }
-
-    /**
      * Authenticates the user
      * @param email email of the user
      * @param password password of the user
@@ -304,7 +259,8 @@ public class User {
                 // If credentials don't match, return null
             }
         }
-        return null; // Return null if no matching user is found
+        return null;
+        // Return null if no matching user is found
     }
 
     /**
@@ -319,18 +275,6 @@ public class User {
         return Files.readAllLines(file.toPath());
     }
 
-    private static List<String> loadAllLinesFromAssets(Context context, String filename) throws IOException {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(context.getAssets().open(filename)))) {
-            // Clear the first line
-            br.readLine();
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-        }
-        return lines;
-    }
 
     /**
      * Copies the users file to internal storage
@@ -354,72 +298,11 @@ public class User {
     }
 
     /**
-     * Adds a goal to the user
-     * @param goal goal to add
-     */
-    public void addGoal(Goal goal) {
-        this.goals.add(goal);
-        updateAnalytics();
-    }
-
-    /**
-     * Deletes a goal from the user
-     * @param goal goal to delete
-     */
-    public void deleteGoal(Goal goal) {
-        this.goals.remove(goal);
-        updateAnalytics();
-    }
-
-    /**
      * Gets the goals of the user
      * @return a list of goals
      */
     public ArrayList<Goal> getGoals() {
         return goals;
-    }
-
-    /**
-     * Updates the analytics of the user
-     */
-    private void updateAnalytics() {
-        ArrayList<Goal> completedGoals = new ArrayList<>();
-        ArrayList<Goal> activeGoals = new ArrayList<>();
-
-        for (Goal goal : goals) {
-            if (goal.isGoalCompleted()) {
-                completedGoals.add(goal);
-            } else {
-                activeGoals.add(goal);
-            }
-        }
-
-        analytics.setGoalsCompleted(completedGoals);
-        analytics.setActiveGoals(activeGoals);
-    }
-
-    /**
-     * Gets the completed goals of the user
-     * @return a list of completed goals
-     */
-    public ArrayList<Goal> getCompletedGoals() {
-        return analytics.getGoalsCompleted();
-    }
-
-    /**
-     * Gets the active goals of the user
-     * @return a list of active goals
-     */
-    public ArrayList<Goal> getActiveGoals() {
-        return analytics.getActiveGoals();
-    }
-
-    /**
-     * Gets the not complete goals of the user
-     * @return a list of not complete goals
-     */
-    public ArrayList<Goal> getGoalsNotComplete() {
-        return analytics.getGoalsNotComplete();
     }
 
     /**

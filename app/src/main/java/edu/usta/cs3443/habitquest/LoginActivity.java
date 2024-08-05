@@ -19,11 +19,6 @@ import java.io.IOException;
 import edu.usta.cs3443.habitquest.model.CheckLogin;
 import edu.usta.cs3443.habitquest.model.User;
 
-/*
- * LoginActivity Controller:
- * User creation / login
- * Transition to MainActivity if user is logged in
- */
 /**
  *
  * @author Katarah (Kat) Griffin,Alistair Chambers, Muskan Devi,Christian (Ian) Fernandez

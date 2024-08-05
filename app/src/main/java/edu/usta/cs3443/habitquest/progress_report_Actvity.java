@@ -35,7 +35,7 @@ public class progress_report_Actvity extends AppCompatActivity {
         seekBarProgress = findViewById(R.id.seekBarProgress);
 
         // Fetch user and analytics data
-        User currentUser = getCurrentUser(); // Implement this method to get the current user
+        User currentUser = getCurrentUser();
         String progressReport = null;
         try {
             progressReport = currentUser.generateProgressReport(this);
@@ -60,8 +60,7 @@ public class progress_report_Actvity extends AppCompatActivity {
      * @return the current user
      */
     private User getCurrentUser() {
-        // Assuming User data is passed through Intent extras; adjust as needed
-        // For simplicity, creating a new User object here. Replace with your logic.
+        // Getting sample user data
         return new User("John Doe", "01/01/1990", "He/Him", "john.doe@example.com", "password", "last_login", "date_created");
     }
 
@@ -86,7 +85,7 @@ public class progress_report_Actvity extends AppCompatActivity {
 
         // Check to avoid division by zero
         if (totalGoals == 0) {
-            return 0; // or some default value if no goals are available
+            return 0; // default value if no goals are available
         }
 
         // Calculate percentage

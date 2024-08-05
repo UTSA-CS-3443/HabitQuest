@@ -18,8 +18,6 @@ import androidx.core.view.WindowInsetsCompat;
  * Cs 3443 Summer 2024 - Group Project
  */
 public class profile_Settings_Activity extends AppCompatActivity {
-    private static final String TAG = "profile_Settings_Activity";
-
     /**
      * Called when the activity is first created.
      * @param savedInstanceState creates a new instance of the activity
