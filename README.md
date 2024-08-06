@@ -1,5 +1,6 @@
 # HabitQuest
-Project for team Code Legends
+The purpose of this application is to help users set, track, and achieve their defined goals, whether they be activities, fitness, health, education, career, habits, etc. By providing a structured platform, the application will serve as a sort of digital assistant to encourage personal productivity and organization to allow users to monitor their progress and make informed decisions about their activities and habits. The potential impact this application will have will be to: provide a method of organization to keep track of tasks, track trends, increase productivity and motivate the user, and most importantly, provide the user with personal growth. 
+
 
 ## Authors
 
