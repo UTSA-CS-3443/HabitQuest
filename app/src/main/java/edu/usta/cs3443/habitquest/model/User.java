@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -321,5 +320,45 @@ public class User {
      */
     public String generateProgressReport(Context context) throws IOException {
         return analytics.generateProgressReport(context);
+    }
+
+
+    /**
+     * Updates the user data file with the new user information.
+     * @param newName the name of the user
+     * @param newBday the birthday of the user
+     * @param newPronouns the pronouns of the user
+     * @param newEmail the email of the user
+     * @param newPassword the password of the user
+     * @throws IOException if there is an error writing to the file
+     */
+    public static void updateUserFile(String newName, String newBday, String newPronouns, String newEmail, String newPassword, Context context) throws IOException {
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "users.csv");
+        List<String> lines = new ArrayList<>();
+        boolean updated = false;
+
+        // Read the file and update the user information
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 7 && parts[3].equals(newEmail)) {
+                    // Update the user data line
+                    lines.add(String.join(",", newName, newBday, newPronouns, newEmail, newPassword, parts[5], parts[6]));
+                    updated = true;
+                } else {
+                    lines.add(line);
+                }
+            }
+        }
+
+        // If user was found and updated, write the changes back to the file
+        if (updated) {
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                for (String l : lines) {
+                    fos.write((l + "\n").getBytes());
+                }
+            }
+        }
     }
 }
