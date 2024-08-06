@@ -16,7 +16,7 @@ Project for team Code Legends
 
 ### Getting Started
 
- *Clone or download the URL for HabitQuest app on GitHub. (https://github.com/UTSA-CS-3443/HabitQuest)
+ * **Clone or download the URL for HabitQuest app on GitHub. (https://github.com/UTSA-CS-3443/HabitQuest)**
 
  *Option 1: Clone using Git:
    This is the recommended method for developers familiar with Git version control.
