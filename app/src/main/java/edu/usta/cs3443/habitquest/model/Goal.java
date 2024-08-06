@@ -7,14 +7,11 @@ import android.net.ParseException;
 import android.os.Environment;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -130,31 +127,7 @@ public class Goal {
         List<Goal> goals = new ArrayList<>();
         String filename = "goals.csv";
 
-        // Load pre-loaded goals from sample_goals.csv
-        try (InputStream inputStream = context.getAssets().open("sample_goals.csv");
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            String line;
-            // Skip the header line
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] columns = line.split(",");
-                if (columns.length == 6) {
-                    String goalName = columns[0].trim();
-                    String goalType = columns[1].trim();
-                    String goalDescription = columns[2].trim();
-                    String goalStart = columns[3].trim();
-                    String goalEnd = columns[4].trim();
-                    Boolean goalCompleted = Boolean.parseBoolean(columns[5].trim());
-
-                    Goal goal = new Goal(goalName, goalType, goalDescription, goalStart, goalEnd);
-                    goal.setGoalCompleted(goalCompleted);
-                    goals.add(goal);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      
 
         // Load newly created goals from goals.csv
         try {
