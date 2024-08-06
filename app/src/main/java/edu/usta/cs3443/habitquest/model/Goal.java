@@ -1,5 +1,7 @@
 package edu.usta.cs3443.habitquest.model;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.net.ParseException;
 import android.os.Environment;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+
 /**
  * Goal: The Goal class represents a goal or habit that a user wants to track. It includes attributes to describe the goal and methods to manage it.
  *
@@ -356,6 +359,17 @@ public class Goal {
                     writer.newLine();
                 }
             }
+        }
+    }
+    /**
+     * Adds a new habit to the CSV file .
+     */
+    public static void addGoal(Goal goal, Context context) throws IOException {
+        String filename = "goals.csv";
+        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), filename);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.write(goal.getGoalName() + "," + goal.getGoalType() + "," + goal.getGoalDescription() + "," + goal.getGoalStart() + "," + goal.getGoalEnd() + "," + "false" + "\n");
+            Log.d(TAG, "Goal added: " + goal.getGoalName());
         }
     }
 }

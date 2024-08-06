@@ -4,9 +4,9 @@ import static android.content.ContentValues.TAG;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,9 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -69,7 +66,7 @@ public class set_Goal_Activity extends AppCompatActivity {
         goalTypeSpinner.setAdapter(adapter);
 
         addHabitButton = findViewById(R.id.addHabitButton);
-        addHabitButton.setOnClickListener(v -> addAndReadHabit());
+        addHabitButton.setOnClickListener(v -> addAHabit(this));
 
         goBackButton = findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(v -> startActivity(new Intent(set_Goal_Activity.this, MainActivity.class)));
@@ -164,10 +161,11 @@ public class set_Goal_Activity extends AppCompatActivity {
         return "JAN";
     }
 
+
     /**
      * Adds a new habit to the CSV file and redirects to today's goals activity.
      */
-    private void addAndReadHabit() {
+    private void addAHabit(Context context) {
         String goalName = goalNameEditText.getText().toString();
         String goalDescription = goalDescriptionEditText.getText().toString();
         String goalStartDate = goalStartDateEditText.getText().toString();
@@ -175,30 +173,24 @@ public class set_Goal_Activity extends AppCompatActivity {
         String goalType = (String) goalTypeSpinner.getSelectedItem();
 
         if (goalName.isEmpty() || goalDescription.isEmpty() || goalStartDate.isEmpty() || goalEndDate.isEmpty() || goalType.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // Create a new Goal object
         Goal newGoal = new Goal(goalName, goalType, goalDescription, goalStartDate, goalEndDate);
 
-        // Path to the external storage file
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "goals.csv");
-        Log.d(TAG, "File path: " + file.getAbsolutePath());
-
         // Add the habit to the CSV file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(newGoal.getGoalName() + "," + newGoal.getGoalType() + "," + newGoal.getGoalDescription() + "," + newGoal.getGoalStart() + "," + newGoal.getGoalEnd() + "," + "false" + "\n");
-            Log.d(TAG, "Goal added: " + newGoal.getGoalName());
-
-            Toast.makeText(this, "Goal added successfully!", Toast.LENGTH_SHORT).show();
+        try {
+            Goal.addGoal(newGoal,context);
+            Toast.makeText(context, "Goal added successfully!", Toast.LENGTH_SHORT).show();
 
             // Redirect to today's goals activity
             Intent intent = new Intent(set_Goal_Activity.this, todays_goal_Activity.class);
             startActivity(intent);
         } catch (IOException e) {
             Log.e(TAG, "Error writing to CSV", e);
-            Toast.makeText(this, "Error adding goal", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Error adding goal", Toast.LENGTH_SHORT).show();
         }
     }
 }
